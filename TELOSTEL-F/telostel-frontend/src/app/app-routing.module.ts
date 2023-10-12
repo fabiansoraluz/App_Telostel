@@ -6,10 +6,12 @@ import { RecuperarComponent } from './components/rr/recuperar/recuperar.componen
 import { RRComponent } from './components/rr/rr.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SystemComponent } from './components/system/system.component';
+import { AsideComponent } from './components/aside/aside.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:"full"},
   {path:'login', component:LoginComponent},
+  {path:'aside', component:AsideComponent},
   {path:'opciones',component:RRComponent,children:[
     {path:'registrar',component:RegistrarComponent},
     {path:'recuperar',component:RecuperarComponent}
