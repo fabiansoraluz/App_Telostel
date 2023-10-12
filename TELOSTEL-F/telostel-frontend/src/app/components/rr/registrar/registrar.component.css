@@ -66,10 +66,30 @@
     color: var(--white);
     margin-right: 1rem;
 }
-/* :::::: RECUPERAR :::::::: */
-.btn--enviar{
-    position: absolute;
-    right: 1rem;
-    top: .5rem;
-    background-color: inherit;
+/* :::::::::::: MODAL-UBIGEO ::::::::::::::*/
+
+/*Header*/
+.modal-header,.modal-footer{
+    background-color: var(--almost-white);
+}
+
+/*Formulario*/
+.modal-body{
+    padding: 2rem 20px !important;
+}
+.form--ubigeo{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 1rem;
+}
+.form__select--ubigeo{
+    border: 2px solid var(--almost-white);
+    padding: 1rem;
+    border-radius: 5px;
+    outline: none;
+    width: 100%;
+}
+.btn-save{
+    background-color: var(--purple) !important;
+    color: var(--white) !important;
 }

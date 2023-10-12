@@ -51,8 +51,8 @@ public class Cliente {
 	private Integer estado;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_distrito")
-	private Distrito distrito;
+	@JoinColumn(name = "id_ubigeo")
+	private Ubigeo ubigeo;
 	
 	@PrePersist
 	private void prePersist() {

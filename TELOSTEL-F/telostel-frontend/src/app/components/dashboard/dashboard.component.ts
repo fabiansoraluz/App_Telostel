@@ -11,8 +11,7 @@ export class DashboardComponent implements OnInit{
   constructor(private SUtiles:UtilesService){}
 
   ngOnInit(): void {
-    //Función del sidebar
-    this.SUtiles.sidebar();
+
   }
 
 }

@@ -8,43 +8,44 @@
 </ul>
 <div class="opciones-container">
     <h2 class="form-title">Registrar Usuario</h2>
-    <form action="" class="main__form">
+    <form #f="ngForm" class="main__form" (ngSubmit)="registrarUsuario()">
         <div class="form__item">
             <i class="fa-solid fa-image-portrait form__icon"></i>
-            <input type="text" class="form__input" name="nombre" placeholder="Nombre: ">
+            <input type="text" class="form__input" name="nombre" [(ngModel)]="usuario.empleado.nombre" placeholder="Ingresar nombre">
         </div>
         <div class="form__item">
             <i class="fa-solid fa-id-card-clip form__icon"></i>
-            <input type="text" class="form__input" name="apellido" placeholder="Apellido: ">
-        </div>
-        <div class="form__item form__item--100">
-            <i class="fa-solid fa-envelope form__icon"></i>
-            <input type="email" class="form__input" name="correo" placeholder="Correo: ">
+            <input type="text" class="form__input" name="apellido" [(ngModel)]="usuario.empleado.apellido" placeholder="Ingresar apellido">
         </div>
         <div class="form__item">
             <i class="fa-solid fa-address-card form__icon"></i>
-            <input type="text" class="form__input" name="dni" placeholder="DNI: ">
+            <input type="text" class="form__input" name="dni" [(ngModel)]="usuario.empleado.dni" placeholder="Ingresar DNI">
         </div>
         <div class="form__item">
             <i class="fa-solid fa-phone form__icon"></i>
-            <input type="text" class="form__input" name="celular" placeholder="Celular: ">
+            <input type="text" class="form__input" name="celular" [(ngModel)]="usuario.empleado.celular" placeholder="Ingresar celular">
+        </div>
+        <div class="form__item form__item--100">
+            <i class="fa-solid fa-envelope form__icon"></i>
+            <input type="email" class="form__input" name="correo" [(ngModel)]="usuario.correo" placeholder="Ingresar correo">
         </div>
         <div class="form__item">
             <i class="fa-solid fa-user form__icon"></i>
-            <input type="text" class="form__input" name="username" placeholder="Username: ">
+            <input type="text" class="form__input" name="username" [(ngModel)]="usuario.username" placeholder="Ingresar username">
         </div>
         <div class="form__item">
-            <i class="fa-solid fa-map form__icon"></i>
-            <input type="text" class="form__input" name="distrito" placeholder="Distrito: ">
+            <button type="button" class="btn btn-primary w-100 mt-2" data-toggle="modal" data-target="#modalUbigeo">
+                <i class="fa-solid fa-map btn-icon"></i> Busca tu ubicación
+            </button>
         </div>
         <div class="form__item">
             <i class="fa-solid fa-key form__icon"></i>
-            <input type="password" class="form__input" name="password" placeholder="Contraseña: ">
+            <input type="password" class="form__input" name="password" [(ngModel)]="usuario.password" placeholder="Ingresar contraseña">
             <img src="../../../assets/img/eye.svg" class="btn__eye" alt="eye">
         </div>
         <div class="form__item">
             <i class="fa-solid fa-lock form__icon"></i>
-            <input type="password" class="form__input" name="repeat" placeholder="Repetir Contraseña: ">
+            <input type="password" class="form__input" name="repeat" placeholder="Repetir contraseña">
             <img src="../../../assets/img/eye.svg" class="btn__eye" alt="eye">
         </div>
         <div class="form__button-container form__item--100">
@@ -52,4 +53,37 @@
             <button type="button" routerLink="/login" class="form__btn"><i class="fa-solid fa-house"></i> Login</button>
         </div>
     </form>
+</div>
+
+<!-- MODAL DE UBIGEO -->
+<div class="modal fade" id="modalUbigeo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Seleccionar Ubicación</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="form--ubigeo">
+                    <div class="form__item--ubigeo">
+                        <select class="form__select--ubigeo" (change)="listarDistritos()" name="provincia" [(ngModel)]="provincia">
+                            <option value="" disabled selected>Provincia</option>
+                            <option *ngFor="let p of provincias">{{p}}</option>
+                        </select>
+                    </div>
+                    <div class="form__item--ubigeo">
+                        <select class="form__select--ubigeo" name="Distrito" [(ngModel)]="usuario.empleado.ubigeo.id">
+                            <option value=0 disabled selected>Distrito</option>
+                            <option *ngFor="let di of distritos" [value]="di.id">{{di.distrito}}</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Guardar</button>
+            </div>
+        </div>
+    </div>
 </div>

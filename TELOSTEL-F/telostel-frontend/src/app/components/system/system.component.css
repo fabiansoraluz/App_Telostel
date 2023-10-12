@@ -12,11 +12,12 @@ p{
 .main{
     padding-left: 280px;
 }
-
+.padding{
+    padding: 20px 50px !important;
+}
 /* :::::::::: NAV ::::::::::*/
 .nav{
     justify-content: space-between;
-    padding: 20px 50px !important;
 }
 .nav__title{
     font-size: 40px;

@@ -36,6 +36,6 @@ public class Sede {
 	private String imagen;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_distrito")
-	private Distrito distrito;
+	@JoinColumn(name = "id_ubigeo")
+	private Ubigeo ubigeo;
 }

@@ -15,5 +15,11 @@ public class EmpleadoService {
 	public Empleado grabar(Empleado bean) {
 		return repo.save(bean);
 	}
+	public boolean existeXDni(String dni) {
+		return repo.existsByDni(dni);
+	}
+	public boolean existeXCelular(String celular) {
+		return repo.existsByCelular(celular);
+	}
 	
 }

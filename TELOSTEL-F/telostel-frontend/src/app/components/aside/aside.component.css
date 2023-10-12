@@ -54,12 +54,14 @@ li{
 }
 .sidebar__link--primary{
     background-color: var(--blue-color);
-    color: var(--white) !important;
     border-radius: 10px;
     transition: background-color ease .5s;
 }
 .sidebar__link--primary:hover{
     background-color: var(--gray);
+}
+.sidebar__link--primary a{
+    color: var(--white) !important;
 }
 .sidebar__link--logout{
     border-radius: 10px;
