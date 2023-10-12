@@ -45,4 +45,12 @@ export class LoginComponent implements OnInit{
     )
   }
 
+  public sistema() {
+    // Implementación del método login
+    // ...
+
+    // Redirigir al componente AsideComponent
+    this.router.navigate(['/aside']);  // Reemplazar con la ruta correcta
+  }
+
 }

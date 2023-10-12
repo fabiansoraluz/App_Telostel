@@ -30,6 +30,7 @@ export class AsideComponent implements OnInit{
     const arrow = button.querySelector(".sidebar__arrow")
     arrow.classList.toggle("sidebar__arrow--active")
 
+
     const menu = button.nextElementSibling as HTMLElement;
     let height = 0;
     if(menu.clientHeight == 0){
