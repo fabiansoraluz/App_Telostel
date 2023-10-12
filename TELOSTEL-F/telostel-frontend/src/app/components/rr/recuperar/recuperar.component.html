@@ -1,0 +1,36 @@
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link btn-registrar" aria-current="page" routerLink="/opciones/registrar">Registrar</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active btn-recuperar" routerLink="/opciones/recuperar">Recuperar</a>
+    </li>
+</ul>
+<div class="opciones-container">
+    <h2 class="form-title">Recuperar Usuario</h2>
+    <form class="main__form">
+        <div class="form__item form__item--100">
+            <i class="fa-solid fa-envelope form__icon"></i>
+            <input type="text" class="form__input" name="correo" placeholder="Ingresar correo">
+            <button type="button" class="btn--enviar"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+        <div class="form__item form__item--100">
+            <i class="fa-solid fa-user-shield form__icon"></i>
+            <input type="text" class="form__input" name="key" placeholder="Ingresar key">
+        </div>
+        <div class="form__item form__item--100">
+            <i class="fa-solid fa-key form__icon"></i>
+            <input type="password" class="form__input" name="password" placeholder="Ingresar nueva contraseña">
+            <img src="../../../assets/img/eye.svg" class="btn__eye" alt="eye">
+        </div>
+        <div class="form__item form__item--100">
+            <i class="fa-solid fa-lock form__icon"></i>
+            <input type="password" class="form__input" name="repeat" placeholder="Repetir nueva contraseña">
+            <img src="../../../assets/img/eye.svg" class="btn__eye" alt="eye">
+        </div>
+        <div class="form__button-container form__item--100">
+            <button type="submit" class="form__btn btn--registrar"><i class="fa-solid fa-floppy-disk form__icon--recuperar"></i> Recuperar</button>
+            <button type="button" routerLink="/login" class="form__btn"><i class="fa-solid fa-house"></i> Login</button>
+        </div>
+    </form>
+</div>

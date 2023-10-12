@@ -1,0 +1,20 @@
+<div class="main-container">
+    <app-aside></app-aside>
+    <main class="main">
+        <nav class="nav">
+            <div class="nav__title">Bienvenidos a Telotel</div>
+            <div class="nav__user">
+                <div class="user__img-container">
+                    <img src="../../assets/img/user.jpg" class="user__img" alt="#">
+                </div>
+                <div class="user__text">
+                    <p class="user__title">Hola, soy <span class="user__nombre">Luis Cabrera</span></p>
+                    <p class="user__rol">Administrador</p>
+                </div>
+            </div>
+        </nav>
+        <div class="main__body">
+           <router-outlet></router-outlet> 
+        </div>
+    </main>
+</div>

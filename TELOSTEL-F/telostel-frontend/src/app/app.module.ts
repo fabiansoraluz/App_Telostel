@@ -3,31 +3,39 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BarraMenuComponent } from './barra-menu/barra-menu.component';
-
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatDividerModule } from '@angular/material/divider';
+import { RouterModule } from '@angular/router';
+import { LoginComponent } from './components/login/login.component';
+import { RegistrarComponent } from './components/rr/registrar/registrar.component';
+import { RecuperarComponent } from './components/rr/recuperar/recuperar.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { RRComponent } from './components/rr/rr.component';
+import { UtilesService } from './services/utiles.service';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { SystemComponent } from './components/system/system.component';
+import { AsideComponent } from './components/aside/aside.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BarraMenuComponent
+    LoginComponent,
+    RegistrarComponent,
+    RecuperarComponent,
+    DashboardComponent,
+    RRComponent,
+    SystemComponent,
+    AsideComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDividerModule
+    RouterModule,
+    HttpClientModule,
+    FormsModule,
   ],
-  providers: [],
+  providers: [
+    UtilesService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

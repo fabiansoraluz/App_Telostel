@@ -1,0 +1,55 @@
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active btn-registrar" aria-current="page" routerLink="/opciones/registrar">Registrar</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link btn-recuperar" routerLink="/opciones/recuperar">Recuperar</a>
+    </li>
+</ul>
+<div class="opciones-container">
+    <h2 class="form-title">Registrar Usuario</h2>
+    <form action="" class="main__form">
+        <div class="form__item">
+            <i class="fa-solid fa-image-portrait form__icon"></i>
+            <input type="text" class="form__input" name="nombre" placeholder="Nombre: ">
+        </div>
+        <div class="form__item">
+            <i class="fa-solid fa-id-card-clip form__icon"></i>
+            <input type="text" class="form__input" name="apellido" placeholder="Apellido: ">
+        </div>
+        <div class="form__item form__item--100">
+            <i class="fa-solid fa-envelope form__icon"></i>
+            <input type="email" class="form__input" name="correo" placeholder="Correo: ">
+        </div>
+        <div class="form__item">
+            <i class="fa-solid fa-address-card form__icon"></i>
+            <input type="text" class="form__input" name="dni" placeholder="DNI: ">
+        </div>
+        <div class="form__item">
+            <i class="fa-solid fa-phone form__icon"></i>
+            <input type="text" class="form__input" name="celular" placeholder="Celular: ">
+        </div>
+        <div class="form__item">
+            <i class="fa-solid fa-user form__icon"></i>
+            <input type="text" class="form__input" name="username" placeholder="Username: ">
+        </div>
+        <div class="form__item">
+            <i class="fa-solid fa-map form__icon"></i>
+            <input type="text" class="form__input" name="distrito" placeholder="Distrito: ">
+        </div>
+        <div class="form__item">
+            <i class="fa-solid fa-key form__icon"></i>
+            <input type="password" class="form__input" name="password" placeholder="Contraseña: ">
+            <img src="../../../assets/img/eye.svg" class="btn__eye" alt="eye">
+        </div>
+        <div class="form__item">
+            <i class="fa-solid fa-lock form__icon"></i>
+            <input type="password" class="form__input" name="repeat" placeholder="Repetir Contraseña: ">
+            <img src="../../../assets/img/eye.svg" class="btn__eye" alt="eye">
+        </div>
+        <div class="form__button-container form__item--100">
+            <button type="submit" class="form__btn btn--registrar"><i class="fa-solid fa-floppy-disk"></i> Registrar</button>
+            <button type="button" routerLink="/login" class="form__btn"><i class="fa-solid fa-house"></i> Login</button>
+        </div>
+    </form>
+</div>

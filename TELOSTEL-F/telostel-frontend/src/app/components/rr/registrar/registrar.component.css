@@ -1,0 +1,75 @@
+/* ::::::::: MAIN-FORM :::::::::*/
+.main__form-body{
+    max-width: 650px;
+}
+.main__form{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 1rem;
+    margin-top: 2rem;
+}
+.form-title{
+    color: var(--almost-black);
+    margin: 5rem 0px 2rem;
+}
+.form__item{
+    flex-basis: 46%;
+    position: relative;
+}
+.form__item--100{
+    flex-basis: 100%;
+}
+.form__icon{
+    position: absolute;
+    top: 1rem;
+    left: 0;
+    font-size: 20px;
+    color: var(--almost-black);
+}
+.form__input{
+    width: 100%;
+    padding: .8rem 0px;
+    border: none;
+    font-size: 18px;
+    border-bottom: 2px solid var(--almost-blue);
+    outline: none;
+    background-color: inherit;
+    padding-left: 2.5rem;
+}
+.btn__eye{
+    position: absolute;
+    top: 1.2rem;
+    right: 1rem;
+    width: 23px;
+    cursor: pointer;
+}
+.card-body{
+    background-color: var(--almost-white);
+}
+.form__icon{
+    margin-right: .5rem;
+}
+.form__btn{
+    margin-top: 2rem;
+    font-weight: 500;
+    border: none;
+    font-size: 20px;
+    padding: .5rem 2rem;
+    border-radius: 7px;
+}
+.form__btn i{
+    margin-right: 1rem;
+}
+.btn--registrar{
+    background-color: var(--blue-color);
+    color: var(--white);
+    margin-right: 1rem;
+}
+/* :::::: RECUPERAR :::::::: */
+.btn--enviar{
+    position: absolute;
+    right: 1rem;
+    top: .5rem;
+    background-color: inherit;
+}

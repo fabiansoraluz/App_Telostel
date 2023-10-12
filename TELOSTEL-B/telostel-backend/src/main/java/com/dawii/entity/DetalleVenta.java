@@ -8,9 +8,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "tb_detalle_venta")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class DetalleVenta {
 
 	@Id
@@ -35,67 +43,4 @@ public class DetalleVenta {
 	@JoinColumn(name = "id_producto")
 	private Producto producto;
 
-	public DetalleVenta() {
-		super();
-	}
-
-	public DetalleVenta(Long id, Integer cantidad, Double precio, Double total, Venta venta, Producto producto) {
-		super();
-		this.id = id;
-		this.cantidad = cantidad;
-		this.precio = precio;
-		this.total = total;
-		this.venta = venta;
-		this.producto = producto;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Integer getCantidad() {
-		return cantidad;
-	}
-
-	public void setCantidad(Integer cantidad) {
-		this.cantidad = cantidad;
-	}
-
-	public Double getPrecio() {
-		return precio;
-	}
-
-	public void setPrecio(Double precio) {
-		this.precio = precio;
-	}
-
-	public Double getTotal() {
-		return total;
-	}
-
-	public void setTotal(Double total) {
-		this.total = total;
-	}
-
-	public Venta getVenta() {
-		return venta;
-	}
-
-	public void setVenta(Venta venta) {
-		this.venta = venta;
-	}
-
-	public Producto getProducto() {
-		return producto;
-	}
-
-	public void setProducto(Producto producto) {
-		this.producto = producto;
-	}
-	
-	
 }
