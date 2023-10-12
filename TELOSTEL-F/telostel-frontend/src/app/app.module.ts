@@ -14,6 +14,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { SystemComponent } from './components/system/system.component';
 import { AsideComponent } from './components/aside/aside.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
+import { ServicioVentaComponent } from './servicio/servicio-venta/servicio-venta.component';
+import { ServicioReservacionComponent } from './servicio/servicio-reservacion/servicio-reservacion.component';
+import { ConsultaProductoComponent } from './consulta/consulta-producto/consulta-producto.component';
+import { ConsultaReservacionComponent } from './consulta/consulta-reservacion/consulta-reservacion.component';
+import { ConsultaClienteComponent } from './consulta/consulta-cliente/consulta-cliente.component';
+import { ReporteVentaComponent } from './reporte/reporte-venta/reporte-venta.component';
+import { ReporteReservacionComponent } from './reporte/reporte-reservacion/reporte-reservacion.component';
+import { MantenimientoEmpleadoComponent } from './mantenimiento/mantenimiento-empleado/mantenimiento-empleado.component';
+import { MantenimientoClienteComponent } from './mantenimiento/mantenimiento-cliente/mantenimiento-cliente.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +34,17 @@ import { AsideComponent } from './components/aside/aside.component';
     DashboardComponent,
     RRComponent,
     SystemComponent,
-    AsideComponent
+    AsideComponent,
+    PerfilComponent,
+    ServicioVentaComponent,
+    ServicioReservacionComponent,
+    ConsultaProductoComponent,
+    ConsultaReservacionComponent,
+    ConsultaClienteComponent,
+    ReporteVentaComponent,
+    ReporteReservacionComponent,
+    MantenimientoEmpleadoComponent,
+    MantenimientoClienteComponent
   ],
   imports: [
     BrowserModule,

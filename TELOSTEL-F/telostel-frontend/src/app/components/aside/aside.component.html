@@ -3,102 +3,33 @@
         <img src="../../assets/img/logo.png" alt="Logo">
     </div>
     <ul class="sidebar__container">
-        <li class="sidebar__items">
-            <a routerLink="#" class="sidebar__link sidebar__link--primary">
-                <i class="fa-solid fa-gauge sidebar__icon"></i>
-                Dashboard
-            </a>
-        </li>
-        <li class="sidebar__items">
-            <a routerLink="#" class="sidebar__link">
-                <i class="fa-solid fa-user sidebar__icon"></i>
-                Perfil
-            </a>
-        </li>
-        <li class="sidebar__items">
-            <button class="sidebar__link sidebar__link--scroll">
-                <div class="sidebar__link-text">
-                    <i class="fa-solid fa-toolbox sidebar__icon"></i>
-                    Mantenimiento
-                </div>
-                <i class="fa-solid fa-caret-down sidebar__arrow"></i>
-            </button>
-            <ul class="sidebar__submenu">
-                <li>
-                    <a routerLink="#" class="sidebar__sublink">
-                    <i class="fa-solid fa-user-gear sidebar__icon"></i>Cliente</a>
-                </li>
-                <li>
-                    <a routerLink="#" class="sidebar__sublink">
-                    <i class="fa-solid fa-user-doctor sidebar__icon"></i>Empleado</a>
-                </li>
-            </ul>
-        </li>
-        <li class="sidebar__items">
-            <button class="sidebar__link sidebar__link--scroll">
-                <div class="sidebar__link-text">
-                    <i class="fa-solid fa-file-invoice sidebar__icon"></i>
-                    Reporte
-                </div>
-                <i class="fa-solid fa-caret-down sidebar__arrow"></i>
-            </button>
-            <ul class="sidebar__submenu">
-                <li><a routerLink="#" class="sidebar__sublink">
-                    <i class="fa-solid fa-building-wheat sidebar__icon"></i>
-                    Reservaciones</a>
-                </li>
-                <li>
-                    <a routerLink="#" class="sidebar__sublink">
-                        <i class="fa-solid fa-shop sidebar__icon"></i>
-                    Ventas</a>
-                </li>
-            </ul>
-        </li>
-        <li class="sidebar__items">
-            <button class="sidebar__link sidebar__link--scroll">
-                <div class="sidebar__link-text">
-                    <i class="fa-solid fa-magnifying-glass sidebar__icon"></i>
-                    Consulta
-                </div>
-                <i class="fa-solid fa-caret-down sidebar__arrow"></i>
-            </button>
-            <ul class="sidebar__submenu">
-                <li>
-                    <a routerLink="#" class="sidebar__sublink">
-                    <i class="fa-solid fa-user-gear sidebar__icon"></i>Cliente</a>
-                </li>
-                <li>
-                    <a routerLink="#" class="sidebar__sublink">
-                    <i class="fa-solid fa-building-wheat sidebar__icon"></i>
-                    Reservaciones</a>
-                </li>
-                <li>
-                    <a routerLink="#" class="sidebar__sublink">
-                    <i class="fa-solid fa-utensils sidebar__icon"></i>
-                    Productos</a></li>
-            </ul>
-        </li>
-        <li class="sidebar__items">
-            <button class="sidebar__link sidebar__link--scroll">
-                <div class="sidebar__link-text">
-                    <i class="fa-solid fa-bell-concierge sidebar__icon"></i>
-                    Servicios
-                </div>
-                <i class="fa-solid fa-caret-down sidebar__arrow"></i>
-            </button>
-            <ul class="sidebar__submenu">
-                <li>
-                    <a routerLink="#" class="sidebar__sublink">
-                    <i class="fa-solid fa-building-wheat sidebar__icon"></i>
-                    Reservaciones</a>
-                </li>
-                <li>
-                    <a routerLink="#" class="sidebar__sublink">
-                    <i class="fa-solid fa-shop sidebar__icon"></i>
-                    Ventas</a>
-                </li>
-            </ul>
-        </li>
+        <ng-container *ngFor="let enlace of enlaces">
+            <li class="sidebar__items" *ngIf="enlace.subenlaces.length==0" [ngClass]="{'sidebar__link--primary':enlace.descripcion==='Dashboard'}">
+                <a routerLink="{{enlace.ruta}}" class="sidebar__link"> 
+                    <img src="../../../assets/img/{{enlace.ico}}" class="sidebar__icon" alt="">
+                    {{enlace.descripcion}}
+                </a>
+            </li>
+        </ng-container>
+        <ng-container *ngFor="let enlace of enlaces">
+            <li class="sidebar__items" *ngIf="enlace.subenlaces.length!=0">
+                <button class="sidebar__link sidebar__link--scroll" (click)="sidebar($event)">
+                    <div class="sidebar__link-text">
+                        <img src="../../../assets/img/{{enlace.ico}}" class="sidebar__icon" alt="">
+                        {{enlace.descripcion}}
+                    </div>
+                    <i class="fa-solid fa-caret-down sidebar__arrow"></i>
+                </button>
+                <ul class="sidebar__submenu">
+                    <li *ngFor="let subenlace of enlace.subenlaces">
+                        <a routerLink="{{enlace.ruta+subenlace.ruta}}" class="sidebar__sublink">
+                            <img src="../../../assets/img/{{subenlace.ico}}" class="sidebar__icon" alt="">
+                            {{subenlace.descripcion}}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ng-container>
     </ul>
     <div class="logout-container">
         <button type="button" class="btn-logout sidebar__link sidebar__link--logout" (click)="logout()"><i class="fa-solid fa-door-open sidebar__icon"></i> Logout</button>

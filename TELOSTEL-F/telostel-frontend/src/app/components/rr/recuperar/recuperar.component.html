@@ -8,28 +8,52 @@
 </ul>
 <div class="opciones-container">
     <h2 class="form-title">Recuperar Usuario</h2>
-    <form class="main__form">
+    <form class="main__form" #f="ngForm" (ngSubmit)="recuperar()">
         <div class="form__item form__item--100">
             <i class="fa-solid fa-envelope form__icon"></i>
-            <input type="text" class="form__input" name="correo" placeholder="Ingresar correo">
-            <button type="button" class="btn--enviar"><i class="fa-solid fa-paper-plane"></i></button>
+            <input type="text" class="form__input" name="correo" [(ngModel)]="usuario.email" placeholder="Ingresar correo" #correo="ngModel" required email>
+            <button type="button" (click)="enviar()" class="btn--enviar" [disabled]="correo.invalid"><i class="fa-solid fa-paper-plane"></i></button>
+            <div class="my-3 text-danger" *ngIf="correo.invalid && (correo.dirty||correo.touched)">
+                <div *ngIf="correo.errors['required']">
+                    Campo obligatorio
+                </div>
+                <div *ngIf="correo.errors['email']">
+                    Ingresar un correo válido
+                </div>
+            </div>
         </div>
         <div class="form__item form__item--100">
             <i class="fa-solid fa-user-shield form__icon"></i>
-            <input type="text" class="form__input" name="key" placeholder="Ingresar key">
+            <input type="text" class="form__input" name="key" [(ngModel)]="usuario.key" placeholder="Ingresar key" #key="ngModel" required>
+            <div class="my-3 text-danger" *ngIf="key.invalid && (key.dirty||key.touched)">
+                <div *ngIf="key.errors['required']">
+                    Campo obligatorio
+                </div>
+            </div>
         </div>
         <div class="form__item form__item--100">
             <i class="fa-solid fa-key form__icon"></i>
-            <input type="password" class="form__input" name="password" placeholder="Ingresar nueva contraseña">
+            <input type="password" class="form__input" name="password" [(ngModel)]="usuario.password" placeholder="Ingresar nueva contraseña" #password="ngModel" required>
             <img src="../../../assets/img/eye.svg" class="btn__eye" alt="eye">
+            <div class="my-3 text-danger" *ngIf="password.invalid && (password.dirty||password.touched)">
+                <div *ngIf="password.errors['required']">
+                    Campo obligatorio
+                </div>
+            </div>
         </div>
         <div class="form__item form__item--100">
             <i class="fa-solid fa-lock form__icon"></i>
-            <input type="password" class="form__input" name="repeat" placeholder="Repetir nueva contraseña">
+            <input type="password" class="form__input" name="repeat" [ngModel]="" placeholder="Repetir nueva contraseña" #repeat="ngModel" required>
             <img src="../../../assets/img/eye.svg" class="btn__eye" alt="eye">
+            <div class="my-3 text-danger" *ngIf="repeat.invalid && (repeat.dirty||repeat.touched)">
+                <div *ngIf="repeat.errors['required']">
+                    Ingresar la misma contraseña
+                </div>
+            </div>
+
         </div>
         <div class="form__button-container form__item--100">
-            <button type="submit" class="form__btn btn--registrar"><i class="fa-solid fa-floppy-disk form__icon--recuperar"></i> Recuperar</button>
+            <button type="submit" class="form__btn btn--registrar" [disabled]="f.invalid"><i class="fa-solid fa-floppy-disk form__icon--recuperar"></i> Recuperar</button>
             <button type="button" routerLink="/login" class="form__btn"><i class="fa-solid fa-house"></i> Login</button>
         </div>
     </form>

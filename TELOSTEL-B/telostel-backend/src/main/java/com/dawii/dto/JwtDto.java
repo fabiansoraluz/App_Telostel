@@ -16,12 +16,14 @@ public class JwtDto {
 
 	private String token;
 	private String bearer = "Bearer";
+	private String nombre;
 	private String username;
 	private String rol;
 	private List<Enlace> enlaces;
 
-	public JwtDto(String token, String username, Collection<? extends GrantedAuthority> authorities,List<Enlace> enlaces) {
+	public JwtDto(String token,String nombre, String username, Collection<? extends GrantedAuthority> authorities,List<Enlace> enlaces) {
 		this.token = token;
+		this.nombre = nombre;
 		this.username = username;
 		this.rol = authorities.iterator().next().getAuthority();
 		this.enlaces = enlaces;

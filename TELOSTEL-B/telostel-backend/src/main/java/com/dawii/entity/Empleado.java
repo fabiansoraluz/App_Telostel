@@ -7,8 +7,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,12 +32,20 @@ public class Empleado {
 	@Column(name = "id_empleado", nullable = false, unique = true, length = 5)
 	private Long id;
 
+	@NotEmpty
 	@Column(name = "nombre", length = 35, nullable = false)
 	private String nombre;
 
+	@NotEmpty
 	@Column(name = "apellido", length = 50, nullable = false)
 	private String apellido;
+	
+	@NotEmpty
+	@Size(min = 8,max = 8)
+	@Column(name = "dni", length = 8,nullable = false)
+	private String dni;
 
+	@NotEmpty
 	@Column(name = "celular", length = 9, nullable = false)
 	private String celular;
 
@@ -42,6 +55,11 @@ public class Empleado {
 	@Column(name = "estado", nullable = false)
 	private Integer estado;
 
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name="id_ubigeo",nullable = false)
+	private Ubigeo ubigeo;
+	
 	@PrePersist
 	public void prePersist() {
 		this.createAt = LocalDate.now();

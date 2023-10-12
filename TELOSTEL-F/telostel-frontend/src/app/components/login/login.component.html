@@ -16,18 +16,28 @@
                         <i class="fa-solid fa-user form__icon"></i>
                         Username
                     </label>
-                    <input type="text" class="form__input" required name="username" [(ngModel)]="usuario.username">
+                    <input type="text" class="form__input" name="username" [(ngModel)]="usuario.username" required #username="ngModel">
+                    <div class="my-3" *ngIf="username.invalid &&(username.dirty||username.touched)">
+                        <div class="text-danger" *ngIf="username.errors['required']">
+                            Username es obligatorio
+                        </div>
+                    </div>
                 </div>
                 <div class="form__item">
                     <label for="#" class="form__label">
                         <i class="fa-solid fa-lock form__icon"></i>
                         Password
                     </label>
-                    <input type="password" class="form__input" required name="password" [(ngModel)]="usuario.password">
+                    <input type="password" class="form__input" name="password" [(ngModel)]="usuario.password" required #password="ngModel">
                     <img src="../../assets/img/eye.svg" class="btn__eye" alt="eye">
+                    <div class="my-3" *ngIf="password.invalid && (password.dirty || password.touched)">
+                        <div class="text-danger" *ngIf="password.errors['required']">
+                            Password es obligatorio
+                        </div>
+                    </div>
                 </div>
                 <div class="form__button-container">
-                    <button type="submit" class="form__btn form__btn--submit">Ingresar</button>
+                    <button type="submit" class="form__btn form__btn--submit" [disabled]="f.invalid">Ingresar</button>
                     <a routerLink="/opciones/registrar" type="button" class="form__btn">Registrar</a>
                 </div>
             </form>

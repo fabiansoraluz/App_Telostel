@@ -48,21 +48,4 @@ export class UtilesService {
     })
   }
 
-  public sidebar(){
-    const links = document.querySelectorAll(".sidebar__link--scroll")
-    links.forEach(link=>{
-        link.addEventListener("click",()=>{
-            const arrow = link.querySelector(".sidebar__arrow")
-            arrow.classList.toggle("sidebar__arrow--active")
-
-            const menu = link.nextElementSibling as HTMLElement;
-            let height = 0;
-            if(menu.clientHeight == 0){
-                height=menu.scrollHeight;
-            }
-            menu.style.height = `${height}px`
-        })
-    })
-  }
-
 }

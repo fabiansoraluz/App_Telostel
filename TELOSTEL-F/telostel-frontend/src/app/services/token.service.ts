@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Enlace } from '../model/enlace';
 
 const TOKEN = 'AuthToken';
+const NAME = 'AuthName';
 const USERNAME = 'AuthUsername';
 const ROL = 'AuthRol';
 const ENLACES = 'AuthEnlaces';
@@ -22,6 +23,15 @@ export class TokenService {
   }
   public getToken():string{
     return window.sessionStorage.getItem(TOKEN);
+  }
+
+  // ::::::::: NAME :::::::::
+  public setNombre(nombre:string):void{
+    window.sessionStorage.removeItem(NAME);
+    window.sessionStorage.setItem(NAME,nombre);
+  }
+  public getNombre():string{
+    return window.sessionStorage.getItem(NAME);
   }
 
   // ::::::::: USERNAME :::::::::

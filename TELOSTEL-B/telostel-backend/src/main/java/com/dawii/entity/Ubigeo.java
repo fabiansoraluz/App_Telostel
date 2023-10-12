@@ -12,19 +12,19 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "tb_distrito")
+@Table(name="tb_ubigeo")
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class Distrito {
+@AllArgsConstructor
+public class Ubigeo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_distrito")
+	@Column(name="id_ubigeo")
 	private Long id;
-
-	@Column(name = "nombre", length = 35, nullable = false)
-	private String nombre;
-
+	
+	private String provincia;
+	private String distrito;
+	
 }

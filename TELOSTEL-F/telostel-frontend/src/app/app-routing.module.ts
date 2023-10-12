@@ -6,6 +6,16 @@ import { RecuperarComponent } from './components/rr/recuperar/recuperar.componen
 import { RRComponent } from './components/rr/rr.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SystemComponent } from './components/system/system.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
+import { MantenimientoClienteComponent } from './mantenimiento/mantenimiento-cliente/mantenimiento-cliente.component';
+import { MantenimientoEmpleadoComponent } from './mantenimiento/mantenimiento-empleado/mantenimiento-empleado.component';
+import { ReporteReservacionComponent } from './reporte/reporte-reservacion/reporte-reservacion.component';
+import { ReporteVentaComponent } from './reporte/reporte-venta/reporte-venta.component';
+import { ConsultaClienteComponent } from './consulta/consulta-cliente/consulta-cliente.component';
+import { ConsultaProductoComponent } from './consulta/consulta-producto/consulta-producto.component';
+import { ConsultaReservacionComponent } from './consulta/consulta-reservacion/consulta-reservacion.component';
+import { ServicioReservacionComponent } from './servicio/servicio-reservacion/servicio-reservacion.component';
+import { ServicioVentaComponent } from './servicio/servicio-venta/servicio-venta.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:"full"},
@@ -15,7 +25,17 @@ const routes: Routes = [
     {path:'recuperar',component:RecuperarComponent}
   ]},
   {path:'system',component:SystemComponent,children:[
-    {path:'dashboard',component:DashboardComponent}
+    {path:'dashboard',component:DashboardComponent},
+    {path:'perfil',component:PerfilComponent},
+    {path:'consulta/cliente',component:ConsultaClienteComponent},
+    {path:'consulta/producto',component:ConsultaProductoComponent},
+    {path:'consulta/reservacion',component:ConsultaReservacionComponent},
+    {path:'mantenimiento/cliente',component:MantenimientoClienteComponent},
+    {path:'mantenimiento/empleado',component:MantenimientoEmpleadoComponent},
+    {path:'reporte/reservacion',component:ReporteReservacionComponent},
+    {path:'reporte/venta',component:ReporteVentaComponent},
+    {path:'servicio/reservacion',component:ServicioReservacionComponent},
+    {path:'servicio/venta',component:ServicioVentaComponent}
   ]}
 ];
 

@@ -14,10 +14,18 @@ public class UsuarioService {
 	@Autowired
 	private IUsuarioDAO repo;
 	
-	public Usuario findByUsername(String username) {
+	public boolean existeXCorreo(String correo) {
+		return repo.existsByCorreo(correo);
+	}
+	public boolean existeXUsername(String username) {
+		return repo.existsByUsername(username);
+	}
+	public Usuario buscarXUsername(String username) {
 		return repo.findByUsername(username);
 	}
-	
+	public Usuario buscarXCorreo(String correo) {
+		return repo.findByCorreo(correo);
+	}
 	public Usuario grabar(Usuario user) {
 		return repo.save(user);
 	}

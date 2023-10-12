@@ -4,6 +4,7 @@ import { LoginUsuario } from '../../model/login-usuario';
 import { UsuarioService } from '../../services/usuario.service';
 import { TokenService } from '../../services/token.service';
 import { Router} from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -32,10 +33,14 @@ export class LoginComponent implements OnInit{
     this.SUsuario.login(this.usuario).subscribe(
       response => {
         this.SToken.setToken(response.token);
+        this.SToken.setNombre(response.nombre);
         this.SToken.setUsername(response.username);
         this.SToken.setRol(response.rol);
         this.SToken.setEnlaces(response.enlaces);
         this.router.navigate(["/system/dashboard"])
+      },
+      err =>{
+        Swal.fire("Se produjo un error",err.error.mensaje,"error")
       }
     )
   }

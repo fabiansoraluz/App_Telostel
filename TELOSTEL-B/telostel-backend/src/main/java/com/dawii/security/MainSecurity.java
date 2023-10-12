@@ -57,6 +57,7 @@ public class MainSecurity {
 		http.csrf(cors -> cors.disable());
 		http.authorizeHttpRequests(auth -> auth.
 				requestMatchers("/api/usuario/**").permitAll().
+				requestMatchers("/api/ubigeo/**").permitAll().
 				anyRequest().authenticated());
 		http.exceptionHandling(eh -> eh.authenticationEntryPoint(jwtEntryPoint));
 		http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

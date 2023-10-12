@@ -14,6 +14,9 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,12 +35,19 @@ public class Usuario {
 	@Column(name = "id_usuario", nullable = false, unique = true, length = 5)
 	private Long id;
 
+	@NotEmpty
 	@Column(name = "username", length = 30, nullable = false, unique = true)
 	private String username;
 
+	@NotEmpty
 	@Column(name = "password", nullable = false)
 	private String password;
 
+	@NotEmpty
+	@Email
+	@Column(name = "correo",nullable = false)
+	private String correo;
+	
 	@Column(name = "imagen", nullable = false)
 	private String imagen;
 
@@ -49,6 +59,7 @@ public class Usuario {
 
 	@OneToOne
 	@JoinColumn(name="id_empleado")
+	@Valid
 	private Empleado empleado;
 
 	@ManyToMany
@@ -60,6 +71,7 @@ public class Usuario {
 
 	@PrePersist
 	private void prePersist() {
+		this.imagen="test";
 		this.createAt=LocalDate.now();
 		this.estado=1;
 	}
