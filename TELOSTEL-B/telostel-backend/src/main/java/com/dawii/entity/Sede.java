@@ -7,11 +7,18 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "tb_sede")
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Sede {
 
 	@Id
@@ -31,75 +38,4 @@ public class Sede {
 	@ManyToOne
 	@JoinColumn(name = "id_distrito")
 	private Distrito distrito;
-	
-	@OneToOne(mappedBy = "sede")
-	private Reservacion reservacion;
-
-
-	public Sede() {
-		super();
-	}
-
-	public Sede(Long id, String nombre, String direccion, String imagen, Distrito distrito, Reservacion reservacion) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.direccion = direccion;
-		this.imagen = imagen;
-		this.distrito = distrito;
-		this.reservacion = reservacion;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getDireccion() {
-		return direccion;
-	}
-
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
-
-	public String getImagen() {
-		return imagen;
-	}
-
-	public void setImagen(String imagen) {
-		this.imagen = imagen;
-	}
-
-	public Distrito getDistrito() {
-		return distrito;
-	}
-
-	public void setDistrito(Distrito distrito) {
-		this.distrito = distrito;
-	}
-
-	public Reservacion getReservacion() {
-		return reservacion;
-	}
-
-	public void setReservacion(Reservacion reservacion) {
-		this.reservacion = reservacion;
-	}
-
-	
-	
-	
-	
 }

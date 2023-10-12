@@ -7,67 +7,35 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "tb_rol")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Rol {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_rol")
+	@Column(name = "id_rol")
 	private Long id;
-	
+
 	@Column(name = "nombre", length = 30, nullable = false)
 	private String nombre;
-	
-	@OneToMany(mappedBy = "rol")
-    private List<Usuario> usuario;
-	
-	public Rol() {
-		super();
-	}
 
-	public Rol(Long id, String nombre, List<Usuario> usuario, List<com.dawii.entity.RolEnlace> rolEnlace) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.usuario = usuario;
-	}
-
-
-
-
-
-	public Long getId() {
-		return id;
-	}
-
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-
-	public String getNombre() {
-		return nombre;
-	}
-
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-
-	public List<Usuario> getUsuario() {
-		return usuario;
-	}
-
-
-	public void setUsuario(List<Usuario> usuario) {
-		this.usuario = usuario;
-	}
-
-	
+	@ManyToMany
+	@JoinTable(
+			name="tb_rol_enlace",
+			joinColumns = @JoinColumn(name="id_rol",referencedColumnName = "id_rol"),
+			inverseJoinColumns = @JoinColumn(name="id_enlace",referencedColumnName = "id_enlace"))
+	private List<Enlace> enlaces;
 	
 }

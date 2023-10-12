@@ -1,0 +1,102 @@
+/* :::::::::: DEFAULT ::::::::::*/
+
+ul{
+    padding: 0px;
+}
+li{
+    list-style: none;
+}
+
+/* :::::::::: SIDEBAR ::::::::::*/
+.sidebar{
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    min-width: 280px;
+    padding: 2rem;
+    border-radius: 0px 10px 10px 0px;
+}
+.sidebar__icon{
+    margin-right: .7rem;
+}
+.sidebar__container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding-top: 3rem;
+}
+.sidebar__items{
+    margin-bottom: 1rem;
+}
+.sidebar__items .sidebar__link{
+    color: var(--almost-black);
+    font-size: 18px;
+    text-decoration: none;
+}
+.sidebar__link{
+    display: flex;
+    align-items: center;
+    padding: .5rem 1rem;
+}
+.sidebar__link:hover{
+    color: var(--gray);
+}
+.sidebar__link--scroll{
+    border: none;
+    background-color: unset;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.sidebar__link--primary{
+    background-color: var(--blue-color);
+    color: var(--white) !important;
+    border-radius: 10px;
+    transition: background-color ease .5s;
+}
+.sidebar__link--primary:hover{
+    background-color: var(--gray);
+}
+.sidebar__link--logout{
+    border-radius: 10px;
+    transition: background-color ease .5s;
+}
+.sidebar__link--logout:hover{
+    background-color: var(--almost-black);
+    color: var(--white);
+}
+.sidebar__arrow{
+    transition: transform ease .5s;
+}
+.sidebar__arrow--active{
+    transform: rotate(180deg);
+}
+.btn-logout{
+    background-color: inherit;
+    border: none;
+    width: 100%;
+    text-align: start;
+    font-size: 18px;
+    color: var(--almost-black);
+}
+
+.sidebar__submenu{
+    height: 0px;
+    overflow: hidden;
+    transition: height ease .5s;
+}
+
+.sidebar__sublink{
+    padding: 0.5rem 1rem;
+    display: block;
+    text-decoration: none !important;
+    color: var(--almost-black) !important;
+    border-left: 2px solid var(--almost-black);
+}
+.sidebar__sublink:hover{
+    background-color: var(--almost-gray);
+}

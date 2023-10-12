@@ -4,45 +4,24 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "tb_cliente_frecuente")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @PrimaryKeyJoinColumn(name = "id_cliente")
-public class ClienteFrecuente extends Cliente{
+public class ClienteFrecuente extends Cliente {
 
-	
 	@Column(name = "puntos", nullable = false)
-    private Integer puntos;
-	
+	private Integer puntos;
+
 	@Column(name = "descuento", nullable = false)
 	private Double descuento;
 
-	public ClienteFrecuente() {
-		super();
-	}
-
-	
-	public ClienteFrecuente(Long idFrecuente, Integer puntos, Double descuento) {
-		super();
-		this.puntos = puntos;
-		this.descuento = descuento;
-	}
-
-
-	public Integer getPuntos() {
-		return puntos;
-	}
-
-	public void setPuntos(Integer puntos) {
-		this.puntos = puntos;
-	}
-
-	public Double getDescuento() {
-		return descuento;
-	}
-
-	public void setDescuento(Double descuento) {
-		this.descuento = descuento;
-	}
-	
 }

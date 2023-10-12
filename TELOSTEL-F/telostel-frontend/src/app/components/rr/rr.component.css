@@ -1,0 +1,35 @@
+/* ::::::::: DEFAULT :::::::::*/
+img{
+    display: block;
+    object-fit: cover;
+    max-width: 100%;
+}
+.main__container{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    height: 100vh;
+}
+.main__form-container{
+    padding-left: 15%;
+    display: grid;
+    grid-template-rows: 15vh max-content;
+}
+.main__logo-container{
+    display: flex;
+    align-items: center;
+}
+
+/* ::::::::: MAIN-IMG :::::::::*/
+
+.main__img-container{
+    background: linear-gradient(to bottom, var(--almost-yellow) 60%, var(--yellow-color) 40%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.main__figure{
+    width: 60%;
+}
+.main__form-body{
+    max-width: 650px;
+}

@@ -1,0 +1,37 @@
+<div class="main__container">
+    <div class="main__img-container">
+        <div class="main__logo-container">
+            <img src="../../assets/img/logo.png" alt="Logo" class="main__logo">
+        </div>
+        <figure class="main__figure">
+            <img src="../../assets/img/login.svg" alt="Imagen de Login" class="main__img">
+        </figure>
+    </div>
+    <div class="main__form-container">
+        <div class="main__form-body">
+            <h2 class="main__title">Iniciar Sesión</h2>
+            <form class="main__form" #f="ngForm" (ngSubmit)="login()">
+                <div class="form__item">
+                    <label for="#" class="form__label">
+                        <i class="fa-solid fa-user form__icon"></i>
+                        Username
+                    </label>
+                    <input type="text" class="form__input" required name="username" [(ngModel)]="usuario.username">
+                </div>
+                <div class="form__item">
+                    <label for="#" class="form__label">
+                        <i class="fa-solid fa-lock form__icon"></i>
+                        Password
+                    </label>
+                    <input type="password" class="form__input" required name="password" [(ngModel)]="usuario.password">
+                    <img src="../../assets/img/eye.svg" class="btn__eye" alt="eye">
+                </div>
+                <div class="form__button-container">
+                    <button type="submit" class="form__btn form__btn--submit">Ingresar</button>
+                    <a routerLink="/opciones/registrar" type="button" class="form__btn">Registrar</a>
+                </div>
+            </form>
+            <p class="main__text">En caso de olvidar tu contraseña selecciona <a routerLink="/opciones/recuperar">recuperar</a></p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,124 @@
+/* :::::::::::::: MAIN-CONTAINER ::::::::::::::*/
+
+.main__container{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    height: 100vh;
+}
+
+/* :::::::::::::: MAIN-IMG ::::::::::::::*/
+
+img{
+    display: block;
+    max-width: 100%;
+}
+button{
+    border: none;
+    background: none;
+}
+.main__img-container{
+    background: linear-gradient(to bottom, var(--almost-sky-blue) 70%, var(--sky-blue) 30%);
+    padding-left: 20%;
+    display: grid;
+    grid-template-rows: 15vh 85vh;
+}
+.main__logo-container{
+    display: flex;
+    align-items: center;
+}
+.main__figure{
+    margin: 0px;
+    display: flex;
+    justify-content: flex-start;
+    max-width: 700px;
+    align-items: center;
+    margin-bottom: 5rem;
+}
+
+/* :::::::::::::: MAIN - FORMULARIO ::::::::::::::*/
+.main__form-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.main__form-body{
+    margin: 0 auto;
+    max-width: 550px;
+    width: 90%;
+}
+.main__title{
+    text-transform: uppercase;
+    color: var(--almost-black);
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--gray);
+    margin-bottom: 3rem;
+}
+.main__form{
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+}
+.form__item{
+    position: relative;
+    transition: margin ease .5s;
+}
+.form__label{
+    position: absolute;
+    transform: translateY(1rem);
+    left: 1rem;
+    pointer-events: none;
+    color: var(--almost-black);
+    font-size: 20px;
+    transition: transform ease .5s;
+}
+.form__icon{
+    margin-right: .7rem;
+}
+.form__input{
+    border: none;
+    background-color: var(--almost-gray);
+    width: 100%;
+    padding: 1rem;
+    border-radius: 10px;
+    font-size: 20px;
+    outline: none;
+}
+.btn__eye{
+    position: absolute;
+    top: 1.2rem;
+    right: 1rem;
+    width: 25px;
+    cursor: pointer;
+}
+
+.form__button-container{
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2,1fr);
+}
+.form__btn--submit{
+    background-color: #1F78AA;
+}
+.form__btn{
+    padding: .5rem 0px;
+    font-weight: 500;
+    font-size: 18px;
+    background-color: var(--almost-black);
+    color: var(--white);
+    text-align: center;
+}
+.form__btn--submit{
+    background-color: var(--blue-color);
+}
+.main__text{
+    margin-top: 2rem;
+    font-size: 20px;
+}
+
+/* ::::::::::: Efecto Transición :::::::::::*/
+.form__item--active{
+    margin-top: 2rem;
+}
+.form__label--active{
+    transform: translateY(-3rem);
+}
