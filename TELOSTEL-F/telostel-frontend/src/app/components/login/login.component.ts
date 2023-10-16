@@ -67,4 +67,12 @@ export class LoginComponent implements OnInit{
     return usuario;
   }
 
+  public sistema() {
+    // Implementación del método login
+    // ...
+
+    // Redirigir al componente AsideComponent
+    this.router.navigate(['/aside']);  // Reemplazar con la ruta correcta
+  }
+
 }
