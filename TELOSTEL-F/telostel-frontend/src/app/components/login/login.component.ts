@@ -5,6 +5,7 @@ import { UsuarioService } from '../../services/usuario.service';
 import { TokenService } from '../../services/token.service';
 import { Router} from '@angular/router';
 import Swal from 'sweetalert2';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -13,13 +14,14 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent implements OnInit{
 
-  usuario:LoginUsuario=new LoginUsuario();
+  formulario:FormGroup;
 
   constructor(
     private SUtiles:UtilesService,
     private SUsuario:UsuarioService,
     private SToken:TokenService,
-    private router:Router){}
+    private router:Router,
+    private formBuilder:FormBuilder){}
 
   ngOnInit(): void {
 
@@ -27,10 +29,24 @@ export class LoginComponent implements OnInit{
     this.SUtiles.login();
     //Implementamos función de password
     this.SUtiles.password();
+    //Construimos un formulario
+    this.formulario = this.formBuilder.group({
+      username:['',
+        [
+          Validators.required
+        ]
+      ],
+      password:['',
+        [
+          Validators.required
+        ]
+      ]
+    })
   }
 
   public login(){
-    this.SUsuario.login(this.usuario).subscribe(
+    var usuario = this.buildLoginUsuario();
+    this.SUsuario.login(usuario).subscribe(
       response => {
         this.SToken.setToken(response.token);
         this.SToken.setNombre(response.nombre);
@@ -43,6 +59,12 @@ export class LoginComponent implements OnInit{
         Swal.fire("Se produjo un error",err.error.mensaje,"error")
       }
     )
+  }
+  buildLoginUsuario():LoginUsuario{
+    var usuario = new LoginUsuario();
+    usuario.username=this.formulario.get('username').value
+    usuario.password=this.formulario.get('password').value
+    return usuario;
   }
 
 }

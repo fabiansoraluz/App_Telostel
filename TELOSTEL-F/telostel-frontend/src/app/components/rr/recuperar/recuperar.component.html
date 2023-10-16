@@ -8,53 +8,42 @@
 </ul>
 <div class="opciones-container">
     <h2 class="form-title">Recuperar Usuario</h2>
-    <form class="main__form" #f="ngForm" (ngSubmit)="recuperar()">
+    <form class="main__form" [formGroup]="formulario" (ngSubmit)="recuperar()" errorTailor>
         <div class="form__item form__item--100">
             <i class="fa-solid fa-envelope form__icon"></i>
-            <input type="text" class="form__input" name="correo" [(ngModel)]="usuario.email" placeholder="Ingresar correo" #correo="ngModel" required email>
-            <button type="button" (click)="enviar()" class="btn--enviar" [disabled]="correo.invalid"><i class="fa-solid fa-paper-plane"></i></button>
-            <div class="my-3 text-danger" *ngIf="correo.invalid && (correo.dirty||correo.touched)">
-                <div *ngIf="correo.errors['required']">
-                    Campo obligatorio
-                </div>
-                <div *ngIf="correo.errors['email']">
-                    Ingresar un correo válido
-                </div>
-            </div>
+            <input type="text" class="form__input" name="correo" placeholder="Ingresar correo" formControlName="correo" [controlErrorsTpl]="messageErrorCorreo">
+            <button type="button" (click)="enviar()" class="btn--enviar" [disabled]="formulario.get('correo').invalid"><i class="fa-solid fa-paper-plane"></i></button>
         </div>
         <div class="form__item form__item--100">
             <i class="fa-solid fa-user-shield form__icon"></i>
-            <input type="text" class="form__input" name="key" [(ngModel)]="usuario.key" placeholder="Ingresar key" #key="ngModel" required>
-            <div class="my-3 text-danger" *ngIf="key.invalid && (key.dirty||key.touched)">
-                <div *ngIf="key.errors['required']">
-                    Campo obligatorio
-                </div>
-            </div>
+            <input type="text" class="form__input" name="key" placeholder="Ingresar key" formControlName="key" [controlErrorsTpl]="messageErrorKey">
         </div>
         <div class="form__item form__item--100">
             <i class="fa-solid fa-key form__icon"></i>
-            <input type="password" class="form__input" name="password" [(ngModel)]="usuario.password" placeholder="Ingresar nueva contraseña" #password="ngModel" required>
+            <input type="password" class="form__input" name="password" placeholder="Ingresar nueva contraseña" formControlName="password" [controlErrorsTpl]="messageErrorPassword">
             <img src="../../../assets/img/eye.svg" class="btn__eye" alt="eye">
-            <div class="my-3 text-danger" *ngIf="password.invalid && (password.dirty||password.touched)">
-                <div *ngIf="password.errors['required']">
-                    Campo obligatorio
-                </div>
-            </div>
-        </div>
-        <div class="form__item form__item--100">
-            <i class="fa-solid fa-lock form__icon"></i>
-            <input type="password" class="form__input" name="repeat" [ngModel]="" placeholder="Repetir nueva contraseña" #repeat="ngModel" required>
-            <img src="../../../assets/img/eye.svg" class="btn__eye" alt="eye">
-            <div class="my-3 text-danger" *ngIf="repeat.invalid && (repeat.dirty||repeat.touched)">
-                <div *ngIf="repeat.errors['required']">
-                    Ingresar la misma contraseña
-                </div>
-            </div>
-
         </div>
         <div class="form__button-container form__item--100">
-            <button type="submit" class="form__btn btn--registrar" [disabled]="f.invalid"><i class="fa-solid fa-floppy-disk form__icon--recuperar"></i> Recuperar</button>
+            <button type="submit" class="form__btn btn--registrar" [disabled]="formulario.invalid"><i class="fa-solid fa-floppy-disk form__icon--recuperar"></i> Recuperar</button>
             <button type="button" routerLink="/login" class="form__btn"><i class="fa-solid fa-house"></i> Login</button>
         </div>
     </form>
 </div>
+<ng-template let-error let-text="text" #messageErrorCorreo>
+    <div class="form__message" *ngIf="formulario.get('correo').invalid">
+        <p *ngIf="error.required">Correo obligatorio</p>
+        <p *ngIf="error.email">Ingresar un correo valido</p>
+    </div>
+</ng-template>
+<ng-template let-error let-text="text" #messageErrorKey>
+    <div class="form__message" *ngIf="formulario.get('key').invalid">
+        <p *ngIf="error.required">Key obligatorio</p>
+        <p *ngIf="error.pattern">El formato debe ser [XXXX-XXXX-XXXX]</p>
+    </div>
+</ng-template>
+<ng-template let-error let-text="text" #messageErrorPassword>
+    <div class="form__message" *ngIf="formulario.get('password').invalid">
+        <p *ngIf="error.required">Password obligatorio</p>
+        <p *ngIf="error.pattern">Ingresar contraseña entre 6 a 12 caracteres, formato A-a-1</p>   
+    </div>
+</ng-template>

@@ -11,7 +11,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RRComponent } from './components/rr/rr.component';
 import { UtilesService } from './services/utiles.service';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SystemComponent } from './components/system/system.component';
 import { AsideComponent } from './components/aside/aside.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
@@ -24,12 +24,12 @@ import { ReporteVentaComponent } from './reporte/reporte-venta/reporte-venta.com
 import { ReporteReservacionComponent } from './reporte/reporte-reservacion/reporte-reservacion.component';
 import { MantenimientoEmpleadoComponent } from './mantenimiento/mantenimiento-empleado/mantenimiento-empleado.component';
 import { MantenimientoClienteComponent } from './mantenimiento/mantenimiento-cliente/mantenimiento-cliente.component';
+import { errorTailorImports, provideErrorTailorConfig } from '@ngneat/error-tailor';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegistrarComponent,
     RecuperarComponent,
     DashboardComponent,
     RRComponent,
@@ -44,7 +44,8 @@ import { MantenimientoClienteComponent } from './mantenimiento/mantenimiento-cli
     ReporteVentaComponent,
     ReporteReservacionComponent,
     MantenimientoEmpleadoComponent,
-    MantenimientoClienteComponent
+    MantenimientoClienteComponent,
+    RegistrarComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,9 +53,25 @@ import { MantenimientoClienteComponent } from './mantenimiento/mantenimiento-cli
     RouterModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
+    errorTailorImports,
   ],
   providers: [
-    UtilesService
+    UtilesService,
+    provideErrorTailorConfig({
+      errors: {
+        useValue: {
+          required: 'Campo obligatorio',
+          minlength: ({ requiredLength, actualLength }) => 
+                      `Se espera ${requiredLength} caracteres pero tienes ${actualLength}`,
+          maxlength: ({ requiredLength, actualLength }) => 
+          `Se espera ${requiredLength} caracteres pero tienes ${actualLength}`,
+          pattern:'Debes seguir el formato',
+          invalidAddress: error => `Address isn't valid`,
+          email:'Ingresar un formato de correo válido'
+        }
+      }
+    })
   ],
   bootstrap: [AppComponent]
 })

@@ -36,7 +36,8 @@ export class UtilesService {
     const eyes = document.querySelectorAll(".btn__eye");
     eyes.forEach(eye=>{
         eye.addEventListener("click",()=>{
-            const input = eye.previousElementSibling as HTMLInputElement;
+            const formItem = eye.closest('.form__item'); // Encuentra el elemento .form__item más cercano
+            const input = formItem.querySelector('.form__input') as HTMLInputElement;
             if(input.type=="password"){
                 input.type="text"
                 eye.setAttribute("src","../../assets/img/eye-close.svg")
