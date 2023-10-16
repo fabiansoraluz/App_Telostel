@@ -1,6 +1,8 @@
 import { Component,OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RecuperarUsuario } from 'src/app/model/recuperar-usuario';
+import { Usuario } from 'src/app/model/usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { UtilesService } from 'src/app/services/utiles.service';
 import Swal from 'sweetalert2';
@@ -12,23 +14,46 @@ import Swal from 'sweetalert2';
 })
 export class RecuperarComponent implements OnInit{
   
-  usuario:RecuperarUsuario = new RecuperarUsuario()
+  public formulario:FormGroup;
 
   constructor(
     private SUtiles:UtilesService,
     private SUsuario:UsuarioService,
-    private router:Router){}
+    private router:Router,
+    private formBuilder:FormBuilder){}
 
   ngOnInit(): void {
+    //Agregamos evento del password
     this.SUtiles.password();
+    //Costruimos el formulario para validar
+    this.formulario = this.formBuilder.group({
+      correo:['',
+        [
+          Validators.required,
+          Validators.email
+        ]
+      ],
+      key:['',
+        [
+          Validators.required,
+          Validators.pattern("[A-Z\\d]{4}[-][A-Z\\d]{4}[-][A-Z\\d]{4}")
+        ]
+      ],
+      password:['',
+        [
+          Validators.required,
+          Validators.pattern("(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{6,12}")
+        ]
+      ]
+    })
   }
 
   enviar(){
-    const email = this.usuario.email;
+    const email = this.formulario.get('correo').value;
     if(email != null){
       this.SUsuario.mail(email).subscribe(
         response=>{
-          Swal.fire(response.mensaje,"Ingresar secret key para recuperar cuenta","success")
+          Swal.fire(response.mensaje,"Ingresar SECRET KEY para recuperar cuenta","success")
         },
         err=>{
           Swal.fire("Error de envio",err.error.mensaje,"error");
@@ -39,7 +64,8 @@ export class RecuperarComponent implements OnInit{
     }
   }
   recuperar(){
-    this.SUsuario.recuperar(this.usuario).subscribe(
+    var usuario = this.buildUser();
+    this.SUsuario.recuperar(usuario).subscribe(
       response=>{
         this.router.navigate(["/login"]);
         Swal.fire(response.mensaje,"Ingrese sesión con nueva contraseña","success");
@@ -49,5 +75,11 @@ export class RecuperarComponent implements OnInit{
       }
     )
   }
-
+  buildUser():RecuperarUsuario{
+    var usuario = new RecuperarUsuario();
+    usuario.email=this.formulario.get('correo').value
+    usuario.key=this.formulario.get('key').value
+    usuario.password=this.formulario.get('password').value
+    return usuario;
+  }
 }

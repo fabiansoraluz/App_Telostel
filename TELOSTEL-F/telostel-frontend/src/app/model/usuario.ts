@@ -7,6 +7,6 @@ export class Usuario {
     correo:string
     imagen:string
     createAt:Date
-    estado:Number
+    estado:number
     empleado:Empleado = new Empleado()
 }

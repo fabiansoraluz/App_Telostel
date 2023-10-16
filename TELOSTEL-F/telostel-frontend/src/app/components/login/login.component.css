@@ -122,3 +122,22 @@ button{
 .form__label--active{
     transform: translateY(-3rem);
 }
+
+/*Estilos de Validación*/
+input.ng-touched.ng-invalid{
+    border: 2px var(--valid-red) solid;
+    border-radius: 10px;
+}
+.form__icon--valid{
+    position: absolute;
+    top: 1rem;
+    right: 10px;
+    font-size: 20px;
+}
+
+/* Mensaje de validación*/
+.form__message{
+    margin-top: 10px;
+    color: var(--valid-red);
+    padding-left: 10px;
+}

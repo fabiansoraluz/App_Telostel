@@ -8,52 +8,98 @@
 </ul>
 <div class="opciones-container">
     <h2 class="form-title">Registrar Usuario</h2>
-    <form #f="ngForm" class="main__form" (ngSubmit)="registrarUsuario()">
+    <form [formGroup]="formulario" class="main__form" (ngSubmit)="registrarUsuario()" errorTailor>
+
         <div class="form__item">
             <i class="fa-solid fa-image-portrait form__icon"></i>
-            <input type="text" class="form__input" name="nombre" [(ngModel)]="usuario.empleado.nombre" placeholder="Ingresar nombre">
+            <input type="text" class="form__input" name="nombre" formControlName="nombre" placeholder="Ingresar nombre" [controlErrorsTpl]="messageNombreError">
+            <i class="form__icon--valid fa-solid fa-circle-xmark" *ngIf="formulario.get('nombre').invalid && formulario.get('nombre').touched" style="color: #dc3545;"></i>
+            <i class="form__icon--valid fa-solid fa-circle-check" *ngIf="formulario.get('nombre').valid" style="color:rgb(18, 102, 18);"></i>
         </div>
         <div class="form__item">
             <i class="fa-solid fa-id-card-clip form__icon"></i>
-            <input type="text" class="form__input" name="apellido" [(ngModel)]="usuario.empleado.apellido" placeholder="Ingresar apellido">
+            <input type="text" class="form__input" name="apellido" formControlName="apellido" placeholder="Ingresar apellido" [controlErrorsTpl]="messageApellidoError">
+            <i class="form__icon--valid fa-solid fa-circle-xmark" *ngIf="formulario.get('apellido').invalid && formulario.get('apellido').touched" style="color: #dc3545;"></i>
+            <i class="form__icon--valid fa-solid fa-circle-check" *ngIf="formulario.get('apellido').valid" style="color:rgb(18, 102, 18);"></i>
         </div>
         <div class="form__item">
             <i class="fa-solid fa-address-card form__icon"></i>
-            <input type="text" class="form__input" name="dni" [(ngModel)]="usuario.empleado.dni" placeholder="Ingresar DNI">
+            <input type="text" class="form__input" name="dni" formControlName="dni" placeholder="Ingresar DNI" [controlErrorsTpl]="messageDniError">
+            <i class="form__icon--valid fa-solid fa-circle-xmark" *ngIf="formulario.get('dni').invalid && formulario.get('dni').touched" style="color: #dc3545;"></i>
+            <i class="form__icon--valid fa-solid fa-circle-check" *ngIf="formulario.get('dni').valid" style="color:rgb(18, 102, 18);"></i>
         </div>
         <div class="form__item">
             <i class="fa-solid fa-phone form__icon"></i>
-            <input type="text" class="form__input" name="celular" [(ngModel)]="usuario.empleado.celular" placeholder="Ingresar celular">
+            <input type="text" class="form__input" name="celular" formControlName="celular" placeholder="Ingresar celular" [controlErrorsTpl]="messageCelularError">
+            <i class="form__icon--valid fa-solid fa-circle-xmark" *ngIf="formulario.get('celular').invalid && formulario.get('celular').touched" style="color: #dc3545;"></i>
+            <i class="form__icon--valid fa-solid fa-circle-check" *ngIf="formulario.get('celular').valid" style="color:rgb(18, 102, 18);"></i>
         </div>
         <div class="form__item form__item--100">
             <i class="fa-solid fa-envelope form__icon"></i>
-            <input type="email" class="form__input" name="correo" [(ngModel)]="usuario.correo" placeholder="Ingresar correo">
+            <input type="email" class="form__input" name="correo" formControlName="correo" placeholder="Ingresar correo">
+            <i class="form__icon--valid fa-solid fa-circle-xmark" *ngIf="formulario.get('correo').invalid && formulario.get('correo').touched" style="color: #dc3545;"></i>
+            <i class="form__icon--valid fa-solid fa-circle-check" *ngIf="formulario.get('correo').valid" style="color:rgb(18, 102, 18);"></i>
         </div>
         <div class="form__item">
             <i class="fa-solid fa-user form__icon"></i>
-            <input type="text" class="form__input" name="username" [(ngModel)]="usuario.username" placeholder="Ingresar username">
+            <input type="text" class="form__input" name="username" formControlName="username" placeholder="Ingresar username" [controlErrorsTpl]="messageUsernameError">
+            <i class="form__icon--valid fa-solid fa-circle-xmark" *ngIf="formulario.get('username').invalid && formulario.get('username').touched" style="color: #dc3545;"></i>
+            <i class="form__icon--valid fa-solid fa-circle-check" *ngIf="formulario.get('username').valid" style="color:rgb(18, 102, 18);"></i>
         </div>
         <div class="form__item">
             <button type="button" class="btn btn-primary w-100 mt-2" data-toggle="modal" data-target="#modalUbigeo">
                 <i class="fa-solid fa-map btn-icon"></i> Busca tu ubicación
+                <input type="hidden" formControlName="distrito">
             </button>
         </div>
-        <div class="form__item">
+        <div class="form__item form__item--100">
             <i class="fa-solid fa-key form__icon"></i>
-            <input type="password" class="form__input" name="password" [(ngModel)]="usuario.password" placeholder="Ingresar contraseña">
-            <img src="../../../assets/img/eye.svg" class="btn__eye" alt="eye">
-        </div>
-        <div class="form__item">
-            <i class="fa-solid fa-lock form__icon"></i>
-            <input type="password" class="form__input" name="repeat" placeholder="Repetir contraseña">
+            <input type="password" class="form__input" name="password" placeholder="Ingresar contraseña" formControlName="password" [controlErrorsTpl]="messagePasswordError">
             <img src="../../../assets/img/eye.svg" class="btn__eye" alt="eye">
         </div>
         <div class="form__button-container form__item--100">
-            <button type="submit" class="form__btn btn--registrar"><i class="fa-solid fa-floppy-disk"></i> Registrar</button>
+            <button type="submit" class="form__btn btn--registrar" [disabled]="formulario.invalid"><i class="fa-solid fa-floppy-disk"></i> Registrar</button>
             <button type="button" routerLink="/login" class="form__btn"><i class="fa-solid fa-house"></i> Login</button>
         </div>
     </form>
 </div>
+
+<ng-template let-error let-text="text" #messageNombreError>
+    <div class="form__message" *ngIf="!formulario.get('nombre').valid">
+        <p *ngIf="error.required">El campo nombre es obligatorio</p>
+        <p *ngIf="error.pattern">Ingresar entre 4 a 30 letras</p>
+    </div>
+</ng-template>
+<ng-template let-error let-text="text" #messageApellidoError>
+    <div class="form__message" *ngIf="!formulario.get('apellido').valid">
+        <p *ngIf="error.required">El campo apellido es obligatorio</p>
+        <p *ngIf="error.pattern">Ingresar entre 4 a 30 caracteres</p>
+    </div>
+</ng-template>
+<ng-template let-error let-text="text" #messageDniError>
+    <div class="form__message" *ngIf="!formulario.get('dni').valid">
+        <p *ngIf="error.required">El campo dni es obligatorio</p>
+        <p *ngIf="error.pattern">Ingresar 8 dígitos</p>
+    </div>
+</ng-template>
+<ng-template let-error let-text="text" #messageCelularError>
+    <div class="form__message" *ngIf="!formulario.get('celular').valid">
+        <p *ngIf="error.required">El campo celular es obligatorio</p>
+        <p *ngIf="error.pattern">Ingresar entre 7 a 9 dígitos</p>
+    </div>
+</ng-template>
+<ng-template let-error let-text="text" #messageUsernameError>
+    <div class="form__message" *ngIf="!formulario.get('username').valid">
+        <p *ngIf="error.required">El campo username es obligatorio</p>
+        <p *ngIf="error.pattern">Ingresar username entre 6 a 20 caracteres</p>
+    </div>
+</ng-template>
+<ng-template let-error let-text="text" #messagePasswordError>
+    <div class="form__message" *ngIf="!formulario.get('password').valid">
+        <p *ngIf="error.required">El campo password es obligatorio</p>
+        <p *ngIf="error.pattern">Ingresar contraseña entre 6 a 12 caracteres, formato A-a-1</p>   
+    </div>
+</ng-template>
 
 <!-- MODAL DE UBIGEO -->
 <div class="modal fade" id="modalUbigeo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -70,11 +116,11 @@
                     <div class="form__item--ubigeo">
                         <select class="form__select--ubigeo" (change)="listarDistritos()" name="provincia" [(ngModel)]="provincia">
                             <option value="" disabled selected>Provincia</option>
-                            <option *ngFor="let p of provincias">{{p}}</option>
+                            <option *ngFor="let p of provincias" [value]="p">{{p}}</option>
                         </select>
                     </div>
                     <div class="form__item--ubigeo">
-                        <select class="form__select--ubigeo" name="Distrito" [(ngModel)]="usuario.empleado.ubigeo.id">
+                        <select class="form__select--ubigeo" name="Distrito" [(ngModel)]="id_ubigeo">
                             <option value=0 disabled selected>Distrito</option>
                             <option *ngFor="let di of distritos" [value]="di.id">{{di.distrito}}</option>
                         </select>

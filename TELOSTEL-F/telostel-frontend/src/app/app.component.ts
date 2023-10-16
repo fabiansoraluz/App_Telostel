@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { errorTailorImports } from '@ngneat/error-tailor';
 
 @Component({
   selector: 'app-root',

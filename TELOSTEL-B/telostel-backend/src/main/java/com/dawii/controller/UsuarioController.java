@@ -126,7 +126,6 @@ public class UsuarioController {
 		if(SUsuario.existeXCorreo(user.getCorreo())) {
 			return new ResponseEntity<Mensaje>(new Mensaje("El correo ya está registrado"),HttpStatus.BAD_REQUEST);
 		}
-		
 		//Registramos al empleado
 		Empleado e = SEmpleado.grabar(user.getEmpleado());
 		
