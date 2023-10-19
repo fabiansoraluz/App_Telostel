@@ -46,6 +46,7 @@ public class Empleado {
 	private String dni;
 
 	@NotEmpty
+	@Size(min=7,max=9)
 	@Column(name = "celular", length = 9, nullable = false)
 	private String celular;
 
@@ -59,6 +60,11 @@ public class Empleado {
 	@ManyToOne
 	@JoinColumn(name="id_ubigeo",nullable = false)
 	private Ubigeo ubigeo;
+	
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name="id_cargo",nullable = false)
+	private CargoEmpleado cargo;
 	
 	@PrePersist
 	public void prePersist() {

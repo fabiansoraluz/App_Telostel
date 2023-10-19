@@ -22,9 +22,11 @@ import { ConsultaReservacionComponent } from './consulta/consulta-reservacion/co
 import { ConsultaClienteComponent } from './consulta/consulta-cliente/consulta-cliente.component';
 import { ReporteVentaComponent } from './reporte/reporte-venta/reporte-venta.component';
 import { ReporteReservacionComponent } from './reporte/reporte-reservacion/reporte-reservacion.component';
-import { MantenimientoEmpleadoComponent } from './mantenimiento/mantenimiento-empleado/mantenimiento-empleado.component';
-import { MantenimientoClienteComponent } from './mantenimiento/mantenimiento-cliente/mantenimiento-cliente.component';
 import { errorTailorImports, provideErrorTailorConfig } from '@ngneat/error-tailor';
+import { MantenimientoProductoComponent } from './mantenimiento/mantenimiento-producto/mantenimiento-producto.component';
+import { MantenimientoHabitacionComponent } from './mantenimiento/mantenimiento-habitacion/mantenimiento-habitacion.component';
+import { ProductoService } from './services/producto.service';
+import { interceptorProvider } from './interceptor/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -43,9 +45,9 @@ import { errorTailorImports, provideErrorTailorConfig } from '@ngneat/error-tail
     ConsultaClienteComponent,
     ReporteVentaComponent,
     ReporteReservacionComponent,
-    MantenimientoEmpleadoComponent,
-    MantenimientoClienteComponent,
     RegistrarComponent,
+    MantenimientoProductoComponent,
+    MantenimientoHabitacionComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,9 @@ import { errorTailorImports, provideErrorTailorConfig } from '@ngneat/error-tail
     errorTailorImports,
   ],
   providers: [
+    ProductoService,
     UtilesService,
+    interceptorProvider,
     provideErrorTailorConfig({
       errors: {
         useValue: {
