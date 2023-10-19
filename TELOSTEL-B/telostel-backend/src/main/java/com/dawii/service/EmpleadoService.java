@@ -1,5 +1,7 @@
 package com.dawii.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,5 +23,21 @@ public class EmpleadoService {
 	public boolean existeXCelular(String celular) {
 		return repo.existsByCelular(celular);
 	}
+	
+    public boolean existeOtroXDni(Long id, String dni) {
+        return repo.existsByDniAndIdNot(dni, id);
+    }
+
+    public boolean existeOtroXCelular(Long id, String celular) {
+        return repo.existsByCelularAndIdNot(celular, id);
+    }
+
+    public Empleado buscarPorId(Long id) {
+        return repo.findById(id).orElse(null);
+    }
+
+    public Empleado actualizar(Empleado empleado) {
+        return repo.save(empleado);
+    }
 	
 }
