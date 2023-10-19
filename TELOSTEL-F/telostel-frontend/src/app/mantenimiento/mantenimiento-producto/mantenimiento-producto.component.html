@@ -1,0 +1,62 @@
+<div class="contenedor">
+    <div class="contenedor__item">
+        <form class="row" action="">
+            <div class="form-group col-4">
+                <label for="" class="form-label">Producto</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="form-group col-4">
+                <label for="" class="form-label">Cant. por Unidad</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="form-group col-4">
+                <label for="" class="form-label">Precio</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="form-group col-4">
+                <label for="" class="form-label">Stock</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="form-group col-4">
+                <label for="" class="form-label">Categoria</label>
+                <select name="" id="" class="form-control">
+                    <option value=0 disabled selected>Seleccionar Categoria</option>
+                </select>
+            </div>
+            <div class="form-btn col-12">
+                <button class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Registrar</button>
+            </div>
+        </form>
+    </div>
+    <div class="contenedor__item">
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Producto</th>
+                    <th>Cant. por Unidad</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th>Categoria</th>
+                    <th>Fec. Registro</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let prod of productos">
+                    <td>{{prod.id}}</td>
+                    <td>{{prod.nombre}}</td>
+                    <td>{{prod.cantUnidad}}</td>
+                    <td>{{prod.precio}}</td>
+                    <td>{{prod.stock}}</td>
+                    <td>{{prod.categoria.nombre}}</td>
+                    <td>{{prod.createAt}}</td>
+                    <td>
+                        <button class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button class="btn btn-danger ml-3"><i class="fa-solid fa-trash-can"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

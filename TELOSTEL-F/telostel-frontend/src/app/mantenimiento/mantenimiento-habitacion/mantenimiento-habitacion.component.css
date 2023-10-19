@@ -1,0 +1,104 @@
+img{
+    display: block;
+    width: 100%;
+    object-fit: cover;
+}
+.hab__contenedor{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 1rem;
+}
+.card__habitacion{
+    margin-top: 3rem;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.card__header{
+    display: flex;
+    gap: 2rem;
+    padding: 1rem;
+    border-radius: 10px 10px 0px 0px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card__header .card__numero{
+    font-weight: 700;
+    min-width: 100px;
+    margin: 0px;
+    font-size: 22px;
+}
+.card__header .card__estado{
+   font-size: 20px;
+   font-weight: 500; 
+    margin: 0px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+.card__body{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 1rem 1.5rem 0px;
+    gap: 2rem;
+}
+.card__body .card__item{
+    font-weight: 500;
+}
+.card__body .card__value{
+    font-weight: 400;
+}
+
+.card__figure{
+    min-width: 70px;
+    margin-bottom: 16px;
+}
+/* ESTILOS DE LAS HABITACIONES */
+.card__habitacion--disponible{
+    background-color: rgb(207, 207, 207);
+}
+.card__habitacion--disponible .card__header{
+    background-color: rgb(97, 97, 97);
+    color: white;
+}
+
+.card__habitacion--reservado{
+    background-color: rgb(206, 222, 255);
+}
+.card__habitacion--reservado .card__header{
+    background-color: rgb(43, 104, 196);
+    color: white;
+}
+
+.card__habitacion--ocupado{
+    background-color: rgb(255, 206, 206);
+}
+.card__habitacion--ocupado .card__header{
+    background-color: rgb(196, 43, 43);
+    color: white;
+}
+
+.card__habitacion--limpieza{
+    background-color: rgb(220, 255, 213);
+}
+.card__habitacion--limpieza .card__header{
+    background-color: rgb(59, 129, 56);
+    color: white;
+}
+
+/*Formulario*/
+.contenedor__item--habitacion{
+    display: flex;
+    gap: 2rem;
+}
+.form__figure{
+    width: 20%;
+}
+.form__figure img{
+    border-radius: 10px;
+    box-shadow: 0px 0px 3px 3px var(--gray);
+}
+.form-btn{
+    display: flex;
+    align-items: center;
+}

@@ -4,7 +4,7 @@ import { Enlace } from '../model/enlace';
 const TOKEN = 'AuthToken';
 const NAME = 'AuthName';
 const USERNAME = 'AuthUsername';
-const ROL = 'AuthRol';
+const ROL = 'AuthAuthorities';
 const ENLACES = 'AuthEnlaces';
 
 @Injectable({

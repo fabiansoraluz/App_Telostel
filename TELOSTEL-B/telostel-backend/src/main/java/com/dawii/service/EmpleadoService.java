@@ -14,9 +14,7 @@ public class EmpleadoService {
 	@Autowired
 	private IEmpleadoDAO repo;
 	
-	public Empleado grabar(Empleado bean) {
-		return repo.save(bean);
-	}
+	//VALIDACIONES
 	public boolean existeXDni(String dni) {
 		return repo.existsByDni(dni);
 	}
@@ -24,20 +22,18 @@ public class EmpleadoService {
 		return repo.existsByCelular(celular);
 	}
 	
-    public boolean existeOtroXDni(Long id, String dni) {
-        return repo.existsByDniAndIdNot(dni, id);
-    }
-
-    public boolean existeOtroXCelular(Long id, String celular) {
-        return repo.existsByCelularAndIdNot(celular, id);
-    }
-
-    public Empleado buscarPorId(Long id) {
-        return repo.findById(id).orElse(null);
-    }
-
-    public Empleado actualizar(Empleado empleado) {
-        return repo.save(empleado);
-    }
+	//CRUD
+	public Empleado grabar(Empleado bean) {
+		return repo.save(bean);
+	}
+	public Empleado buscarXId(Long id) {
+		return repo.findById(id).orElse(null);
+	}
+	public List<Empleado> listarEmpleados(){
+		return repo.findAll();
+	}
+	public void eliminar(Long id) {
+		repo.deleteById(id);
+	}
 	
 }

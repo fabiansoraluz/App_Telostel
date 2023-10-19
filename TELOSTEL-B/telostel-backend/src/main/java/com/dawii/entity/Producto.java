@@ -32,6 +32,9 @@ public class Producto {
 	@Column(name = "nombre", length = 50, nullable = false)
 	private String nombre;
 
+	@Column(name = "cant_uni",length = 100,nullable = false)
+	private String cantUnidad;
+	
 	@Column(name = "precio", nullable = false)
 	private Double precio;
 

@@ -14,6 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.dawii.jwt.JwtEntryPoint;
 import com.dawii.jwt.JwtTokenFilter;
@@ -52,9 +54,18 @@ public class MainSecurity {
 		builder.userDetailsService(userDetailsImp).passwordEncoder(passwordEncoder());
 		AuthenticationManager authenticationManager = builder.build();
 		
+		/*Configuracion CORS*/
+		CorsConfiguration config = new CorsConfiguration();
+	    config.addAllowedOrigin("http://localhost:4200");
+	    config.addAllowedHeader("*");
+	    config.addAllowedMethod("*");
+	    
+	    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+		
 		http.authenticationManager(authenticationManager);
 		http.csrf(csrf -> csrf.disable());
-		http.csrf(cors -> cors.disable());
+		http.cors(cors -> cors.configurationSource(source));
 		http.authorizeHttpRequests(auth -> auth.
 				requestMatchers("/api/usuario/**").permitAll().
 				requestMatchers("/api/ubigeo/**").permitAll().
@@ -65,5 +76,4 @@ public class MainSecurity {
 		
 		return http.build();
 	}
-	
 }

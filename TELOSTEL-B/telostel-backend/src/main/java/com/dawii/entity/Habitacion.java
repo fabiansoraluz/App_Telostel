@@ -39,16 +39,16 @@ public class Habitacion {
 	private LocalDate createAt;
 	
 	@Column(name = "estado", nullable = false)
-	private Integer estado;
+	private String estado;
 
 	@ManyToOne
 	@JoinColumn(name = "id_tipo_habitacion")
-	private TipoHabitacion tipohabitacion;
+	private TipoHabitacion tipo;
 
 	@PrePersist
 	private void prePersist() {
 		this.createAt=LocalDate.now();
-		this.estado=1;
+		this.estado="Disponible";
 	}
 	
 }
