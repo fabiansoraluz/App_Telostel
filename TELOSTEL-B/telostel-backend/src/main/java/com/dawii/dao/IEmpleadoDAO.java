@@ -11,5 +11,9 @@ public interface IEmpleadoDAO extends JpaRepository<Empleado, Long>{
 	//Buscar si existe empleado por DNI
 	public boolean existsByDni(String dni);
 	
-	
+    // Buscar si existe empleado por celular excluyendo el ID proporcionado
+    boolean existsByCelularAndIdNot(String celular, Long id);
+
+    // Buscar si existe empleado por DNI excluyendo el ID proporcionado
+    boolean existsByDniAndIdNot(String dni, Long id);
 }
