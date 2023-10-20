@@ -1,0 +1,38 @@
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active btn-registrar" aria-current="page" routerLink="/habitaciones/registrar">Registrar Habitación</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link btn-recuperar" routerLink="/opciones/recuperar">Recuperar</a>
+    </li>
+</ul>
+
+<div class="opciones-container">
+    <h2 class="form-title">Registrar Habitación</h2>
+    <form #f="ngForm" class="main__form" (ngSubmit)="registrarHabitacion()">
+        <div class="form__item">
+            <label>Número de Habitación</label>
+            <input type="text" class="form__input" name="numero" [(ngModel)]="habitacion.numero" placeholder="Número de Habitación">
+        </div>
+        <div class="form__item">
+            <label>Piso</label>
+            <input type="text" class="form__input" name="piso" [(ngModel)]="habitacion.piso" placeholder="Piso">
+        </div>
+        <div class="form__item">
+            <label>Estado</label>
+            <input type="text" class="form__input" name="estado" [(ngModel)]="habitacion.estado" placeholder="Estado">
+        </div>
+        <div class="form__item">
+            <label>ID Tipo de Habitación</label>
+            <select class="form-select" name="tipohabitacion" [(ngModel)]="habitacion.tipohabitacion.id">
+                <option>Tipo Habitaciones</option>
+                <option  *ngFor="let tip of tipos" [value]="tip.id">{{tip.nombre}}</option>
+            </select>
+        </div>
+        <div class="form__button-container form__item--100">
+            <button type="submit" class="form__btn btn--registrar"><i class="fa-solid fa-floppy-disk"></i> Registrar Habitación</button>
+            <button type="button" routerLink="/habitaciones/listar" class="form__btn"><i class="fa-solid fa-house"></i> Lista de Habitaciones</button>
+        </div>
+    </form>
+</div>
+

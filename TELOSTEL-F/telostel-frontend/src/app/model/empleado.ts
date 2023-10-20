@@ -1,5 +1,6 @@
 import { Ubigeo } from "./ubigeo"
 
+
 export class Empleado {
     id:number
     nombre:string

@@ -58,6 +58,5 @@ public class Cliente {
 	private void prePersist() {
 		this.registro=LocalDate.now();
 		this.estado=1;
-	}
-		
+	}		
 }

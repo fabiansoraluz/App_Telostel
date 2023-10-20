@@ -13,16 +13,22 @@ import com.dawii.entity.Enlace;
 import com.dawii.entity.Usuario;
 
 @Service
-public class UserDetailsImp implements UserDetailsService{
+public class UserDetailsImp implements UserDetailsService {
 
-	@Autowired
-	private UsuarioService SUsuario;
-	
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Usuario user = SUsuario.buscarXUsername(username);
-		List<Enlace> enlaces = user.getRoles().get(0).getEnlaces();
-		return UsuarioPrincipal.build(user, enlaces);
-	}
+    @Autowired
+    private UsuarioService SUsuario; 
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        // Paso 1: Cargar un usuario basado en el nombre de usuario proporcionado
+        Usuario user = SUsuario.buscarXUsername(username);
+
+        // Paso 2: Obtener los enlaces relacionados con el usuario a través de su primer rol
+        List<Enlace> enlaces = user.getRoles().get(0).getEnlaces();
+
+        // Paso 3: Construir y devolver un objeto UserDetails (en este caso, UsuarioPrincipal)
+        return UsuarioPrincipal.build(user, enlaces);
+    }
 }
+
+

@@ -22,7 +22,7 @@
                 </button>
                 <ul class="sidebar__submenu">
                     <li *ngFor="let subenlace of enlace.subenlaces">
-                        <a routerLink="{{enlace.ruta+subenlace.ruta}}" class="sidebar__sublink">
+                        <a routerLink="/system/mantenimiento/habitacion" class="sidebar__sublink">
                             <img src="../../../assets/img/{{subenlace.ico}}" class="sidebar__icon" alt="">
                             {{subenlace.descripcion}}
                         </a>

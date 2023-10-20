@@ -24,6 +24,9 @@ import { ReporteVentaComponent } from './reporte/reporte-venta/reporte-venta.com
 import { ReporteReservacionComponent } from './reporte/reporte-reservacion/reporte-reservacion.component';
 import { MantenimientoEmpleadoComponent } from './mantenimiento/mantenimiento-empleado/mantenimiento-empleado.component';
 import { MantenimientoClienteComponent } from './mantenimiento/mantenimiento-cliente/mantenimiento-cliente.component';
+import { MantenimientoHabitacionComponent } from './mantenimiento/mantenimiento-habitacion/mantenimiento-habitacion.component';
+import { RegistrarHabitacionComponent } from './mantenimiento/mantenimiento-habitacion/registrar-habitacion/registrar-habitacion.component';
+import { ListarHabitacionComponent } from './mantenimiento/mantenimiento-habitacion/listar-habitacion/listar-habitacion.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,10 @@ import { MantenimientoClienteComponent } from './mantenimiento/mantenimiento-cli
     ReporteVentaComponent,
     ReporteReservacionComponent,
     MantenimientoEmpleadoComponent,
-    MantenimientoClienteComponent
+    MantenimientoClienteComponent,
+    MantenimientoHabitacionComponent,
+    RegistrarHabitacionComponent,
+    ListarHabitacionComponent
   ],
   imports: [
     BrowserModule,
