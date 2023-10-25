@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Habitacion } from 'src/app/model/habitacion';
+import { TipoHabitacion } from 'src/app/model/tipohabitacion';
 import { HabitacionService } from 'src/app/services/habitacion.service';
 import Swal from 'sweetalert2';
 
@@ -18,7 +19,7 @@ export class MantenimientoHabitacionComponent {
   constructor(
     private serHabitacion:HabitacionService,
     private router:Router){}
-
+    tipos:TipoHabitacion[]
     ngOnInit():void{
       this.listaHabitaciones()
     }

@@ -1,37 +1,52 @@
-<ul class="nav nav-tabs">
-    <li class="nav-item">
-        <a class="nav-link active" aria-current="page" routerLink="/habitaciones">Listar Habitaciones</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" routerLink="/system/mantenimiento/habitacion/registrar">Registrar Habitación</a>
-    </li>
-</ul>
-
-<div class="opciones-container">
-    
-    <h2 class="form-title">Listar Habitaciones</h2>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>ID Habitación</th>
-                <th>Fecha de Creación</th>
-                <th>Estado</th>
-                <th>Número</th>
-                <th>Piso</th>
-                <th>Tipo Habitación</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of listarHabitaciones">
-                <td>{{item.id}}</td>
-                <td>{{item.numero}}</td>
-                <td>{{item.piso}}</td>
-                <td>{{item.createAt}}</td>
-                <td>{{item.estado}}</td>
-                <td>{{item.tipohabitacion.nombre}}</td>
-                <td><button type="button" class="btn btn-success">Editar</button></td>
-                <td><button type="button" class="btn btn-danger" (click)="eliminarHabitacion(item.id)">Eliminar</button></td>
-            </tr>
-        </tbody>
-    </table>
+<div class="contenedor">
+    <div class="contenedor__item contenedor__item--habitacion">
+        <figure class="form__figure">
+            <img src="../../../assets/img/matrimonial.jpg" alt="">
+        </figure>
+        <form class="row" action="">
+            <div class="form-group col-4">
+                <label for="" class="form-label">Número</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="form-group col-4">
+                <label for="" class="form-label">Piso</label>
+                <input type="text" class="form-control" readonly>
+            </div>
+            <div class="form-group col-4">
+                <label for="" class="form-label">Tipo</label>
+                <select name="" id="" class="form-control">
+                    <option value=0 disabled selected>Seleccionar Tipo</option>
+                </select>
+            </div>
+            <div class="form-group col-4">
+                <label for="" class="form-label">Estado</label>
+                <select name="" id="" class="form-control">
+                    <option value="" disabled selected>Seleccionar Estado</option>
+                    <option value="disponible">Disponible</option>
+                    <option value="reservado">Reservado</option>
+                    <option value="ocupado">Ocupado</option>
+                    <option value="limpieza">Limpieza</option>
+                </select>
+            </div>
+            <div class="form-btn col-4">
+                <button class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Registrar</button>
+            </div>
+        </form>
+    </div>
+    <div class="hab__contenedor">
+        <div *ngFor="let hab of listarHabitaciones" class="card__habitacion" [ngClass]="'card__habitacion--'+hab.estado">
+            <div class="card__header">
+                <h3 class="card__numero">{{hab.numero}}</h3>
+                <p class="card__estado">{{hab.estado}}</p>
+            </div>
+            <div class="card__body">
+                <div class="card__figure">
+                    <img src="../../../assets/img/vacio.svg" alt="">
+                </div>
+                <div class="card__text">
+                    <p class="card__item"><i class="fa-solid fa-layer-group"></i> Piso:  <span class="card__value">{{hab.piso}}</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
