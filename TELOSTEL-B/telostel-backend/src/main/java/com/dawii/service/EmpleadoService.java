@@ -1,12 +1,10 @@
 package com.dawii.service;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dawii.dao.IEmpleadoDAO;
-import com.dawii.entity.Empleado;
 
 @Service
 public class EmpleadoService {
@@ -38,4 +36,12 @@ public class EmpleadoService {
 	public Empleado buscarXUsername(String username) {
 		return repo.findXUsername(username);
 	}
+	public boolean existeOtroXDni(Long id, String dni) {
+    return repo.existsByDniAndIdNot(dni, id);
+  }
+  public boolean existeOtroXCelular(Long id, String celular) {
+    return repo.existsByCelularAndIdNot(celular, id);
+  }
+	
+
 }
