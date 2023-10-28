@@ -34,6 +34,7 @@ import com.dawii.entity.Usuario;
 import com.dawii.jwt.JwtProvider;
 import com.dawii.service.EmpleadoService;
 import com.dawii.service.UsuarioService;
+import com.dawii.serviceImp.EmpleadoServiceImp;
 import com.dawii.utils.Key;
 import com.dawii.utils.Mensaje;
 
@@ -59,6 +60,9 @@ public class UsuarioController {
 	
 	@Autowired
 	private EmpleadoService SEmpleado;
+	
+	@Autowired
+	private EmpleadoServiceImp SEmpleadoImp;
 	
 	@Autowired
 	private PasswordEncoder encoder;
@@ -127,7 +131,7 @@ public class UsuarioController {
 			return new ResponseEntity<Mensaje>(new Mensaje("El correo ya está registrado"),HttpStatus.BAD_REQUEST);
 		}
 		//Registramos al empleado
-		Empleado e = SEmpleado.grabar(user.getEmpleado());
+		Empleado e = SEmpleadoImp.registrar(user.getEmpleado());
 		
 		//Setteamps el rol
 		List<Rol> roles = new ArrayList<Rol>();
