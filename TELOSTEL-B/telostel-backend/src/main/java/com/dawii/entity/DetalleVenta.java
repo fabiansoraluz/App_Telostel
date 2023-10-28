@@ -1,12 +1,13 @@
 package com.dawii.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,10 +22,18 @@ import lombok.Setter;
 @NoArgsConstructor
 public class DetalleVenta {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_detalle_venta")
-	private Long id;
+	@EmbeddedId
+	private DetalleVentaPK pk;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_venta", insertable = false, updatable = false)
+	@JsonIgnore
+	private Venta venta;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_producto", insertable = false, updatable = false)
+	@JsonIgnore
+	private Producto producto;
 	
 	@Column(name = "cantidad", nullable = false)
 	private Integer cantidad;
@@ -35,12 +44,8 @@ public class DetalleVenta {
 	@Column(name = "total", nullable = false)
 	private Double total;
 	
-	@ManyToOne
-	@JoinColumn(name = "id_venta")
-	private Venta venta;
-	
-	@ManyToOne
-	@JoinColumn(name = "id_producto")
-	private Producto producto;
-
+	@PrePersist
+	private void prePersist() {
+		this.total=this.cantidad*this.precio;
+	}
 }

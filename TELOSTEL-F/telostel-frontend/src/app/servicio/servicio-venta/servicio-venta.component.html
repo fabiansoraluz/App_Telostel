@@ -1,1 +1,163 @@
-<p>servicio-venta works!</p>
+<div class="contenedor">
+    <div class="contenedor__item">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Producto</th>
+                    <th>Categoria</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Importe</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of carrito">
+                  <td>{{item.idProducto}}</td>
+                  <td>{{item.producto}}</td>
+                  <td>{{item.categoria.nombre}}</td>
+                  <td>{{item.precio}}</td>
+                  <td>{{item.cantidad}}</td>
+                  <td>{{item.importe}}</td>
+                  <td>
+                    <button type="button" class="btn btn-danger ml-3" (click)="eliminarProducto(item)"><i class="fa-solid fa-trash-can"></i></button>
+                  </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="contenedor__item">
+        <form class="form" [formGroup]="formulario" (ngSubmit)="registrar()" errorTailor>
+            <div class="form-container row">
+                <div class="form-group col-3">
+                    <label for="">Cliente</label>
+                    <div class="form__item position-relative">    
+                      <input type="text" class="form-control" name="cliente" formControlName="cliente" readonly>
+                      <button type="button" class="btn-cliente" data-toggle="modal" data-target="#clienteModal"><i class="fa-solid fa-magnifying-glass"></i></button>
+                  </div>
+                </div>
+                <div class="form-group col-3">
+                    <label for="">Producto</label>
+                    <div class="form__input-container">  
+                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#productoModal">
+                          <i class="fa-solid fa-magnifying-glass"></i> Buscar Producto
+                      </button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="">Fecha de Venta</label>
+                    <div class="form__input-container d-flex">  
+                      <input type="date" class="form-control" readonly [value]="fecha">
+                    </div>
+                </div>
+                <div class="form-group">
+                  <label for="">Importe</label>
+                  <div class="form__input-container d-flex">  
+                    <input type="text" class="form-control" readonly [value]="'S/ ' + (importeTotal | number:'1.2-2')">
+                  </div>
+                </div>
+            </div>
+            <div class="form-buttons">
+                <button class="btn btn-primary" type="submit" [disabled]="formulario.invalid"><i class="fa-solid fa-floppy-disk btn-icon"></i> Registrar</button>
+                <button class="btn btn-secondary" type="button" (click)="limpiar()"><i class="fa-solid fa-rotate-right btn-icon"></i> Limpiar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL PARA BUSCAR CLIENTE -->
+<div class="modal fade" id="clienteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Selecciona al Cliente</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label for="nombre" class="label-buscar">Nombre</label> 
+        <div class="btn__buscar-container row px-3 pb-3">
+          <input type="text" id="nombre" class="input-buscar form-control col-10" [(ngModel)]="nombre_cliente">
+          <button class="btn btn-success btn-buscar ml-3" (click)="buscarClientes()"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cliente of clientes">
+                    <td>{{cliente.id}}</td>
+                    <td>{{cliente.nombre}}</td>
+                    <td>{{cliente.apellido}}</td>
+                    <td><button class="btn btn-secondary" (click)="seleccionarCliente(cliente.id)" data-dismiss="modal"><i class="fa-solid fa-check"></i></button></td>
+                </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PRODUCTO -->
+<div class="modal fade" id="productoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Buscar Productos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label for="nombre" class="label-buscar">Nombre</label> 
+        <div class="btn__buscar-container row px-3 pb-3">
+          <input type="text" id="nombre" class="input-buscar form-control col-10" [(ngModel)]="nombre_producto">
+          <button class="btn btn-success btn-buscar ml-3" (click)="buscarProductos()"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+        <table class="table table-striped">
+          <thead>
+              <tr>
+                  <th>ID</th>
+                  <th>Producto</th>
+                  <th>Categoria</th>
+                  <th></th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let prod of productos">
+                  <td>{{prod.id}}</td>
+                  <td>{{prod.nombre}}</td>
+                  <td>{{prod.categoria.nombre}}</td>
+                  <td><button type="button" class="btn btn-secondary" (click)="seleccionarProducto(prod)"><i class="fa-solid fa-check"></i></button></td>
+              </tr>
+          </tbody>
+        </table>
+        <div class="form__input-container mt-5">
+          <div class="form__group">
+            <label for="exampleInputEmail1"><b>Producto</b></label><br>			
+            <div class="form__input-cliente">
+              <input type="text" class="form-control" readonly [value]="producto.nombre">
+            </div>																											
+          </div>
+          <div class="form__group mt-3">
+              <label for="exampleInputEmail1"><b>Cantidad</b></label><br>		
+              <div class="form__input-cliente">
+                <input type="number" class="form-control" [(ngModel)]="cantidad">	
+              </div>																									
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" data-dismiss="modal" (click)="agregarProducto()"><i class="fas fa-save"></i> Agregar</button>
+        <button type="button" class="btn btn-danger btn-cancelar-producto" data-dismiss="modal"><i class="fas fa-undo-alt"></i> Cancelar</button>
+      </div>
+</div>
+  </div>
+</div>

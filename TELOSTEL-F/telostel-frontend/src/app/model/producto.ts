@@ -2,7 +2,7 @@ import { Categoria } from "./categoria"
 
 export class Producto {
     id:number
-    nombre:string
+    nombre:string=""
     cantUnidad:string
     precio:number
     stock:number

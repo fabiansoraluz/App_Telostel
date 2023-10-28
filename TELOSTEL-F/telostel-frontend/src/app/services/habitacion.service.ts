@@ -12,6 +12,8 @@ export class HabitacionService {
 
   constructor(private http:HttpClient) { }
 
+  //CRUD
+
   public listar():Observable<any>{
     return this.http.get(this.host)
   }
@@ -32,4 +34,14 @@ export class HabitacionService {
     return this.http.delete(this.host+"/"+id)
   }
 
+  //CONSULTAS PERSONALIZADAS
+  public ultimoPiso():Observable<any>{
+    return this.http.get(this.host+"/ultimoPiso")
+  }
+  public buscarXPiso(piso:number):Observable<any>{
+    return this.http.get(this.host+"/piso/"+piso)
+  }
+  public buscarXTipo(id_tipo:number):Observable<any>{
+    return this.http.get(this.host+"/tipo/"+id_tipo)
+  }
 }

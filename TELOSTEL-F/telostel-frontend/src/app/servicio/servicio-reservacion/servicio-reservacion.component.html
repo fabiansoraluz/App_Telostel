@@ -1,1 +1,154 @@
-<p>servicio-reservacion works!</p>
+<div class="rol d-flex">
+    <button class="btn btn-primary col-2" routerLink="/system/mantenimiento/habitacion"><i class="fa-solid fa-floppy-disk"></i> Registrar Habitación</button>
+    <select class="form-control col-2 ml-3" [(ngModel)]="pisoSeleccionado" (change)="cambiarPiso()">
+        <option value=0 disabled selected>Seleccionar Piso</option>
+        <option *ngFor="let piso of pisos" [value]="piso">{{'Nivel ' + piso}}</option>
+    </select>
+</div>
+<div class="contenedor__item">
+    <h3 [ngClass]="{'text-info':habitaciones!=null}">{{habitaciones!=null && habitaciones.length>0 ? 'Habitaciones Disponibles':'No hay habitaciones disponibles' }}</h3>
+    <div class="hab__contenedor mt-5" *ngIf="habitaciones!=null && habitaciones.length>0">
+        <div *ngFor="let hab of habitaciones" class="card__habitacion" [ngClass]="'card__habitacion--'+hab.estado" (click)="llenar(hab.id)">
+            <div class="card__header">
+                <h3 class="card__numero">{{hab.numero}}</h3>
+                <p class="card__estado">{{hab.estado}}</p>
+            </div>
+            <div class="card__body">
+                <div class="card__figure">
+                    <img src="../../../assets/img/vacio.svg" alt="">
+                </div>
+                <div class="card__text">
+                    <p class="card__item"><i class="fa-solid fa-cart-flatbed"></i> Tipo:  <span class="card__value">{{hab.tipo.nombre}}</span></p>
+                    <p class="card__item"><i class="fa-solid fa-money-bill"></i> Costo: <span class="card__value">{{hab.tipo.costo}}</span></p>
+                    <p class="card__item"><i class="fa-solid fa-layer-group"></i> Piso:  <span class="card__value">{{hab.piso}}</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="contenedor__item contenedor__item--form" *ngIf="habitacion!=null">
+    <form class="form" [formGroup]="formulario" (ngSubmit)="registrarReserva()" errorTailor>
+        <div class="form__reserva">
+            <figure class="reserva__figure">
+                <input type="hidden" [value]="habitacion.id">
+                <img [src]="'../../../assets/img/'+habitacion.tipo.nombre+'.jpg'" alt="">
+                <p class="alert alert-info text-center reserva__tipo">{{habitacion.tipo.nombre}}</p>
+            </figure>
+            <div class="reserva__container">
+                <h3 class="form__subtitulo">Reservar Habitación</h3>
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label for="">Cliente</label>
+                        <div class="form__item position-relative">    
+                            <input type="text" class="form-control" formControlName="cliente" readonly>
+                            <button type="button" class="btn-cliente" data-toggle="modal" data-target="#clienteModal"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="">Sede</label>
+                        <select name="" id="" class="form-control" formControlName="sede" [controlErrorsTpl]="messageSedeError">
+                            <option value = 0 disabled>Seleccionar Ubicación</option>
+                            <option *ngFor="let sede of sedes" [value]="sede.id">{{sede.nombre}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="">Fecha de Ingreso</label>
+                        <input type="date" class="form-control" formControlName="checkIn" [controlErrorsTpl]="messageCheckInError">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="">Fecha de Salida</label>
+                        <input type="date" class="form-control" formControlName="checkOut" (change)="importeReserva()" [controlErrorsTpl]="messageCheckOutError">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="">Importe de Reserva</label>
+                        <input type="text" class="form-control" [value]="'S/ ' + (impReserva | number:'1.2-2')" readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form__servicios">
+            <h3 class="form__subtitulo">Servicios Adicionales</h3>
+            <div class="servicios__items row">
+                <div class="form-group col-4" *ngFor="let servicio of servicios">
+                    <input type="checkbox" [value]="servicio.id" [id]="'servicio'+servicio.id" (change)="agregarServicio(servicio)"> 
+                    <label [for]="'servicio'+servicio.id" class="ml-3">{{servicio.nombre}}</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-4">
+                    <label for="">Importe de Servicios</label>
+                    <input type="text" class="form-control" [value]="'S/ ' + (impServicio | number:'1.2-2')" readonly>
+                </div>
+                <div class="form-group col-4">
+                    <label for="">Importe Total</label>
+                    <input type="text" class="form-control" [value]="'S/ ' + (impTotal | number:'1.2-2')" readonly>
+                </div>
+                <div class="form-group form-group-buttons col-4">
+                    <button type="submit" class="btn btn-primary" [disabled]="formulario.invalid">
+                        <i class="fa-solid fa-floppy-disk"></i> Reservar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- MODAL PARA BUSCAR CLIENTE -->
+<div class="modal fade" id="clienteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Selecciona al Cliente</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <label for="nombre" class="label-buscar">Nombre</label> 
+            <div class="btn__buscar-container row px-3 pb-3">
+                <input type="text" id="nombre" class="input-buscar form-control col-10" [(ngModel)]="nombre">
+                <button class="btn btn-success btn-buscar ml-3" (click)="buscarClientes()"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let cliente of clientes">
+                        <td>{{cliente.id}}</td>
+                        <td>{{cliente.nombre}}</td>
+                        <td>{{cliente.apellido}}</td>
+                        <td><button class="btn btn-secondary" (click)="seleccionarCliente(cliente.id)" data-dismiss="modal"><i class="fa-solid fa-check"></i></button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- MENSAJES DE ERRORES -->
+<ng-template let-error let-text="text" #messageSedeError>
+    <div class="form__message" *ngIf="formulario.get('sede').invalid">
+        <p class="control-error" *ngIf="error.required">Debes seleccionar una ubicación</p>
+    </div>
+</ng-template>
+
+<ng-template let-error let-text="text" #messageCheckInError>
+    <div class="form__message" *ngIf="formulario.get('checkIn').invalid">
+        <p class="control-error" *ngIf="error.required">Ingresar fecha de ingreso</p>
+        <p class="control-error" *ngIf="error.dateInvalid">Ingresar una fecha valida</p>
+    </div>
+</ng-template>
+
+<ng-template let-error let-text="text" #messageCheckOutError>
+    <div class="form__message" *ngIf="formulario.get('checkOut').invalid">
+        <p class="control-error" *ngIf="error.required">Ingresar fecha de salida</p>
+        <p class="control-error" *ngIf="error.dateInvalid">Ingresar una fecha valida</p>
+    </div>
+</ng-template>

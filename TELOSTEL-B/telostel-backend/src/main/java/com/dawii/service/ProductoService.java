@@ -15,7 +15,6 @@ public class ProductoService {
 	private IProductoDAO repo;
 	
 	//CRUD
-	
 	public Producto grabar(Producto bean) {
 		return repo.save(bean);
 	}
@@ -27,6 +26,11 @@ public class ProductoService {
 	}
 	public void eliminar(Long id) {
 		repo.deleteById(id);
+	}
+	
+	//CONSULTAS
+	public List<Producto> buscarXNombre(String nombre){
+		return repo.findByNombreStartingWith(nombre);
 	}
 	
 }

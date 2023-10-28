@@ -27,4 +27,7 @@ export class ProductoService {
   public eliminar(id:number):Observable<any>{
     return this.http.delete(`${this.host}/${id}`)
   }
+  public buscarXNombre(nombre:string):Observable<any>{
+    return this.http.get(this.host+"/nombre/"+nombre);
+  }
 }

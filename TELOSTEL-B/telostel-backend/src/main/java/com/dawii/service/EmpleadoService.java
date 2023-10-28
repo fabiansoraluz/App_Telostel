@@ -35,5 +35,7 @@ public class EmpleadoService {
 	public void eliminar(Long id) {
 		repo.deleteById(id);
 	}
-	
+	public Empleado buscarXUsername(String username) {
+		return repo.findXUsername(username);
+	}
 }

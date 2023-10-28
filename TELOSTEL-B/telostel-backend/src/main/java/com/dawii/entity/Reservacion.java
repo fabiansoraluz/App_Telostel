@@ -5,6 +5,7 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -12,6 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
@@ -38,14 +40,17 @@ public class Reservacion {
 
 	@Column(name = "checkOut", nullable = false)
 	private LocalDate checkOut;
-
+	
+	@Column(name = "importe_reserva",nullable = false)
+	private double importeReserva;
+	
 	@Column(name = "create_at", nullable = false)
 	private LocalDate createAt;
 
 	@Column(name = "estado", length = 30, nullable = false)
 	private Integer estado;
 
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "id_cliente")
 	private Cliente cliente;
 
@@ -57,21 +62,25 @@ public class Reservacion {
 	@JoinColumn(name = "id_habitacion")
 	private Habitacion habitacion;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "id_sede")
 	private Sede sede;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 			name="tb_reservacion_servicio",
 			joinColumns = @JoinColumn(name="id_reservacion",referencedColumnName = "id_reservacion"),
 			inverseJoinColumns = @JoinColumn(name="id_servicio",referencedColumnName = "id_servicio"))
 	private List<Servicio> servicios;
 	
+	@OneToMany
+	@JoinColumn(name="id_reservacion")
+	private List<DetalleReservacion> detalles;
+	
 	@PrePersist
 	private void prePersist() {
 		this.createAt = LocalDate.now();
 		this.estado = 1;
 	}
-
+	
 }

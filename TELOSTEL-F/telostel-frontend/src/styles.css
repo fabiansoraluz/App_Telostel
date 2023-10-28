@@ -26,6 +26,7 @@
     gap: 1rem;
 }
 .contenedor__item{
+    margin-top: 2rem;
     background-color: var(--white);
     border-radius: 20px;
     padding: 2rem;

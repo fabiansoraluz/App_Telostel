@@ -45,7 +45,7 @@ public class Cliente {
 	private String celular;
 	
 	@Column(name = "create_at", nullable = false)
-	private LocalDate registro;
+	private LocalDate createAt;
 	
 	@Column(name = "estado", nullable = false)
 	private Integer estado;
@@ -56,7 +56,7 @@ public class Cliente {
 	
 	@PrePersist
 	private void prePersist() {
-		this.registro=LocalDate.now();
+		this.createAt=LocalDate.now();
 		this.estado=1;
 	}
 		
