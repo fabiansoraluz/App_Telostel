@@ -3,10 +3,9 @@ package com.dawii.entity;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -46,8 +45,8 @@ public class Venta {
     @JoinColumn(name = "id_empleado")
     private Empleado empleado;
 
-	@OneToMany(mappedBy = "venta")
-	@JsonIgnore
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name="id_venta")
 	private List<DetalleVenta> detallesVenta;
 
 	@PrePersist

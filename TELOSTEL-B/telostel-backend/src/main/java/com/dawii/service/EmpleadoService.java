@@ -20,12 +20,28 @@ public class EmpleadoService {
 		return repo.existsByCelular(celular);
 	}
 	
+	//CRUD
+	public Empleado grabar(Empleado bean) {
+		return repo.save(bean);
+	}
+	public Empleado buscarXId(Long id) {
+		return repo.findById(id).orElse(null);
+	}
+	public List<Empleado> listarEmpleados(){
+		return repo.findAll();
+	}
+	public void eliminar(Long id) {
+		repo.deleteById(id);
+	}
+	public Empleado buscarXUsername(String username) {
+		return repo.findXUsername(username);
+	}
 	public boolean existeOtroXDni(Long id, String dni) {
-        return repo.existsByDniAndIdNot(dni, id);
-    }
-
-    public boolean existeOtroXCelular(Long id, String celular) {
-        return repo.existsByCelularAndIdNot(celular, id);
-    }
+    return repo.existsByDniAndIdNot(dni, id);
+  }
+  public boolean existeOtroXCelular(Long id, String celular) {
+    return repo.existsByCelularAndIdNot(celular, id);
+  }
 	
+
 }

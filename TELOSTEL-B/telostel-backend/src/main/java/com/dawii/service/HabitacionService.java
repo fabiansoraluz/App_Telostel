@@ -28,4 +28,14 @@ public class HabitacionService {
 		repo.deleteById(id);
 	}
 	
+	//CONSULTAS PERSONALIZADAS
+	public int buscarUltimoPiso() {
+		return repo.buscarUltimoPiso();
+	}
+	public List<Habitacion> buscarXPiso(int piso){
+		return repo.findByPiso(piso);
+	}
+	public List<Habitacion> buscarXTipo(int id){
+		return repo.buscarXTipo(id);
+	}
 }

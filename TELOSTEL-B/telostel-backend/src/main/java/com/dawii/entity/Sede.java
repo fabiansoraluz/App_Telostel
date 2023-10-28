@@ -5,8 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,11 +29,5 @@ public class Sede {
 	
 	@Column(name = "direccion", length = 120, nullable = false)
 	private String direccion;
-	
-	@Column(name = "imagen", nullable = false)
-	private String imagen;
-	
-	@ManyToOne
-	@JoinColumn(name = "id_ubigeo")
-	private Ubigeo ubigeo;
+
 }

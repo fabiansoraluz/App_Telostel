@@ -20,7 +20,7 @@ import com.dawii.utils.Mensaje;
 
 @RestController
 @RequestMapping("/api/producto")
-@CrossOrigin(originPatterns = "http://localhost:4200")
+@CrossOrigin("http://localhost:4200")
 public class ProductoController {
 	
 	@Autowired
@@ -38,6 +38,12 @@ public class ProductoController {
 			return new ResponseEntity<Producto>(bean,HttpStatus.OK);
 		}
 		return new ResponseEntity<Mensaje>(new Mensaje("Producto no encontrado"),HttpStatus.BAD_REQUEST);
+	}
+	
+	@GetMapping("/nombre/{nombre}")
+	public ResponseEntity<?> buscarXNombre(@PathVariable String nombre){
+		List<Producto> lista = SProducto.buscarXNombre(nombre);
+		return new ResponseEntity<List<Producto>>(lista,HttpStatus.OK);
 	}
 	
 	@PostMapping

@@ -1,0 +1,28 @@
+/*FORMULARIO*/
+.form{
+    display: flex;
+    justify-content: space-between;
+}
+.form-container{
+    flex-basis: 90%;
+    column-gap: 2rem;
+}
+.form-buttons{
+    flex-basis: 10%;
+}
+.form-buttons .btn{
+    min-width: 120px;
+}
+.form-buttons .btn:first-of-type{
+    margin-bottom: 1rem;
+}
+.btn-icon{
+    margin-right: .5rem;
+}
+.btn-cliente{
+    border: none;
+    background: none;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}

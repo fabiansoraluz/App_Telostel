@@ -72,7 +72,8 @@ import { interceptorProvider } from './interceptor/token.interceptor';
           `Se espera ${requiredLength} caracteres pero tienes ${actualLength}`,
           pattern:'Debes seguir el formato',
           invalidAddress: error => `Address isn't valid`,
-          email:'Ingresar un formato de correo válido'
+          email:'Ingresar un formato de correo válido',
+          dateInvalid:'Ingresar una fecha valida'
         }
       }
     })

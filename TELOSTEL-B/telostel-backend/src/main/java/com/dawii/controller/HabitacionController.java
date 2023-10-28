@@ -26,6 +26,7 @@ public class HabitacionController {
 	@Autowired
 	private HabitacionService SHabitacion;
 	
+	//CRUD
 	@GetMapping
 	public ResponseEntity<?> listar(){
 		return new ResponseEntity<List<Habitacion>>(SHabitacion.listar(),HttpStatus.OK);
@@ -60,6 +61,29 @@ public class HabitacionController {
 			return new ResponseEntity<Mensaje>(new Mensaje("Habitación eliminada"),HttpStatus.OK);
 		}
 		return new ResponseEntity<Mensaje>(new Mensaje("Habitacion no encontrado"),HttpStatus.BAD_REQUEST); 
+	}
+	
+	//CONSULTAS PERSONALIZADAS
+	@GetMapping("/ultimoPiso")
+	public ResponseEntity<?> ultimoPiso(){
+		int piso = SHabitacion.buscarUltimoPiso();
+		return new ResponseEntity<Integer>(piso,HttpStatus.OK);
+	}
+	@GetMapping("/piso/{piso}")
+	public ResponseEntity<?> buscarXPiso(@PathVariable int piso){
+		List<Habitacion> lista = SHabitacion.buscarXPiso(piso);
+		if(lista != null) {
+			return new ResponseEntity<List<Habitacion>>(lista,HttpStatus.OK);
+		}
+		return new ResponseEntity<Mensaje>(new Mensaje("No hay habitaciones"),HttpStatus.BAD_REQUEST);
+	}
+	@GetMapping("/tipo/{tipo}")
+	public ResponseEntity<?> buscarXTipo(@PathVariable int tipo){
+		List<Habitacion> lista = SHabitacion.buscarXTipo(tipo);
+		if(lista != null) {
+			return new ResponseEntity<List<Habitacion>>(lista,HttpStatus.OK);
+		}
+		return new ResponseEntity<Mensaje>(new Mensaje("No hay habitaciones"),HttpStatus.BAD_REQUEST);
 	}
 	
 }
