@@ -16,6 +16,7 @@ import com.dawii.dto.Carrito;
 import com.dawii.entity.DetalleVenta;
 import com.dawii.entity.DetalleVentaPK;
 import com.dawii.entity.Venta;
+import com.dawii.service.ProductoService;
 import com.dawii.service.VentaService;
 import com.dawii.utils.Mensaje;
 
@@ -26,6 +27,9 @@ public class VentaController {
 	
 	@Autowired
 	private VentaService SVenta;
+	
+	@Autowired
+	private ProductoService SProducto;
 	
 	@PostMapping
 	public ResponseEntity<?> registrar(@RequestBody Venta bean){
@@ -52,6 +56,13 @@ public class VentaController {
 			
 			//Registramos el detalle
 			SVenta.registrarDetalle(detalle);
+			
+			//Actualizamos el stock
+			int stock_registrado = SProducto.buscar(carrito.getIdProducto()).getStock();
+			int cantidad = carrito.getCantidad();
+			int stock_actual = stock_registrado - cantidad;
+			SProducto.actualizarStock(stock_actual,carrito.getIdProducto());
+			
 		}
 		return new ResponseEntity<Mensaje>(new Mensaje("Venta Exitosa"),HttpStatus.CREATED);
 	}

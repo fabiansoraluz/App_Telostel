@@ -30,5 +30,4 @@ public class VentaService {
 	public Venta buscarXId(Long id) {
 		return ventaDAO.findById(id).orElse(null);
 	}
-	
 }

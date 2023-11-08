@@ -18,10 +18,10 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ClienteTurista extends Cliente {
 
-	@Column(name = "nacionalidada", length = 50, nullable = false)
+	@Column(name = "nacionalidad", length = 50, nullable = false)
 	private String nacionalidad;
 
-	@Column(name = "celular_emerg", length = 15, nullable = false)
+	@Column(name = "cel_emergencia", length = 15, nullable = false)
 	private String emergencia;
 
 }

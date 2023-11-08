@@ -32,5 +32,9 @@ public class ProductoService {
 	public List<Producto> buscarXNombre(String nombre){
 		return repo.findByNombreStartingWith(nombre);
 	}
-	
+
+	//ACTUALIZAR EL STOCK
+	public void actualizarStock(int stock,long id) {
+		repo.actualizarStock(stock, id);
+	}
 }

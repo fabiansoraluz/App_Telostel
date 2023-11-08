@@ -19,6 +19,7 @@ import { ServicioVentaComponent } from './servicio/servicio-venta/servicio-venta
 import { AsideComponent } from './components/aside/aside.component';
 import { MantenimientoProductoComponent } from './mantenimiento/mantenimiento-producto/mantenimiento-producto.component';
 import { MantenimientoHabitacionComponent } from './mantenimiento/mantenimiento-habitacion/mantenimiento-habitacion.component';
+import { MantenimientoClienteComponent } from './mantenimiento/mantenimiento-cliente/mantenimiento-cliente.component';
 
 
 const routes: Routes = [
@@ -37,6 +38,7 @@ const routes: Routes = [
     {path:'consulta/reservacion',component:ConsultaReservacionComponent,data:{title:'Consulta de Reservaciones'}},
     {path:'mantenimiento/habitacion',component:MantenimientoHabitacionComponent,data:{title:'Mantenimiento de Habitaciones'}},
     {path:'mantenimiento/producto',component:MantenimientoProductoComponent,data:{title:'Mantenimiento de Productos'}},
+    {path:'mantenimiento/cliente',component:MantenimientoClienteComponent,data:{title:'Mantenimiento de Clientes'}},
     {path:'reporte/reservacion',component:ReporteReservacionComponent,data:{title:'Reporte de Reservaciones'}},
     {path:'reporte/venta',component:ReporteVentaComponent,data:{title:'Reporte de Ventas'}},
     {path:'servicio/reservacion',component:ServicioReservacionComponent,data:{title:'Reserva con nosotros'}},

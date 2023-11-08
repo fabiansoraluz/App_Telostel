@@ -27,6 +27,7 @@ import { MantenimientoProductoComponent } from './mantenimiento/mantenimiento-pr
 import { MantenimientoHabitacionComponent } from './mantenimiento/mantenimiento-habitacion/mantenimiento-habitacion.component';
 import { ProductoService } from './services/producto.service';
 import { interceptorProvider } from './interceptor/token.interceptor';
+import { MantenimientoClienteComponent } from './mantenimiento/mantenimiento-cliente/mantenimiento-cliente.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { interceptorProvider } from './interceptor/token.interceptor';
     RegistrarComponent,
     MantenimientoProductoComponent,
     MantenimientoHabitacionComponent,
+    MantenimientoClienteComponent,
   ],
   imports: [
     BrowserModule,
