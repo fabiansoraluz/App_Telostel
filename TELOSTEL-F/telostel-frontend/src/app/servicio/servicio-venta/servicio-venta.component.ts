@@ -31,7 +31,7 @@ export class ServicioVentaComponent implements OnInit{
 
   //Buscar Productos
   private id_producto:number
-  public producto:Producto = new Producto
+  public producto:Producto = new Producto()
   public nombre_producto:string
   public productos:[Producto]
   public cantidad:number=1
@@ -140,6 +140,11 @@ export class ServicioVentaComponent implements OnInit{
       return
     }
 
+    if((this.producto.stock-this.cantidad)<0){
+      Swal.fire("Error de Stock","No hay stock suficiente","error")
+      return
+    }
+
     if(this.carrito.length>0 && this.carrito.some(x=>x.idProducto==this.producto.id)){
       const indice = this.carrito.findIndex(x => x.idProducto == this.producto.id);
       let item = this.carrito[indice]
@@ -186,9 +191,11 @@ export class ServicioVentaComponent implements OnInit{
     this.SVenta.registrar(venta,this.carrito)
     this.limpiar()
   }
+  
   limpiar(){
     this.carrito=[]
     this.formulario.reset()
     this.calcularTotal()
+    window.location.reload();
   }
 }

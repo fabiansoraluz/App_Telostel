@@ -18,9 +18,6 @@ import lombok.Setter;
 @PrimaryKeyJoinColumn(name = "id_cliente")
 public class ClienteFrecuente extends Cliente {
 
-	@Column(name = "puntos", nullable = false)
-	private Integer puntos;
-
 	@Column(name = "descuento", nullable = false)
 	private Double descuento;
 
