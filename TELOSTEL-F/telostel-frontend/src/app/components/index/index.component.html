@@ -1,0 +1,220 @@
+<router-outlet></router-outlet>
+<header class="header">
+    <nav class="nav contenedor">
+      <div class="logo__container">
+        <img src="../../../assets/img/logo--blanco.png" alt="" class="nav__logo">
+      </div>
+      <ul class="enlaces__container">
+        <li><a href="#nosotros" class="scroll-link">Nosotros</a></li>
+        <li><a href="#servicios" class="scroll-link">Servicios</a></li>
+        <li><a href="#habitaciones" class="scroll-link">Habitaciones</a></li>
+        <li><a href="#comentarios" class="scroll-link">Comentarios</a></li>
+        <li><a href="#contacto" class="scroll-link">Contacto</a></li>
+      </ul>
+      <a class="button__container" routerLink="/login"><i class="fa-solid fa-door-open icon"></i> Loggin</a>
+    </nav>
+    <div class="hero__container contenedor">
+        <h1 class="hero__title">Bienvenido a TELOTEL</h1>
+        <div class="hero__button__container">
+            <a routerLink="/login" class="hero__button hero__button--primary"><i class="fa-solid fa-right-to-bracket icon"></i> Iniciar Sesión</a>
+            <a href="#contacto" class="hero__button scroll-link"><i class="fa-solid fa-mobile-screen-button icon"></i> Contactanos</a>
+        </div>
+    </div>
+</header>
+<main>
+    <section id="nosotros" class="nosotros contenedor">
+        <figure class="nosotros__figure">
+            <img src="../../../assets/img/nosotros.jpg" class="nosotros__img">
+        </figure>
+        <div class="nosotros__info">
+            <h2 class="subtitle">!Somos tu mejor opción para tu hospedaje¡</h2>
+            <p class="nosotros__text">
+                Somos una empresa que lleva en el mercado de hoteleria y turismo desde el 2015, tenemos sedes en varios departamentos: Lima, Ica, Piura y Cajamarca. 
+                <br><br>
+                Contamos con una infraestructura moderna que se adapta a tus comodidas con buenas vistas y buen ambiente.
+            </p>
+        </div>
+    </section>
+    <section id="servicios" class="servicios">
+        <div class="contenedor">
+            <h2 class="subtitle subtitle--center">Servicios del Hotel</h2>
+            <p class="servicios__text">Contamos con los mejores servicios para su comodidad y disfrutar de  una mejor experiencia al hospedarce con otros</p>
+            <div class="servicios__container">
+                <div class="servicios__item">
+                    <img src="../../../assets/img/piscina.jpg" class="servicios__img">
+                    <p class="servicios__name">Pisicna</p>
+                </div>
+                <div class="servicios__item">
+                    <img src="../../../assets/img/spa.jpg" class="servicios__img">
+                    <p class="servicios__name">Spa y Masajes</p>
+                </div>
+                <div class="servicios__item">
+                    <img src="../../../assets/img/parking.jpg" class="servicios__img">
+                    <p class="servicios__name">Parking</p>
+                </div>
+                <div class="servicios__item">
+                    <img src="../../../assets/img/comida.jpg" class="servicios__img">
+                    <p class="servicios__name">Room Service</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="habitaciones" class="habitaciones contenedor">
+        <h2 class="subtitle subtitle--center">Reserva en nuestras habitaciones</h2>
+        <div class="habitaciones__container">
+            <div class="habitaciones__item">
+                <figure class="item__figure">
+                    <img src="../../../assets/img/individual.jpg" class="item__img">
+                </figure>
+                <div class="item__info">
+                    <h3 class="item__subtitle">Individual</h3>
+                    <ul>
+                        <li>Cama Individual</li>
+                        <li>Baño con agua caliente</li>
+                        <li>Televisión de 45’’</li>
+                        <li>Comoda de 4 cajones</li>
+                    </ul>
+                </div>
+                <div class="item__footer">
+                    <p class="item__precio">S/80.00</p>
+                    <p class="item__turno">Por noche</p>
+                </div>
+            </div>
+            <div class="habitaciones__item">
+                <figure class="item__figure">
+                    <img src="../../../assets/img/doble.jpg" class="item__img">
+                </figure>
+                <div class="item__info">
+                    <h3 class="item__subtitle">Doble</h3>
+                    <ul>
+                        <li>2 Camas Individuales</li>
+                        <li>Baño con agua caliente</li>
+                        <li>Televisión de 54’’</li>
+                        <li>2 Comodas de 4 cajones</li>
+                    </ul>
+                </div>
+                <div class="item__footer">
+                    <p class="item__precio">S/120.00</p>
+                    <p class="item__turno">Por noche</p>
+                </div>
+            </div>
+            <div class="habitaciones__item">
+                <figure class="item__figure">
+                    <img src="../../../assets/img/matrimonial.jpg" class="item__img">
+                </figure>
+                <div class="item__info">
+                    <h3 class="item__subtitle">Matrimonial</h3>
+                    <ul>
+                        <li>Cama Matrimonial</li>
+                        <li>Baño con agua caliente y jacuzzi</li>
+                        <li>Televisión de 54’’</li>
+                        <li>Comoda de 8 cajones</li>
+                    </ul>
+                </div>
+                <div class="item__footer">
+                    <p class="item__precio">S/150.00</p>
+                    <p class="item__turno">Por noche</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="comentarios" class="comentarios">
+       <div class="contenedor">
+            <h2 class="subtitle">Nuestros Huespedes dicen ...</h2>
+            <div class="comentarios__container">
+                <div class="comentarios__item">
+                    <div class="comentarios__header">
+                        <img src="../../../assets/img/cliente01.jpg" alt="" class="comentarios__img">
+                        <div class="comentarios__info">
+                            <h3 class="comentarios__nombre">Hernesto Pimentel</h3>
+                            <img src="../../../assets/img/4_estrellas.png" alt="" class="comentarios__estrellas">
+                        </div>
+                    </div>
+                    <p class="comentarios__text">
+                        Buen servicio de habitación, empleados coordiales y educados, sin embargo, en mi caso se demoró un poco el room service.
+                    </p>
+                </div>
+                <div class="comentarios__item">
+                    <div class="comentarios__header">
+                        <img src="../../../assets/img/cliente02.jpg" alt="" class="comentarios__img">
+                        <div class="comentarios__info">
+                            <h3 class="comentarios__nombre">Jessica Ortiz</h3>
+                            <img src="../../../assets/img/5_estrellas.png" alt="" class="comentarios__estrellas">
+                        </div>
+                    </div>
+                    <p class="comentarios__text">
+                        Fue la mejor experiencia en hospedaje que tuve a lo largo de mis distintos viajes en todo el Perú.
+                    </p>
+                </div>
+                <div class="comentarios__item">
+                    <div class="comentarios__header">
+                        <img src="../../../assets/img/cliente03.jpg" alt="" class="comentarios__img">
+                        <div class="comentarios__info">
+                            <h3 class="comentarios__nombre">Mariana Guerra</h3>
+                            <img src="../../../assets/img/4_estrellas.png" alt="" class="comentarios__estrellas">
+                        </div>
+                    </div>
+                    <p class="comentarios__text">
+                        Me gusto mucho el diseño moderno del hotel, los multiples servicios como spa y masajes que resultó ser mi favorito. Lo recomiendo.
+                    </p>
+                </div>
+            </div>
+       </div> 
+    </section>
+    <section id="contacto" class="contactanos contenedor">
+        <form action="" class="contactanos__formulario row">
+            <div class="contactanos__header col-12">
+                <h3 class="contactanos__subtitle">Contactanos</h3>
+                <button type="button" class="contactanos__button"><i class="fa-solid fa-paper-plane icon"></i> Enviar</button>
+            </div>
+            <div class="form-group col-6">
+                <input type="text" class="form-control" placeholder="Nombres Completos">
+            </div>
+            <div class="form-group col-6">
+                <input type="text" class="form-control" placeholder="Apellidos Completos">
+            </div>
+            <div class="form-group col-12">
+                <input type="text" class="form-control" placeholder="Correo Electronico">
+            </div>
+            <div class="form-group col-12">
+                <input type="text" class="form-control" placeholder="Asunto">
+            </div>
+            <div class="form-group col-12">
+                <textarea type="text" class="form-control form-control--mensaje" placeholder="Mensaje para nosotros">
+                </textarea>
+            </div>
+        </form>
+        <div class="contactanos__mapa">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d62427.46441322061!2d-77.0296179!3d-12.0630149!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2spe!4v1699584745688!5m2!1ses-419!2spe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
+</main>
+<footer class="footer">
+    <div class="contenedor">
+        <div class="footer__logo__container">
+            <img src="../../../assets/img/logo--blanco.png" alt="" class="footer__logo">
+            <a routerLink="/login" class="logo__enlace">Iniciar Sesión</a>
+        </div>
+        <div class="footer__enlaces__container">
+            <ul class="footer__enlaces">
+                <li><a href="#nosotros" class="scroll-link">Nosotros</a></li>
+                <li><a href="#servicios" class="scroll-link">Servicios</a></li>
+                <li><a href="#habitaciones" class="scroll-link">Habitaciones</a></li>
+                <li><a href="#comentarios" class="scroll-link">Comentarios</a></li>
+                <li><a href="#contacto" class="scroll-link">Contacto</a></li>
+            </ul>
+        </div>
+        <div class="footer__redes__enlaces">
+            <h3 class="footer__redes__subtitle">Contactanos</h3>
+            <p class="footer__telefono">+51 963123456</p>
+            <p class="footer__correo">TelostelContacto@ gmail.com</p>
+            <ul class="footer__redes">
+                <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+                <li><a href="#"><i class="fa-brands fa-tiktok"></i></a></li>
+                <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+<script src="https://kit.fontawesome.com/d46afd6531.js" crossorigin="anonymous"></script>
