@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dawii.entity.CategoriaProducto;
 import com.dawii.entity.Producto;
+import com.dawii.service.CategoriaProductoService;
 import com.dawii.service.ProductoService;
 import com.dawii.utils.Mensaje;
 
@@ -25,6 +27,7 @@ public class ProductoController {
 	
 	@Autowired
 	private ProductoService SProducto;
+
 	
 	@GetMapping
 	public ResponseEntity<?> listar(){
@@ -67,4 +70,5 @@ public class ProductoController {
 		}
 		return new ResponseEntity<Mensaje>(new Mensaje("Producto no encontrado"),HttpStatus.BAD_REQUEST); 
 	}
+	
 }
