@@ -28,6 +28,7 @@ import { MantenimientoHabitacionComponent } from './mantenimiento/mantenimiento-
 import { ProductoService } from './services/producto.service';
 import { interceptorProvider } from './interceptor/token.interceptor';
 import { MantenimientoClienteComponent } from './mantenimiento/mantenimiento-cliente/mantenimiento-cliente.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { MantenimientoClienteComponent } from './mantenimiento/mantenimiento-cli
     FormsModule,
     ReactiveFormsModule,
     errorTailorImports,
+    NgApexchartsModule,
   ],
   providers: [
     ProductoService,
