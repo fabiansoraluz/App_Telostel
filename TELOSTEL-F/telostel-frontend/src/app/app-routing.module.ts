@@ -20,10 +20,12 @@ import { AsideComponent } from './components/aside/aside.component';
 import { MantenimientoProductoComponent } from './mantenimiento/mantenimiento-producto/mantenimiento-producto.component';
 import { MantenimientoHabitacionComponent } from './mantenimiento/mantenimiento-habitacion/mantenimiento-habitacion.component';
 import { MantenimientoClienteComponent } from './mantenimiento/mantenimiento-cliente/mantenimiento-cliente.component';
+import { IndexComponent } from './components/index/index.component';
 
 
 const routes: Routes = [
-  {path:'',redirectTo:'/login',pathMatch:"full"},
+  {path:'',redirectTo:'/index',pathMatch:"full"},
+  {path:'index',component:IndexComponent},
   {path:'login', component:LoginComponent},
   {path:'aside', component:AsideComponent},
   {path:'opciones',component:RRComponent,children:[

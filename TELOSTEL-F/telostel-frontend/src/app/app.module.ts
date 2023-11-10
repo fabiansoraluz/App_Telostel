@@ -29,6 +29,7 @@ import { ProductoService } from './services/producto.service';
 import { interceptorProvider } from './interceptor/token.interceptor';
 import { MantenimientoClienteComponent } from './mantenimiento/mantenimiento-cliente/mantenimiento-cliente.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { IndexComponent } from './components/index/index.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     MantenimientoProductoComponent,
     MantenimientoHabitacionComponent,
     MantenimientoClienteComponent,
+    IndexComponent
   ],
   imports: [
     BrowserModule,
