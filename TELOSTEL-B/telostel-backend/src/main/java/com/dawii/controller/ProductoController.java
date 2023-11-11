@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dawii.entity.CategoriaProducto;
 import com.dawii.entity.Producto;
-import com.dawii.service.CategoriaProductoService;
 import com.dawii.service.ProductoService;
 import com.dawii.utils.Mensaje;
 
@@ -28,16 +27,11 @@ public class ProductoController {
 	@Autowired
 	private ProductoService SProducto;
 	
-	
-	@Autowired
-	private CategoriaProductoService SCategoriaProducto;
-	
-	
 	// METODOS CATEGORIA PRODUCTO
 	
 	@GetMapping("/categorias")
 	public ResponseEntity<?> listarCategorias(){
-		List<CategoriaProducto> categorias = SCategoriaProducto.listar();
+		List<CategoriaProducto> categorias = SProducto.listarCate();
 		if (!categorias.isEmpty()) {
 			return new ResponseEntity<List<CategoriaProducto>>(categorias, HttpStatus.OK);
 		}
@@ -46,7 +40,7 @@ public class ProductoController {
 	
 	@GetMapping("/categorias/{id}")
 	public ResponseEntity<?> buscarCategoriaXId(@PathVariable Long id){
-		CategoriaProducto categoria = SCategoriaProducto.buscarPorId(id);
+		CategoriaProducto categoria = SProducto.buscarPorId(id);
 		if(categoria != null) {
 			return new ResponseEntity<CategoriaProducto>(categoria, HttpStatus.OK);
 		}
