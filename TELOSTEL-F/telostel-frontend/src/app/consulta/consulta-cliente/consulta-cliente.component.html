@@ -1,1 +1,47 @@
-<p>consulta-cliente works!</p>
+<div class="contenedor__item">
+    <h3>Filtrar | Nombre - DNI</h3>
+    <form class="form row mt-3" (ngSubmit)="consultar()">
+        <div class="form-group col-4">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" class="form-control" [(ngModel)]="consulta.nombre">
+        </div>
+        <div class="form-group col-4">
+            <label for="dni">DNI:</label>
+            <input type="text" id="dni" name="dni" class="form-control" [(ngModel)]="consulta.dni">
+        </div>
+        <div class="form-group col-4 d-flex align-items-end">
+            <button type="submit" class="btn btn-success"><i class="fa-solid fa-magnifying-glass"></i> Consultar</button>
+            <button type="button" class="btn btn-secondary ml-3" (click)="limpiar()"><i class="fa-solid fa-rotate-right btn-icon"></i> Limpiar</button>
+        </div>
+    </form>
+
+</div>
+<div class="contenedor__item">
+    <div class="alert alert-danger" *ngIf="error_lista">
+        <h4>{{error_lista}}</h4>
+    </div>
+    <table class="table table-striped mt-3" *ngIf="!error_lista">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Celular</th>
+                <th>DNI</th>
+                <th>Distrito</th>
+                <th>Fec. Registro</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let c of clientes">
+                <td>{{c.id}}</td>
+                <td>{{c.nombre}}</td>
+                <td>{{c.apellido}}</td>
+                <td>{{c.celular}}</td>
+                <td>{{c.dni}}</td>
+                <td>{{c.ubigeo.distrito}}</td>
+                <td>{{c.createAt}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

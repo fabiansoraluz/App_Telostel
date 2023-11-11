@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dawii.entity.CategoriaProducto;
 import com.dawii.entity.Producto;
-import com.dawii.service.CategoriaProductoService;
 import com.dawii.service.ProductoService;
 import com.dawii.utils.Mensaje;
 

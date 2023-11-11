@@ -11,9 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dawii.entity.Ubigeo;
+import com.dawii.entity.Distrito;
 import com.dawii.service.UbigeoService;
-import com.dawii.utils.Mensaje;
 
 @RestController
 @CrossOrigin("http://localhost:4200")
@@ -23,18 +22,19 @@ public class UbigeoController {
 	@Autowired
 	private UbigeoService SUbigeo;
 	
-	@GetMapping("/provincias")
-	public ResponseEntity<?> listarProvincias(){
-		return new ResponseEntity<List<String>>(SUbigeo.listarProvincias(),HttpStatus.OK);
+	@GetMapping("/departamento")
+	public ResponseEntity<?> listarDepartamentos(){
+		return new ResponseEntity<List<String>>(SUbigeo.listarDep(),HttpStatus.OK);
 	}
 	
-	@GetMapping("/distritos/{provincia}")
+	@GetMapping("/provincia/{departamento}")
+	public ResponseEntity<?> listarProvincia(@PathVariable String departamento){
+		return new ResponseEntity<List<String>>(SUbigeo.listarProvXDep(departamento),HttpStatus.OK);
+	}
+	
+	@GetMapping("/distrito/{provincia}")
 	public ResponseEntity<?> listarDistritos(@PathVariable String provincia){
-		if(!provincia.isEmpty()) {
-			return new ResponseEntity<List<Ubigeo>>(SUbigeo.listarDistritos(provincia),HttpStatus.OK);
-		}else {
-			return new ResponseEntity<Mensaje>(new Mensaje("Debes ingresar una provincia"),HttpStatus.BAD_REQUEST);
-		}
+		return new ResponseEntity<List<Distrito>>(SUbigeo.listarDisXProv(provincia),HttpStatus.OK);
 	}
 	
 }

@@ -15,16 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dawii.entity.Habitacion;
-import com.dawii.entity.TipoHabitacion;
 import com.dawii.service.HabitacionService;
-import com.dawii.service.TipoHabitacionService;
 import com.dawii.utils.Mensaje;
 
 @RestController
 @CrossOrigin("http://localhost:4200")
 @RequestMapping("/api/habitacion")
 public class HabitacionController {
-
+	
 	@Autowired
 	private HabitacionService SHabitacion;
 	
