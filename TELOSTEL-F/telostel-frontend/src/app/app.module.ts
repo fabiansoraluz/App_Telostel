@@ -26,6 +26,7 @@ import { errorTailorImports, provideErrorTailorConfig } from '@ngneat/error-tail
 import { MantenimientoProductoComponent } from './mantenimiento/mantenimiento-producto/mantenimiento-producto.component';
 import { MantenimientoHabitacionComponent } from './mantenimiento/mantenimiento-habitacion/mantenimiento-habitacion.component';
 import { ProductoService } from './services/producto.service';
+import { HabitacionService } from './services/habitacion.service';
 import { interceptorProvider } from './interceptor/token.interceptor';
 import { MantenimientoClienteComponent } from './mantenimiento/mantenimiento-cliente/mantenimiento-cliente.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
@@ -66,6 +67,7 @@ import { IndexComponent } from './components/index/index.component';
   ],
   providers: [
     ProductoService,
+    HabitacionService,
     UtilesService,
     interceptorProvider,
     provideErrorTailorConfig({

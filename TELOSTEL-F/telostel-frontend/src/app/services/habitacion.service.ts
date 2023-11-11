@@ -2,46 +2,59 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Habitacion } from '../model/habitacion';
+import { TipoHabitacion } from '../model/tipo-habitacion';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HabitacionService {
 
-  private host="http://localhost:8080/api/habitacion"
+  private host = "http://localhost:8080/api/habitacion"
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  //CRUD
+  // Métodos relacionados con TipoProducto
 
-  public listar():Observable<any>{
-    return this.http.get(this.host)
+  public listarTipos(): Observable<TipoHabitacion[]> {
+    return this.http.get<TipoHabitacion[]>(`${this.host}/tipo`);
   }
 
-  public buscar(id:number):Observable<any>{
-    return this.http.get(this.host+"/"+id)
+  public buscarPorIdTipo(id: number): Observable<TipoHabitacion> {
+    return this.http.get<TipoHabitacion>(`${this.host}/tipoid/${id}`);
   }
 
-  public registrar(bean:Habitacion):Observable<any>{
-    return this.http.post(this.host,bean)
+  // CRUD HABITACION
+
+  public listar(): Observable<any> {
+    return this.http.get(`${this.host}/habitaciones`);
   }
 
-  public actualizar(bean:Habitacion):Observable<any>{
-    return this.http.put(this.host,bean)
+  public buscar(id: number): Observable<any> {
+    return this.http.get(`${this.host}/buscar/${id}`);
   }
 
-  public eliminar(id:number):Observable<any>{
-    return this.http.delete(this.host+"/"+id)
+  public registrar(bean: Habitacion): Observable<any> {
+    return this.http.post(`${this.host}`, bean);
   }
 
-  //CONSULTAS PERSONALIZADAS
-  public ultimoPiso():Observable<any>{
-    return this.http.get(this.host+"/ultimoPiso")
+  public actualizar(bean: Habitacion): Observable<any> {
+    return this.http.put(`${this.host}`, bean);
   }
-  public buscarXPiso(piso:number):Observable<any>{
-    return this.http.get(this.host+"/piso/"+piso)
+
+  public eliminar(id: number): Observable<any> {
+    return this.http.delete(`${this.host}/${id}`);
   }
-  public buscarXTipo(id_tipo:number):Observable<any>{
-    return this.http.get(this.host+"/tipo/"+id_tipo)
+
+  // CONSULTAS PERSONALIZADAS
+  public ultimoPiso(): Observable<any> {
+    return this.http.get(`${this.host}/ultimoPiso`);
+  }
+
+  public buscarXPiso(piso: number): Observable<any> {
+    return this.http.get(`${this.host}/piso/${piso}`);
+  }
+
+  public buscarXTipo(id_tipo: number): Observable<any> {
+    return this.http.get(`${this.host}/tipo/${id_tipo}`);
   }
 }
