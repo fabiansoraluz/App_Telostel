@@ -27,14 +27,41 @@ public class ProductoController {
 	
 	@Autowired
 	private ProductoService SProducto;
-
 	
-	@GetMapping
+	
+	@Autowired
+	private CategoriaProductoService SCategoriaProducto;
+	
+	
+	// METODOS CATEGORIA PRODUCTO
+	
+	@GetMapping("/categorias")
+	public ResponseEntity<?> listarCategorias(){
+		List<CategoriaProducto> categorias = SCategoriaProducto.listar();
+		if (!categorias.isEmpty()) {
+			return new ResponseEntity<List<CategoriaProducto>>(categorias, HttpStatus.OK);
+		}
+		return new ResponseEntity<Mensaje>(new Mensaje("No se encontraron categorías de productos"), HttpStatus.NOT_FOUND);
+	}
+	
+	@GetMapping("/categorias/{id}")
+	public ResponseEntity<?> buscarCategoriaXId(@PathVariable Long id){
+		CategoriaProducto categoria = SCategoriaProducto.buscarPorId(id);
+		if(categoria != null) {
+			return new ResponseEntity<CategoriaProducto>(categoria, HttpStatus.OK);
+		}
+		return new ResponseEntity<Mensaje>(new Mensaje("Categoría de producto no encontrada"), HttpStatus.NOT_FOUND);
+	}
+	
+	
+	//CRUD PRODUCTO
+	
+	@GetMapping("/productos")
 	public ResponseEntity<?> listar(){
 		return new ResponseEntity<List<Producto>>(SProducto.listar(),HttpStatus.OK);
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/buscar/{id}")
 	public ResponseEntity<?> buscar(@PathVariable Long id){
 		Producto bean = SProducto.buscar(id);
 		if(bean!=null) {

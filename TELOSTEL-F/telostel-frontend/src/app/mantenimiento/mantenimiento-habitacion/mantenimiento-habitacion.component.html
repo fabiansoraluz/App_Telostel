@@ -12,12 +12,16 @@
                 <label for="" class="form-label">Piso</label>
                 <input type="text" class="form-control" readonly>
             </div>
+
             <div class="form-group col-4">
                 <label for="" class="form-label">Tipo</label>
-                <select name="" id="" class="form-control">
-                    <option value=0 disabled selected>Seleccionar Tipo</option>
+                <select name="" id="" class="form-control" (click)="listarTipos()">
+                    <option value="0" disabled selected>Seleccionar Tipo</option>
+                    <option *ngFor="let tipo of tiposHabitacion" [value]="tipo.id">{{tipo.nombre}}</option>
                 </select>
             </div>
+            
+
             <div class="form-group col-4">
                 <label for="" class="form-label">Estado</label>
                 <select name="" id="" class="form-control">

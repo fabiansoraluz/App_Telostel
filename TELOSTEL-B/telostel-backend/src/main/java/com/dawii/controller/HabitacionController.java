@@ -27,15 +27,36 @@ public class HabitacionController {
 
 	@Autowired
 	private HabitacionService SHabitacion;
+	
+	@Autowired
+	private TipoHabitacionService STipoHabitacion;
+
+	// METODOS TIPO HABITACION
+	
+	@GetMapping("/tipo")
+    public ResponseEntity<?> listarTipos() {
+        List<TipoHabitacion> tiposHabitacion = STipoHabitacion.listar();
+        return new ResponseEntity<List<TipoHabitacion>>(tiposHabitacion, HttpStatus.OK);
+    }
+
+    // Buscar un tipo de habitación por ID
+    @GetMapping("/tipoid/{id}")
+    public ResponseEntity<?> buscarPorIdTipo(@PathVariable Long id) {
+        TipoHabitacion tipoHabitacion = STipoHabitacion.buscarPorId(id);
+        if (tipoHabitacion != null) {
+            return new ResponseEntity<TipoHabitacion>(tipoHabitacion, HttpStatus.OK);
+        }
+        return new ResponseEntity<Mensaje>(new Mensaje("Tipo de habitación no encontrado"), HttpStatus.BAD_REQUEST);
+    }
 
 	
-	//CRUD
-	@GetMapping
+	//CRUD HABITACION
+	@GetMapping("/habitaciones")
 	public ResponseEntity<?> listar(){
 		return new ResponseEntity<List<Habitacion>>(SHabitacion.listar(),HttpStatus.OK);
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/buscar/{id}")
 	public ResponseEntity<?> buscar(@PathVariable Long id){
 		Habitacion bean = SHabitacion.buscar(id);
 		if(bean!=null) {
