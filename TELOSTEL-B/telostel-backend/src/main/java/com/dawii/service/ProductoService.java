@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.dawii.dao.ICategoriaProductoDAO;
 import com.dawii.dao.IProductoDAO;
+import com.dawii.entity.CategoriaProducto;
 import com.dawii.entity.Producto;
 
 @Service
@@ -13,6 +15,17 @@ public class ProductoService {
 	
 	@Autowired
 	private IProductoDAO repo;
+	
+	@Autowired
+	private ICategoriaProductoDAO repoCate;
+	
+	public List<CategoriaProducto> listarCate(){
+		return repoCate.findAll();
+	}
+	
+    public CategoriaProducto buscarPorId(Long id) {
+        return repoCate.findByIdCategoria(id);
+    }
 	
 	//CRUD
 	public Producto grabar(Producto bean) {
