@@ -114,21 +114,27 @@
             <div class="modal-body">
                 <form class="form--ubigeo">
                     <div class="form__item--ubigeo">
-                        <select class="form__select--ubigeo" (change)="listarDistritos()" name="provincia" [(ngModel)]="provincia">
-                            <option value="" disabled selected>Provincia</option>
-                            <option *ngFor="let p of provincias" [value]="p">{{p}}</option>
+                        <select class="form__select--ubigeo" (change)="listarProvincias()" name="departamento" [(ngModel)]="departamento">
+                            <option value="" disabled selected>Departamento</option>
+                            <option *ngFor="let d of departamentos">{{d}}</option>
                         </select>
                     </div>
                     <div class="form__item--ubigeo">
-                        <select class="form__select--ubigeo" name="Distrito" [(ngModel)]="id_ubigeo">
-                            <option value=0 disabled selected>Distrito</option>
+                        <select class="form__select--ubigeo" (change)="listarDistritos()" name="provincia" [(ngModel)]="provincia">
+                            <option value="" disabled selected>Provincia</option>
+                            <option *ngFor="let p of provincias">{{p}}</option>
+                        </select>
+                    </div>
+                    <div class="form__item--ubigeo">
+                        <select class="form__select--ubigeo" name="distrito" [(ngModel)]="usuario.empleado.ubigeo.id">
+                            <option value="" disabled selected>Distrito</option>
                             <option *ngFor="let di of distritos" [value]="di.id">{{di.distrito}}</option>
                         </select>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal">Guardar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Guardar</button>
             </div>
         </div>
     </div>

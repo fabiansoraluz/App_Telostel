@@ -74,12 +74,14 @@
 }
 
 /*Formulario*/
+.modal-content{
+    width: unset;
+}
 .modal-body{
     padding: 2rem 20px !important;
 }
 .form--ubigeo{
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
+    display: flex;
     gap: 1rem;
 }
 .form__select--ubigeo{
@@ -87,11 +89,7 @@
     padding: 1rem;
     border-radius: 5px;
     outline: none;
-    width: 100%;
-}
-.btn-save{
-    background-color: var(--purple) !important;
-    color: var(--white) !important;
+    width: 150px;
 }
 
 /*Estilos de Validación*/
