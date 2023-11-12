@@ -32,6 +32,15 @@ import { MantenimientoClienteComponent } from './mantenimiento/mantenimiento-cli
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { IndexComponent } from './components/index/index.component';
 
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeEsPE from '@angular/common/locales/es-PE';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+
+
+registerLocaleData(localeEsPE);
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +62,7 @@ import { IndexComponent } from './components/index/index.component';
     MantenimientoProductoComponent,
     MantenimientoHabitacionComponent,
     MantenimientoClienteComponent,
-    IndexComponent
+    IndexComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +73,7 @@ import { IndexComponent } from './components/index/index.component';
     ReactiveFormsModule,
     errorTailorImports,
     NgApexchartsModule,
+    PdfViewerModule 
   ],
   providers: [
     ProductoService,
@@ -84,7 +94,8 @@ import { IndexComponent } from './components/index/index.component';
           dateInvalid:'Ingresar una fecha valida'
         }
       }
-    })
+    }),
+    { provide: LOCALE_ID, useValue: 'es-PE' }
   ],
   bootstrap: [AppComponent]
 })
