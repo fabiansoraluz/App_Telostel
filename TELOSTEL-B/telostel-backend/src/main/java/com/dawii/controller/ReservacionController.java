@@ -1,9 +1,11 @@
 package com.dawii.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +22,10 @@ import com.dawii.entity.Sede;
 import com.dawii.entity.Servicio;
 import com.dawii.service.ReservacionService;
 import com.dawii.utils.Mensaje;
+import com.dawii.utils.ReporteGenerado;
+
+import org.springframework.http.HttpHeaders;
+
 
 @RestController
 @RequestMapping("/api/reservacion")
@@ -110,4 +116,33 @@ public class ReservacionController {
 		}
 		return new ResponseEntity<Mensaje>(new Mensaje("No hay sedes registradas"),HttpStatus.BAD_REQUEST);
 	}
+	
+	@GetMapping("/reporteFec/{fecInicial}/{fecFinal}")
+	public ResponseEntity<?> filtroReporte(@PathVariable LocalDate fecInicial, @PathVariable LocalDate fecFinal){
+		List<Reservacion> lista = SReservacion.FiltrarReservacionFechas(fecInicial, fecFinal);
+		if(lista.size()>0) {
+			return new ResponseEntity<List<Reservacion>>(lista,HttpStatus.OK);
+		}
+		return new ResponseEntity<Mensaje>(new Mensaje("No hay reservaciones"),HttpStatus.BAD_REQUEST);
+	}
+	
+	
+	@GetMapping("/reporteFec2/{fecInicial}/{fecFinal}")
+    public ResponseEntity<?> filtroReporteDato(@PathVariable LocalDate fecInicial, @PathVariable LocalDate fecFinal) {
+        try {
+            List<Reservacion> lista = SReservacion.FiltrarReservacionFechas(fecInicial, fecFinal);
+
+            byte[] reporteBytes = ReporteGenerado.generateReport(lista);
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("inline", "reporte.pdf");
+
+            return new ResponseEntity<>(reporteBytes, headers, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("Error al generar el informe", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+	
 }

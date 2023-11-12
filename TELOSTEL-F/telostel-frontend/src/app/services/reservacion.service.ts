@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Reservacion } from '../model/reservacion';
 
 @Injectable({
@@ -35,4 +35,28 @@ export class ReservacionService {
   public sedes():Observable<any>{
     return this.http.get(this.host+"/sede")
   }
+
+  public reporte1(fecInicial:String, fecFinal:String):Observable<any>{
+    return this.http.get(this.host+"/reporteFec"+"/"+fecInicial+"/"+fecFinal)
+  }
+
+  public reporteDetalle(fecInicial: Date, fecFinal: Date): Observable<Blob> {
+    const url = `${this.host}/reporteFec2/${fecInicial}/${fecFinal}`;
+  
+    // Configuración para recibir la respuesta como array buffer
+    const options = { responseType: 'arraybuffer' as 'json' };
+  
+    return this.http.get(url, options).pipe(
+      map((pdfData: ArrayBuffer) => {
+        // Retorna el Blob en lugar de la URL
+        return this.createBlob(pdfData);
+      })
+    );
+  }
+  
+  private createBlob(pdfData: ArrayBuffer): Blob {
+    return new Blob([pdfData], { type: 'application/pdf' });
+  }
+  
+
 }
