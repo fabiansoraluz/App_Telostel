@@ -51,4 +51,24 @@ public class HabitacionService {
 	public List<Habitacion> buscarXTipo(int id){
 		return repo.buscarXTipo(id);
 	}
+	
+	// AUTOCOMPLETADO PISO - NUMERO
+	public Habitacion autocompletarNumeroHabitacion(String piso) {
+	    // Encontrar la última habitación registrada en el piso seleccionado.
+	    Habitacion ultimaHabitacionEnPiso = repo.findFirstByPisoOrderByNumeroDesc(piso);
+
+	    // Si no se encontró ninguna habitación en ese piso, comienza desde el número 1.
+	    int numero = (ultimaHabitacionEnPiso != null) ? ultimaHabitacionEnPiso.getNumero() : 0;
+
+	    // Calcula el siguiente número basado en el piso.
+	    int numeroSiguiente = Integer.parseInt(piso) * 100 + numero + 1;
+
+	    Habitacion nuevaHabitacion = new Habitacion();
+	    nuevaHabitacion.setPiso(piso);
+	    nuevaHabitacion.setNumero(numeroSiguiente);
+
+	    return nuevaHabitacion;
+	}
+
+
 }
