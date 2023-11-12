@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Habitacion } from 'src/app/model/habitacion';
 import { TipoHabitacion } from 'src/app/model/tipo-habitacion';
 import { HabitacionService } from 'src/app/services/habitacion.service';
-import { FormsModule } from '@angular/forms';
 
 
 @Component({
