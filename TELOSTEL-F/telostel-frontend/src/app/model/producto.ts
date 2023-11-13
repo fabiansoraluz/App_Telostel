@@ -6,7 +6,6 @@ export class Producto {
     cantUnidad:string
     precio:number
     stock:number
-    createAt:Date
     estado:number
     categoria: Categoria = new Categoria;
 }
