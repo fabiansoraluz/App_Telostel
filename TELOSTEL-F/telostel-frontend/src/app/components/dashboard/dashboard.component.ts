@@ -1,5 +1,5 @@
 import { Component,OnInit } from '@angular/core';
-import { UtilesService } from '../../services/utiles.service';
+import Swal from 'sweetalert2';
 
 import {
   ApexAxisChartSeries,
@@ -8,6 +8,12 @@ import {
   ApexPlotOptions,
   ApexLegend
 } from "ng-apexcharts";
+import { Router } from '@angular/router';
+import { TokenService } from 'src/app/services/token.service';
+import { ClienteService } from 'src/app/services/cliente.service';
+import { ReservacionService } from 'src/app/services/reservacion.service';
+import { HabitacionService } from 'src/app/services/habitacion.service';
+import { ProductoService } from 'src/app/services/producto.service';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -26,11 +32,34 @@ export type ChartOptions = {
 export class DashboardComponent implements OnInit{
   
   public chartOptions: Partial<ChartOptions>;
+  public numClientes=0
+  public numReservas=0
+  public numHabitaciones=0
+  public numProductos=0
 
-  constructor(private SUtiles:UtilesService){}
+  constructor(
+    private router:Router,
+    private SToken:TokenService,
+    private SCliente:ClienteService,
+    private SReserva:ReservacionService,
+    private SHabitacion:HabitacionService,
+    private SProducto:ProductoService
+  ){}
 
   ngOnInit(): void {
     this.generarGrafico()
+    this.SCliente.listar().subscribe(
+      (response) => this.numClientes = response.length
+    )
+    this.SReserva.listar().subscribe(
+      (response) => this.numReservas = response.length
+    )
+    this.SHabitacion.listar().subscribe(
+      (response) => this.numHabitaciones = response.length
+    )
+    this.SProducto.listar().subscribe(
+      (response) => this.numProductos = response.length
+    )
   }
 
   ultimosMeses():string[]{
@@ -72,7 +101,7 @@ export class DashboardComponent implements OnInit{
     this.chartOptions = {
       series: [
         {
-          name: "Ventas",
+          name: "Reservas",
           data: this.obtenerDatos()
         }
       ],
@@ -99,5 +128,23 @@ export class DashboardComponent implements OnInit{
       }
     };
   }
-
+  //Enlaces
+  mantenimientoEnlace(enlace:String){
+    let rolesPermitidos=["Administrador","Editor"]
+    let rol = this.SToken.getRol()
+    if(rolesPermitidos.includes(rol)){
+      this.router.navigate([enlace])
+    }else{
+      Swal.fire("Error de Permisos","Usted no tiene permisos necesarios","error")
+    }
+  }
+  serviciosEnlace(enlace:String){
+    let rolesPermitidos=["Administrador","Recepcion"]
+    let rol = this.SToken.getRol()
+    if(rolesPermitidos.includes(rol)){
+      this.router.navigate([enlace])
+    }else{
+      Swal.fire("Error de Permisos","Usted no tiene permisos necesarios","error")
+    }
+  }
 }
