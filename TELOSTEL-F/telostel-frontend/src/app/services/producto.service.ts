@@ -35,12 +35,12 @@ export class ProductoService {
     return this.http.get(`${this.host}/buscar/${id}`);
   }
 
-  public registrar(bean: Producto): Observable<any> {
-    return this.http.post(`${this.host}`, bean);
+  public registrarProducto(producto: Producto): Observable<Producto> {
+    return this.http.post<Producto>(`${this.host}/registrar`, producto);
   }
 
-  public actualizar(bean: Producto): Observable<any> {
-    return this.http.put(`${this.host}`, bean);
+  public actualizarProducto(id: number, producto: Producto): Observable<Producto> {
+    return this.http.put<Producto>(`${this.host}/actualizar/${id}`, producto);
   }
 
   public eliminar(id: number): Observable<any> {
