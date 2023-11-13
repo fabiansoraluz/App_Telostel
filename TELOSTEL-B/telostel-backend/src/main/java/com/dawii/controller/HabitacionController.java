@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dawii.entity.Habitacion;
+import com.dawii.entity.TipoHabitacion;
 import com.dawii.service.HabitacionService;
 import com.dawii.utils.Mensaje;
 
@@ -26,14 +28,32 @@ public class HabitacionController {
 	@Autowired
 	private HabitacionService SHabitacion;
 
+	// METODOS TIPO HABITACION
 	
-	//CRUD
-	@GetMapping
+	@GetMapping("/tipo")
+    public ResponseEntity<?> listarTipos() {
+        List<TipoHabitacion> tiposHabitacion = SHabitacion.listarTipo();
+        return new ResponseEntity<List<TipoHabitacion>>(tiposHabitacion, HttpStatus.OK);
+    }
+
+    // Buscar un tipo de habitación por ID
+    @GetMapping("/tipoid/{id}")
+    public ResponseEntity<?> buscarPorIdTipo(@PathVariable Long id) {
+        TipoHabitacion tipoHabitacion = SHabitacion.buscarPorId(id);
+        if (tipoHabitacion != null) {
+            return new ResponseEntity<TipoHabitacion>(tipoHabitacion, HttpStatus.OK);
+        }
+        return new ResponseEntity<Mensaje>(new Mensaje("Tipo de habitación no encontrado"), HttpStatus.BAD_REQUEST);
+    }
+
+	
+	//CRUD HABITACION
+	@GetMapping("/habitaciones")
 	public ResponseEntity<?> listar(){
 		return new ResponseEntity<List<Habitacion>>(SHabitacion.listar(),HttpStatus.OK);
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/buscar/{id}")
 	public ResponseEntity<?> buscar(@PathVariable Long id){
 		Habitacion bean = SHabitacion.buscar(id);
 		if(bean!=null) {
@@ -42,18 +62,38 @@ public class HabitacionController {
 		return new ResponseEntity<Mensaje>(new Mensaje("Habitacion no encontrado"),HttpStatus.BAD_REQUEST);
 	}
 	
-	@PostMapping
-	public ResponseEntity<?> registar(Habitacion bean) {
-		Habitacion prod = SHabitacion.grabar(bean);
-		return new ResponseEntity<Habitacion>(prod,HttpStatus.CREATED);
+	
+	// METODO PARA REGISTRAR UNA HABITACION
+	@PostMapping("/registrar")
+	public ResponseEntity<Habitacion> registrarHabitacion(@RequestBody Habitacion habitacion) {
+	    Habitacion habitacionGuardada = SHabitacion.grabar(habitacion);
+	    return new ResponseEntity<>(habitacionGuardada, HttpStatus.CREATED);
 	}
 	
-	@PutMapping
-	public ResponseEntity<?> actualizar(Habitacion bean) {
-		Habitacion prod = SHabitacion.grabar(bean);
-		return new ResponseEntity<Habitacion>(prod,HttpStatus.CREATED);
+	
+	// METODO PARA ACTUALIZAR UNA HABITACION REGISTRADA
+	@PutMapping("/actualizar/{id}")
+	public ResponseEntity<Habitacion> actualizarHabitacion(@PathVariable Long id, @RequestBody Habitacion habitacion) {
+	    Habitacion habitacionActualizada = SHabitacion.buscar(id);
+	    
+	    if (habitacionActualizada == null) {
+	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    }
+
+	    // Actualiza la habitación con los nuevos datos.
+	    habitacionActualizada.setNumero(habitacion.getNumero());
+	    habitacionActualizada.setPiso(habitacion.getPiso());
+	    habitacionActualizada.setEstado(habitacion.getEstado());
+	    habitacionActualizada.setTipo(habitacion.getTipo());
+
+	    // Guarda la habitación actualizada.
+	    habitacionActualizada = SHabitacion.grabar(habitacionActualizada);
+
+	    return new ResponseEntity<>(habitacionActualizada, HttpStatus.OK);
 	}
 	
+	
+	// METODO PARA ELIMINAR UNA HABITACION REGISTRADA
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> eliminar(@PathVariable Long id){
 		Habitacion bean = SHabitacion.buscar(id);

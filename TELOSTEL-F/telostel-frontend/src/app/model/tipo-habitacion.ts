@@ -1,5 +1,5 @@
 export class TipoHabitacion {
-    id:number
-    nombre:string
-    costo:number
+    id:number = 0;
+    nombre:string = "";
+    costo:number = 0;
 }

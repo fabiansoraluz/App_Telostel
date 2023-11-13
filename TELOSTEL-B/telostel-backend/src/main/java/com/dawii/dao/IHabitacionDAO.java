@@ -31,5 +31,7 @@ public interface IHabitacionDAO extends JpaRepository<Habitacion, Long>{
     @Modifying
 	@Query("UPDATE Habitacion H SET H.estado=?1 WHERE H.id=?2")
 	public int actualizarEstado(String estado, long id);
-	
+
+	public Habitacion findFirstByPisoOrderByNumeroDesc(String piso);
+
 }

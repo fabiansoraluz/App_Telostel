@@ -7,5 +7,5 @@ export class Producto {
     precio:number
     stock:number
     estado:number
-    categoria: Categoria = new Categoria;
+    categoria: Categoria = new Categoria();
 }

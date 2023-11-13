@@ -26,10 +26,20 @@ import { errorTailorImports, provideErrorTailorConfig } from '@ngneat/error-tail
 import { MantenimientoProductoComponent } from './mantenimiento/mantenimiento-producto/mantenimiento-producto.component';
 import { MantenimientoHabitacionComponent } from './mantenimiento/mantenimiento-habitacion/mantenimiento-habitacion.component';
 import { ProductoService } from './services/producto.service';
+import { HabitacionService } from './services/habitacion.service';
 import { interceptorProvider } from './interceptor/token.interceptor';
 import { MantenimientoClienteComponent } from './mantenimiento/mantenimiento-cliente/mantenimiento-cliente.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { IndexComponent } from './components/index/index.component';
+
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeEsPE from '@angular/common/locales/es-PE';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+
+
+registerLocaleData(localeEsPE);
+
 
 @NgModule({
   declarations: [
@@ -52,7 +62,7 @@ import { IndexComponent } from './components/index/index.component';
     MantenimientoProductoComponent,
     MantenimientoHabitacionComponent,
     MantenimientoClienteComponent,
-    IndexComponent
+    IndexComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,9 +73,11 @@ import { IndexComponent } from './components/index/index.component';
     ReactiveFormsModule,
     errorTailorImports,
     NgApexchartsModule,
+    PdfViewerModule 
   ],
   providers: [
     ProductoService,
+    HabitacionService,
     UtilesService,
     interceptorProvider,
     provideErrorTailorConfig({
@@ -82,7 +94,8 @@ import { IndexComponent } from './components/index/index.component';
           dateInvalid:'Ingresar una fecha valida'
         }
       }
-    })
+    }),
+    { provide: LOCALE_ID, useValue: 'es-PE' }
   ],
   bootstrap: [AppComponent]
 })
