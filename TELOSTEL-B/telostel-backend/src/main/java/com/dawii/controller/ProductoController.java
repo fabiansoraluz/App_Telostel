@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -70,17 +71,32 @@ public class ProductoController {
 		return new ResponseEntity<List<Producto>>(lista,HttpStatus.OK);
 	}
 	
-	@PostMapping
-	public ResponseEntity<?> registar(Producto bean) {
-		Producto prod = SProducto.grabar(bean);
-		return new ResponseEntity<Producto>(prod,HttpStatus.CREATED);
-	}
 	
-	@PutMapping
-	public ResponseEntity<?> actualizar(Producto bean) {
-		Producto prod = SProducto.grabar(bean);
-		return new ResponseEntity<Producto>(prod,HttpStatus.CREATED);
+	@PostMapping("/registrar")
+	public ResponseEntity<?> registrarProducto(@RequestBody Producto producto) {
+	    Producto productoRegistrado = SProducto.grabar(producto);
+	    return new ResponseEntity<Producto>(productoRegistrado, HttpStatus.CREATED);
 	}
+
+	
+	@PutMapping("/actualizar/{id}")
+	public ResponseEntity<?> actualizarProducto(@PathVariable Long id, @RequestBody Producto producto) {
+	    Producto productoExistente = SProducto.buscar(id);
+
+	    if (productoExistente != null) {
+	        productoExistente.setNombre(producto.getNombre());
+	        productoExistente.setCantUnidad(producto.getCantUnidad());
+	        productoExistente.setPrecio(producto.getPrecio());
+	        productoExistente.setStock(producto.getStock());
+	        productoExistente.setCategoria(producto.getCategoria());
+
+	        Producto productoActualizado = SProducto.grabar(productoExistente);
+	        return new ResponseEntity<Producto>(productoActualizado, HttpStatus.OK);
+	    }
+
+	    return new ResponseEntity<Mensaje>(new Mensaje("Producto no encontrado"), HttpStatus.NOT_FOUND);
+	}
+
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> eliminar(@PathVariable Long id){
