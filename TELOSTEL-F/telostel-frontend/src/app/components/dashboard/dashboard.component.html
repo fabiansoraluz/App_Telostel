@@ -5,7 +5,7 @@
             <button class="btn" routerLink="/system/consulta/cliente"><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
         <div class="card__body">
-            <p class="card__text"><i class="fa-solid fa-user"></i><span class="card__data">45</span> </p>
+            <p class="card__text"><i class="fa-solid fa-user"></i><span class="card__data">{{numClientes}}</span> </p>
         </div>
     </div>
     <div class="card">
@@ -14,25 +14,25 @@
             <button class="btn" routerLink="/system/consulta/reservacion"><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
         <div class="card__body">
-            <p class="card__text"><i class="fa-solid fa-hotel"></i><span class="card__data">27</span> </p>
+            <p class="card__text"><i class="fa-solid fa-hotel"></i><span class="card__data">{{numReservas}}</span> </p>
         </div>
     </div>
     <div class="card">
         <div class="card__header">
             <p class="card__title">Habitaciones</p>
-            <button class="btn" routerLink="/system/mantenimiento/habitacion"><i class="fa-solid fa-gear"></i></button>
+            <button class="btn" (click)="mantenimientoEnlace('/system/mantenimiento/habitacion')"><i class="fa-solid fa-gear"></i></button>
         </div>
         <div class="card__body">
-            <p class="card__text"><i class="fa-solid fa-bed"></i><span class="card__data">35</span> </p>
+            <p class="card__text"><i class="fa-solid fa-bed"></i><span class="card__data">{{numHabitaciones}}</span> </p>
         </div>
     </div>
     <div class="card">
         <div class="card__header">
             <p class="card__title">Productos</p>
-            <button class="btn" routerLink="/system/mantenimiento/producto"><i class="fa-solid fa-gear"></i></button>
+            <button class="btn" (click)="mantenimientoEnlace('/system/mantenimiento/producto')"><i class="fa-solid fa-gear"></i></button>
         </div>
         <div class="card__body">
-            <p class="card__text"><i class="fa-solid fa-utensils"></i><span class="card__data">67</span> </p>
+            <p class="card__text"><i class="fa-solid fa-utensils"></i><span class="card__data">{{numProductos}}</span> </p>
         </div>
     </div>
 </section>
@@ -57,7 +57,7 @@
     <section class="servicio__item">
         <div class="servicio__header">
             <p class="servicio__title">Hospedaje</p>
-            <button type="button" class="btn btn-primary" routerLink="/system/servicio/reservacion"><i class="fa-solid fa-hotel"></i></button>
+            <button type="button" class="btn btn-primary" (click)="serviciosEnlace('/system/servicio/reservacion')"><i class="fa-solid fa-hotel"></i></button>
         </div>
         <div class="servicio__body">
             <p>Somos la mejor opción como hospedaje, contamos con excelentes servicios para la comodidad del cliente. </p>
@@ -66,7 +66,7 @@
     <section class="servicio__item servicio__item--tienda">
         <div class="servicio__header">
             <p class="servicio__title">Tienda</p>
-            <button type="button" class="btn btn-success" routerLink="/system/servicio/venta"><i class="fa-solid fa-basket-shopping"></i></button>
+            <button type="button" class="btn btn-success" (click)="serviciosEnlace('/system/servicio/venta')"><i class="fa-solid fa-basket-shopping"></i></button>
         </div>
         <div class="servicio__body">
             <p>Contamos con productos para agregarle valor a la estancia, como comidas, cocteles, juguetes y más.</p>

@@ -1,7 +1,5 @@
 package com.dawii.entity;
 
-import java.time.LocalDate;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -41,9 +39,6 @@ public class Producto {
 	@Column(name = "stock", nullable = false)
 	private Integer stock;
 
-	@Column(name = "create_at", nullable = false)
-	private LocalDate createAt;
-
 	@Column(name = "estado", length = 50, nullable = false)
 	private Integer estado;
 
@@ -53,7 +48,6 @@ public class Producto {
 
 	@PrePersist
 	private void prePersits() {
-		this.createAt=LocalDate.now();
 		this.estado=1;
 	}
 	
