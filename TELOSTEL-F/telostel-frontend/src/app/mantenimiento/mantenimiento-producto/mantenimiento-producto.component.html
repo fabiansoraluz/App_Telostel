@@ -17,12 +17,17 @@
                 <label for="" class="form-label">Stock</label>
                 <input type="text" class="form-control">
             </div>
+
+
             <div class="form-group col-4">
                 <label for="" class="form-label">Categoria</label>
-                <select name="" id="" class="form-control">
+                <select class="form-control" name="categoria" id="categoria" [(ngModel)]="producto.categoria.id">
                     <option value=0 disabled selected>Seleccionar Categoria</option>
+                    <option *ngFor="let cate of categorias" [value]="cate.id">{{cate.nombre}}</option>
                 </select>
             </div>
+
+
             <div class="form-btn col-12">
                 <button class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Registrar</button>
             </div>
@@ -50,8 +55,8 @@
                     <td>{{prod.stock}}</td>
                     <td>{{prod.categoria.nombre}}</td>
                     <td>
-                        <button class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></button>
-                        <button class="btn btn-danger ml-3"><i class="fa-solid fa-trash-can"></i></button>
+                        <button class="btn btn-success" (click)="llenarDatos(prod.id)"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button class="btn btn-danger ml-3" (click)="eliminar(prod.id)"><i class="fa-solid fa-trash-can"></i></button>
                     </td>
                 </tr>
             </tbody>
