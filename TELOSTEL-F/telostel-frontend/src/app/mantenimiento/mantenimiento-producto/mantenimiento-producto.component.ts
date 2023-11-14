@@ -38,15 +38,15 @@ export class MantenimientoProductoComponent implements OnInit {
       ]],
       cantUnidad: ['', [
         Validators.required,
-        Validators.pattern("[a-zA-ZáéíóúÁÉÍÓÚñ\\s]{4,30}")
+        Validators.pattern("^[a-zA-Z0-9\s]{4,40}$")
       ]],
       precio: ['', [
         Validators.required,
-        Validators.pattern("[\\d]{1,9}")
+        Validators.pattern("^[0-9]+(\.[0-9]+)?$")
       ]],
       stock: ['', [
         Validators.required,
-        Validators.pattern("[\\d]{1,9}")
+        Validators.pattern("^[0-9]+$")
       ]],
       categoria: ['', [
         Validators.required
@@ -56,9 +56,12 @@ export class MantenimientoProductoComponent implements OnInit {
 
   public listar() {
     this.SProducto.listar().subscribe(
-      (response) => this.productos = response,
+      (response) => {
+        this.productos = response;
+        console.log('Listado de Productos:', this.productos); // Agregar este console.log
+      },
       (err) => this.error_lista = err.error.mensaje
-    )
+    );
   }
 
   public listarCategorias() {
@@ -76,9 +79,8 @@ export class MantenimientoProductoComponent implements OnInit {
   public llenarDatos(id: number) {
     this.SProducto.buscar(id).subscribe(
       (response) => {
-
+        console.log(response)
         this.formulario.patchValue({
-          id: response.id,
           nombre: response.nombre,
           cantUnidad: response.cantUnidad,
           precio: response.precio,
@@ -119,6 +121,54 @@ export class MantenimientoProductoComponent implements OnInit {
         )
       }
     })
+  }
+
+
+  public registrar() {
+    if (this.producto.categoria.id === 0) {
+      Swal.fire("Error de Ubigeo", "Debes seleccionar un ubigeo", "error")
+      return
+    }
+    this.buildProducto();
+    this.SProducto.registrarProducto(this.producto).subscribe(
+      (response) => {
+        Swal.fire("Producto Registrado", `El producto ${response.nombre} ha sido registrado`, "success")
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+      },
+      (err) => Swal.fire("Error de Sistema", err.error.mensaje, "error")
+    )
+  }
+
+
+  public actualizar() {
+    if (this.producto.categoria.id === 0) {
+      Swal.fire("Error de Categoria", "Debes seleccionar una Categoria", "error");
+      return;
+    }
+    this.buildProducto();
+    this.SProducto.actualizarProducto(this.producto.id, this.producto).subscribe(
+      (response) => {
+        Swal.fire("Producto Actualizado", `El producto ${response.nombre} ha sido actualizado`, "success");
+        this.listar();
+        this.formulario.reset();
+        this.isUpdate = false;
+      },
+      (err) => Swal.fire("Error del Sistema", err.error.mensaje, "error")
+    );
+  }
+
+
+  public buildProducto() {
+    this.producto.nombre = this.formulario.get('nombre').value;
+    this.producto.cantUnidad = this.formulario.get('cantUnidad').value;
+    this.producto.precio = this.formulario.get('precio').value;
+    this.producto.stock = this.formulario.get('stock').value;
+    //this.producto.createAt = this.formulario.get('createAt').value;
+    this.producto.categoria.id = +this.formulario.get('categoria').value;
+
+
   }
 
 }

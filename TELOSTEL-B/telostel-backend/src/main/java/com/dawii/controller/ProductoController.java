@@ -1,5 +1,6 @@
 package com.dawii.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,9 +75,20 @@ public class ProductoController {
 	
 	@PostMapping("/registrar")
 	public ResponseEntity<?> registrarProducto(@RequestBody Producto producto) {
+	    Date fechaActual = new Date();
+	    producto.setCreate_at(fechaActual);
+
+	    // Verificar si ya existe un producto con el mismo nombre
+	    List<Producto> productosConMismoNombre = SProducto.buscarXNombre(producto.getNombre());
+	    if (!productosConMismoNombre.isEmpty()) {
+	        return new ResponseEntity<Mensaje>(new Mensaje("Ya existe este Producto"), HttpStatus.BAD_REQUEST);
+	    }
+
+	    // Si no existe, registrar el nuevo producto
 	    Producto productoRegistrado = SProducto.grabar(producto);
 	    return new ResponseEntity<Producto>(productoRegistrado, HttpStatus.CREATED);
 	}
+
 
 	
 	@PutMapping("/actualizar/{id}")
@@ -84,6 +96,15 @@ public class ProductoController {
 	    Producto productoExistente = SProducto.buscar(id);
 
 	    if (productoExistente != null) {
+	        // Verificar si existe otro producto con el mismo nombre
+	        List<Producto> productosConMismoNombre = SProducto.buscarXNombre(producto.getNombre());
+	        productosConMismoNombre.removeIf(p -> p.getId().equals(id)); // Excluir el producto actual
+
+	        if (!productosConMismoNombre.isEmpty()) {
+	            return new ResponseEntity<Mensaje>(new Mensaje("Ya existe un producto con el mismo nombre"), HttpStatus.BAD_REQUEST);
+	        }
+
+	        // Si no existe, proceder con la actualización
 	        productoExistente.setNombre(producto.getNombre());
 	        productoExistente.setCantUnidad(producto.getCantUnidad());
 	        productoExistente.setPrecio(producto.getPrecio());
@@ -96,6 +117,7 @@ public class ProductoController {
 
 	    return new ResponseEntity<Mensaje>(new Mensaje("Producto no encontrado"), HttpStatus.NOT_FOUND);
 	}
+
 
 	
 	@DeleteMapping("/{id}")
