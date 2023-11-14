@@ -18,8 +18,8 @@ public interface IHabitacionDAO extends JpaRepository<Habitacion, Long>{
 	@Query("SELECT COALESCE(MAX(piso), 0) FROM Habitacion")
 	public int buscarUltimoPiso();
 	
-	//Buscar por piso
-	public List<Habitacion> findByPiso(int piso);
+	// Buscar por piso
+	public List<Habitacion> findByPiso(String piso);
 	
 	//Buscar por tipo
 	@Query("SELECT H FROM Habitacion H "

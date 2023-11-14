@@ -45,13 +45,14 @@ public class HabitacionService {
 	public int buscarUltimoPiso() {
 		return repo.buscarUltimoPiso();
 	}
-	public List<Habitacion> buscarXPiso(int piso){
+	public List<Habitacion> buscarXPiso(String piso){
 		return repo.findByPiso(piso);
 	}
 	public List<Habitacion> buscarXTipo(int id){
 		return repo.buscarXTipo(id);
 	}
 	
+
 	// AUTOCOMPLETADO PISO - NUMERO
 	public Habitacion autocompletarNumeroHabitacion(String piso) {
 	    // Encontrar la última habitación registrada en el piso seleccionado.
@@ -68,7 +69,6 @@ public class HabitacionService {
 	    nuevaHabitacion.setNumero(numeroSiguiente);
 
 	    return nuevaHabitacion;
+
 	}
-
-
 }
