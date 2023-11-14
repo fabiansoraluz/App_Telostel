@@ -1,5 +1,7 @@
 package com.dawii.entity;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,6 +28,9 @@ public class Producto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_producto", nullable = false, unique = true, length = 5)
 	private Long id;
+	
+	@Column(name = "create_at", nullable = false)
+	private Date create_at;
 
 	@Column(name = "nombre", length = 50, nullable = false)
 	private String nombre;
@@ -41,6 +46,8 @@ public class Producto {
 
 	@Column(name = "estado", length = 50, nullable = false)
 	private Integer estado;
+	
+
 
 	@ManyToOne
 	@JoinColumn(name = "id_categoria")
