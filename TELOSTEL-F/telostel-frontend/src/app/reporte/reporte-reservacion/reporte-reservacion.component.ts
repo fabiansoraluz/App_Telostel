@@ -79,8 +79,8 @@ export class ReporteReservacionComponent {
   
 
 
-  verReserva(checkIn: Date, checkOut: Date) {
-    this.sReservacion.reporteDetalle(checkIn, checkOut).subscribe(
+  verReserva(id: number) {
+    this.sReservacion.reporteDetalle(id).subscribe(
       pdfSrc  => {
         // Abrir el PDF en una nueva pestaña
         const blobUrl = URL.createObjectURL(pdfSrc);

@@ -38,7 +38,7 @@
                     <td>{{ reserva.importeReserva | currency:'PEN':'symbol':'1.2-2'
                         }}</td>
                     <td><button
-                            (click)="verReserva(reserva.checkIn, reserva.checkOut)">Ver</button></td>
+                            (click)="verReserva(reserva.id)">Ver</button></td>
                 </tr>
             </tbody>
         </table>
