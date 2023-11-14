@@ -40,8 +40,8 @@ export class ReservacionService {
     return this.http.get(this.host+"/reporteFec"+"/"+fecInicial+"/"+fecFinal)
   }
 
-  public reporteDetalle(fecInicial: Date, fecFinal: Date): Observable<Blob> {
-    const url = `${this.host}/reporteFec2/${fecInicial}/${fecFinal}`;
+  public reporteDetalle(id: number): Observable<Blob> {
+    const url = `${this.host}/reporteFec2/${id}`;
   
     // Configuración para recibir la respuesta como array buffer
     const options = { responseType: 'arraybuffer' as 'json' };

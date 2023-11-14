@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Venta } from '../model/venta';
-import { Observable, switchMap } from 'rxjs';
+import { Observable, map, switchMap } from 'rxjs';
 import { Carrito } from '../model/carrito';
 import Swal from 'sweetalert2';
 
@@ -26,6 +26,26 @@ export class VentaService {
     },(err)=>{
       Swal.fire("Error de registro",err.error.mensaje,"error")
     });
+  }
+
+  public listaVenta():Observable<any>{
+    return this.http.get(this.host)
+  }
+
+  public generarReportePorFecha(fecha: String): Observable<Blob> {
+    const url = `${this.host}/fecha/${fecha}`;
+
+    const options = { responseType: 'arraybuffer' as 'json' };
+
+    return this.http.get(url, options).pipe(
+      map((pdfData: ArrayBuffer) => {
+        return new Blob([pdfData], { type: 'application/pdf' });
+      })
+    );
+  }
+
+  public consultaVenta(fecha:String):Observable<any>{
+    return this.http.get(this.host+"/consulta"+"/"+fecha)
   }
 
 }

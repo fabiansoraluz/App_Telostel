@@ -36,6 +36,7 @@ import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeEsPE from '@angular/common/locales/es-PE';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 registerLocaleData(localeEsPE);
@@ -62,7 +63,7 @@ registerLocaleData(localeEsPE);
     MantenimientoProductoComponent,
     MantenimientoHabitacionComponent,
     MantenimientoClienteComponent,
-    IndexComponent,
+    IndexComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +74,8 @@ registerLocaleData(localeEsPE);
     ReactiveFormsModule,
     errorTailorImports,
     NgApexchartsModule,
-    PdfViewerModule 
+    PdfViewerModule,
+    BrowserAnimationsModule
   ],
   providers: [
     ProductoService,
