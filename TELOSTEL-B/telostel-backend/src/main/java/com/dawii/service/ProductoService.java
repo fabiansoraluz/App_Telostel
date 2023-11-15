@@ -50,4 +50,9 @@ public class ProductoService {
 	public void actualizarStock(int stock,long id) {
 		repo.actualizarStock(stock, id);
 	}
+	
+	public List<Producto> productoXCategoria(Long id){
+		return repo.productoXCategoria(id);
+	}
+
 }

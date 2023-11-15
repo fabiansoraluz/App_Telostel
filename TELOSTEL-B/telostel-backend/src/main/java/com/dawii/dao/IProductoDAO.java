@@ -19,4 +19,7 @@ public interface IProductoDAO extends JpaRepository<Producto, Long>{
 	@Query("UPDATE Producto P SET P.stock = ?1 WHERE P.id=?2")
 	public void actualizarStock(int stock,long id);
 	
+	
+	@Query("select p from Producto p where p.categoria.id = ?1")
+	public List<Producto> productoXCategoria(Long id);
 }

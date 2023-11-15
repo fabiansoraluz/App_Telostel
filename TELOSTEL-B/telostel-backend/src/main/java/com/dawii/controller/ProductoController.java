@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dawii.entity.CategoriaProducto;
 import com.dawii.entity.Producto;
+import com.dawii.service.CategoriaService;
 import com.dawii.service.ProductoService;
 import com.dawii.utils.Mensaje;
 
@@ -29,6 +30,9 @@ public class ProductoController {
 	@Autowired
 	private ProductoService SProducto;
 	
+	@Autowired
+	private CategoriaService SCategoria;
+
 	// METODOS CATEGORIA PRODUCTO
 	
 	@GetMapping("/categorias")

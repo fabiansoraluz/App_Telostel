@@ -12,6 +12,12 @@ export class ProductoService {
 
   private host = "http://localhost:8080/api/producto"
 
+
+
+  constructor(private http:HttpClient) { }
+  public listar():Observable<any>{
+    return this.http.get(this.host)
+
   constructor(private http: HttpClient) { }
 
   
@@ -26,7 +32,6 @@ export class ProductoService {
   }
 
   // CRUD
-
   public listar(): Observable<any> {
     return this.http.get(`${this.host}/productos`);
   }
@@ -49,5 +54,14 @@ export class ProductoService {
 
   public buscarXNombre(nombre: string): Observable<any> {
     return this.http.get(`${this.host}/nombre/${nombre}`);
+  }
+
+  //listar categorias
+  public listarCategorias():Observable<any>{
+    return this.http.get(this.host+"/categorias")
+  }
+
+  public productoXCategoria(id:number):Observable<any>{
+    return this.http.get(this.host+"/categorias/"+id)
   }
 }
