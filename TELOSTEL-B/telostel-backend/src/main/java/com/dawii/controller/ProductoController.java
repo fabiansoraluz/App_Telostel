@@ -72,19 +72,4 @@ public class ProductoController {
 		}
 		return new ResponseEntity<Mensaje>(new Mensaje("Producto no encontrado"),HttpStatus.BAD_REQUEST); 
 	}
-	
-	//ADICIONALES
-	@GetMapping("/categoria")
-	public ResponseEntity<?> listarCategorias(){
-		return new ResponseEntity<List<CategoriaProducto>>(SCategoria.listar(),HttpStatus.OK);
-	}
-	
-	
-	@GetMapping("/categoria/{id}")
-	public ResponseEntity<?> listarCategorias(@PathVariable Long id){
-		List<Producto> bean = SProducto.productoXCategoria(id);
-		if(bean!=null) {
-			return new ResponseEntity<List<Producto>>(bean,HttpStatus.OK);
-		}
-		return new ResponseEntity<Mensaje>(new Mensaje("No hay Productos con esta categoria"),HttpStatus.BAD_REQUEST);	}
 }

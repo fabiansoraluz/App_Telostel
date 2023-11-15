@@ -34,10 +34,10 @@ export class ProductoService {
 
   //listar categorias
   public listarCategorias():Observable<any>{
-    return this.http.get(this.host+"/categoria")
+    return this.http.get(this.host+"/categorias")
   }
 
   public productoXCategoria(id:number):Observable<any>{
-    return this.http.get(this.host+"/categoria/"+id)
+    return this.http.get(this.host+"/categorias/"+id)
   }
 }
