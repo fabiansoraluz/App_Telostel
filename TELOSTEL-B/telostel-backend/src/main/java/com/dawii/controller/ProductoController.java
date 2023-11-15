@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dawii.entity.CategoriaProducto;
 import com.dawii.entity.Producto;
+import com.dawii.service.CategoriaService;
 import com.dawii.service.ProductoService;
 import com.dawii.utils.Mensaje;
 
@@ -25,6 +27,9 @@ public class ProductoController {
 	
 	@Autowired
 	private ProductoService SProducto;
+	
+	@Autowired
+	private CategoriaService SCategoria;
 	
 	@GetMapping
 	public ResponseEntity<?> listar(){
@@ -67,4 +72,19 @@ public class ProductoController {
 		}
 		return new ResponseEntity<Mensaje>(new Mensaje("Producto no encontrado"),HttpStatus.BAD_REQUEST); 
 	}
+	
+	//ADICIONALES
+	@GetMapping("/categoria")
+	public ResponseEntity<?> listarCategorias(){
+		return new ResponseEntity<List<CategoriaProducto>>(SCategoria.listar(),HttpStatus.OK);
+	}
+	
+	
+	@GetMapping("/categoria/{id}")
+	public ResponseEntity<?> listarCategorias(@PathVariable Long id){
+		List<Producto> bean = SProducto.productoXCategoria(id);
+		if(bean!=null) {
+			return new ResponseEntity<List<Producto>>(bean,HttpStatus.OK);
+		}
+		return new ResponseEntity<Mensaje>(new Mensaje("No hay Productos con esta categoria"),HttpStatus.BAD_REQUEST);	}
 }

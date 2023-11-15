@@ -1,1 +1,40 @@
-<p>consulta-producto works!</p>
+
+    <div class="container mt-4">
+        <h2>Tabla de Productos</h2>
+
+        <input class="form-control mt-3" id="filtro" name="nombre" type="text" placeholder="Buscar productos..."
+        [(ngModel)] = "nombre">
+        <select class="form-control col-2 ml-3" [(ngModel)]="categoriaSeleccionada" (change)="productoPorCategoria()">
+            <option value=0 disabled selected>Seleccionar Categoria</option>
+            <option *ngFor="let cate of categorias" [value]="cate.id">{{cate.nombre}}</option>
+        </select>
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Producto</th>
+                    <th>Cant. por Unidad</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th>Categoria</th>
+                    <th>Fec. Registro</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let prod of productos | productoFiltros:nombre">
+                    <td>{{prod.id}}</td>
+                    <td>{{prod.nombre}}</td>
+                    <td>{{prod.cantUnidad}}</td>
+                    <td>{{prod.precio}}</td>
+                    <td>{{prod.stock}}</td>
+                    <td>{{prod.categoria.nombre}}</td>
+                    <td>{{prod.createAt}}</td>
+                    <td>
+                        <button class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button class="btn btn-danger ml-3"><i class="fa-solid fa-trash-can"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
