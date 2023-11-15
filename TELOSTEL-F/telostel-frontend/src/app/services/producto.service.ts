@@ -11,6 +11,7 @@ export class ProductoService {
 
   private host="http://localhost:8080/api/producto"
 
+
   constructor(private http:HttpClient) { }
   public listar():Observable<any>{
     return this.http.get(this.host)
@@ -29,5 +30,14 @@ export class ProductoService {
   }
   public buscarXNombre(nombre:string):Observable<any>{
     return this.http.get(this.host+"/nombre/"+nombre);
+  }
+
+  //listar categorias
+  public listarCategorias():Observable<any>{
+    return this.http.get(this.host+"/categoria")
+  }
+
+  public productoXCategoria(id:number):Observable<any>{
+    return this.http.get(this.host+"/categoria/"+id)
   }
 }
