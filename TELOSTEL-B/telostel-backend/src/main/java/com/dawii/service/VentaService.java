@@ -4,11 +4,10 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +16,7 @@ import com.dawii.dao.IVentaDAO;
 import com.dawii.dto.ReporteVentasDTO;
 import com.dawii.dto.VentaDTO;
 import com.dawii.entity.DetalleVenta;
-
 import com.dawii.entity.Venta;
-
-import javax.sql.DataSource;
 
 @Service
 public class VentaService {

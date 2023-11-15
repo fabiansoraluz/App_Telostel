@@ -64,12 +64,28 @@ public class HabitacionController {
 	
 	
 	// METODO PARA REGISTRAR UNA HABITACION
-	@PostMapping("/registrar")
-	public ResponseEntity<Habitacion> registrarHabitacion(@RequestBody Habitacion habitacion) {
+	@PostMapping
+	public ResponseEntity<?> registrarHabitacion(@RequestBody Habitacion habitacion) {
+		int numero = generarNumero(habitacion.getPiso());
+		if(numero==-1) {
+			return new ResponseEntity<Mensaje>(new Mensaje("Habitaciones en el piso completas"),HttpStatus.BAD_REQUEST);
+		}
+		habitacion.setNumero(numero);
 	    Habitacion habitacionGuardada = SHabitacion.grabar(habitacion);
-	    return new ResponseEntity<>(habitacionGuardada, HttpStatus.CREATED);
+	    return new ResponseEntity<Habitacion>(habitacionGuardada, HttpStatus.CREATED);
 	}
-	
+	private int generarNumero(String piso) {
+		String numero = "";
+		List<Habitacion> lista = SHabitacion.buscarXPiso(piso);
+		if(lista.size()==0) {
+			numero = piso+"01";
+		}else if(lista.size()<5) {
+			numero = ((lista.get(lista.size()-1).getNumero())+1)+"";
+		}else {
+			return -1;
+		}
+		return Integer.parseInt(numero);
+	}
 	
 	// METODO PARA ACTUALIZAR UNA HABITACION REGISTRADA
 	@PutMapping("/actualizar/{id}")

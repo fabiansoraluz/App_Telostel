@@ -38,7 +38,7 @@ export class MantenimientoProductoComponent implements OnInit {
       ]],
       cantUnidad: ['', [
         Validators.required,
-        Validators.pattern("^[a-zA-Z0-9\s]{4,40}$")
+        Validators.pattern("^[a-zA-Z0-9\\s]{4,40}$")
       ]],
       precio: ['', [
         Validators.required,
