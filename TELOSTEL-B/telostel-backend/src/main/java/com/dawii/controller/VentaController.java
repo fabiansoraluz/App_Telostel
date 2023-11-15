@@ -3,12 +3,11 @@ package com.dawii.controller;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -25,13 +24,11 @@ import com.dawii.dto.ReporteVentasDTO;
 import com.dawii.dto.VentaDTO;
 import com.dawii.entity.DetalleVenta;
 import com.dawii.entity.DetalleVentaPK;
-
 import com.dawii.entity.Venta;
 import com.dawii.service.ProductoService;
 import com.dawii.service.VentaService;
 import com.dawii.utils.Mensaje;
 import com.dawii.utils.ReporteGenerado;
-import org.springframework.http.HttpHeaders;
 
 import net.sf.jasperreports.engine.JRException;
 

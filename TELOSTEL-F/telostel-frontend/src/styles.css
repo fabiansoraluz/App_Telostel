@@ -52,6 +52,3 @@ input.ng-touched.ng-invalid{
     padding: 2rem;
     box-shadow: 0px 0px 6px 0px var(--gray);
 }
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

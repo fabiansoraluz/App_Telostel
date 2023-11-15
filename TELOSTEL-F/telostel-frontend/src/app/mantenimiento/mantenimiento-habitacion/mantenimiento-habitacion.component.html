@@ -3,28 +3,29 @@
         <figure class="form__figure">
             <img src="../../../assets/img/matrimonial.jpg" alt="">
         </figure>
-        <form class="row" action="">
-            <div class="form-group col-4">
-                <label for="" class="form-label">Número</label>
-                <input type="text" class="form-control">
-            </div>
-            <div class="form-group col-4">
+        <form class="row" [formGroup]="formulario" (submit)="registrar()" errorTailor>
+            <div class="form-group col-6">
                 <label for="" class="form-label">Piso</label>
-                <input type="text" class="form-control" readonly>
+                <select class="form-control" name="piso" formControlName="piso">
+                    <option value="" selected disabled>Seleccionar Piso</option>
+                    <option value=1>Piso 1</option>
+                    <option value=2>Piso 2</option>
+                    <option value=3>Piso 3</option>
+                    <option value=4>Piso 4</option>
+                    <option value=5>Piso 5</option>
+                </select>
             </div>
 
-            <div class="form-group col-4">
+            <div class="form-group col-6">
                 <label for="" class="form-label">Tipo</label>
-                <select name="" id="" class="form-control" (click)="listarTipos()">
-                    <option value="0" disabled selected>Seleccionar Tipo</option>
+                <select class="form-control" name="tipo" formControlName="tipo">
+                    <option value="" disabled selected>Seleccionar Tipo</option>
                     <option *ngFor="let tipo of tiposHabitacion" [value]="tipo.id">{{tipo.nombre}}</option>
                 </select>
             </div>
-            
-
-            <div class="form-group col-4">
-                <label for="" class="form-label">Estado</label>
-                <select name="" id="" class="form-control">
+            <div class="form-group col-6">
+                <label for="">Estado</label>
+                <select id="" name="estado" class="form-control">
                     <option value="" disabled selected>Seleccionar Estado</option>
                     <option value="disponible">Disponible</option>
                     <option value="reservado">Reservado</option>
@@ -32,8 +33,9 @@
                     <option value="limpieza">Limpieza</option>
                 </select>
             </div>
+
             <div class="form-btn col-4">
-                <button class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Registrar</button>
+                <button type="submit" class="btn btn-primary" [disabled]="formulario.invalid"><i class="fa-solid fa-floppy-disk"></i> Registrar</button>
             </div>
         </form>
     </div>

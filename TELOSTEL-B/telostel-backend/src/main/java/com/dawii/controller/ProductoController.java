@@ -1,6 +1,5 @@
 package com.dawii.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,8 +78,6 @@ public class ProductoController {
 	
 	@PostMapping("/registrar")
 	public ResponseEntity<?> registrarProducto(@RequestBody Producto producto) {
-	    Date fechaActual = new Date();
-	    producto.setCreate_at(fechaActual);
 
 	    // Verificar si ya existe un producto con el mismo nombre
 	    List<Producto> productosConMismoNombre = SProducto.buscarXNombre(producto.getNombre());

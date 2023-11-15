@@ -48,7 +48,7 @@ public class Habitacion {
 	@PrePersist
 	private void prePersist() {
 		this.createAt=LocalDate.now();
-		this.estado="Disponible";
+		this.estado="disponible";
 	}
 	
 }
