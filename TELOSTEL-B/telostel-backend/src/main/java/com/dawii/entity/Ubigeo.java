@@ -2,8 +2,6 @@ package com.dawii.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -20,11 +18,16 @@ import lombok.Setter;
 public class Ubigeo {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_ubigeo")
-	private Long id;
+	@Column(name="id_ubigeo", length = 6, nullable = false, unique = true)
+	private String id;
 	
+	@Column(name="departamento", length = 50, nullable = false)
+	private String departamento;
+	
+	@Column(name="provincia", length = 50, nullable = false)
 	private String provincia;
+	
+	@Column(name="distrito", length = 50, nullable = false)
 	private String distrito;
 	
 }

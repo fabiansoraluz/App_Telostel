@@ -3,18 +3,17 @@ package com.dawii;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import com.dawii.dao.IProductoDAO;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootTest
 class TelostelBackendApplicationTests {
 
 	@Autowired
-	private IProductoDAO repo;
+	private PasswordEncoder encoder;
 	
 	@Test
 	void contextLoads() {
-		repo.actualizarStock(40,1);
+		System.out.print(encoder.encode("Password25"));
 	}
 
 }

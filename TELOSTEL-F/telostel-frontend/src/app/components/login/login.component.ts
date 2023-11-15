@@ -53,6 +53,10 @@ export class LoginComponent implements OnInit{
         this.SToken.setUsername(response.username);
         this.SToken.setRol(response.rol);
         this.SToken.setEnlaces(response.enlaces);
+        
+        //this.SToken.setIdUsuario(response.idUsuario);
+        //console.log('ID de Usuario:', response.idUsuario);
+
         this.router.navigate(["/system/dashboard"])
       },
       err =>{

@@ -1,3 +1,4 @@
+import { CargoEmpleado } from "./cargo-empleado"
 import { Ubigeo } from "./ubigeo"
 
 export class Empleado {
@@ -9,4 +10,5 @@ export class Empleado {
     createAt:Date
     estado:number
     ubigeo:Ubigeo = new Ubigeo()
+    cargo:CargoEmpleado = new CargoEmpleado();
 }

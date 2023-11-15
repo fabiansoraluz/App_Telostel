@@ -1,30 +1,36 @@
 <div class="contenedor">
     <div class="contenedor__item">
-        <form class="row" action="">
+        <form class="row" [formGroup]="formulario" errorTailor>
             <div class="form-group col-4">
                 <label for="" class="form-label">Producto</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" name="nombre" formControlName="nombre">
             </div>
             <div class="form-group col-4">
                 <label for="" class="form-label">Cant. por Unidad</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" name="cantUnidad" formControlName="cantUnidad">
             </div>
             <div class="form-group col-4">
                 <label for="" class="form-label">Precio</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" name="precio" formControlName="precio">
             </div>
             <div class="form-group col-4">
                 <label for="" class="form-label">Stock</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" name="stock" formControlName="stock">
             </div>
+
+
             <div class="form-group col-4">
                 <label for="" class="form-label">Categoria</label>
-                <select name="" id="" class="form-control">
+                <select class="form-control" name="categoria" formControlName="categoria" id="categoria" [(ngModel)]="producto.categoria.id">
                     <option value=0 disabled selected>Seleccionar Categoria</option>
+                    <option *ngFor="let cate of categorias" [value]="cate.id">{{cate.nombre}}</option>
                 </select>
             </div>
+
+
             <div class="form-btn col-12">
-                <button class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Registrar</button>
+                <button class="btn btn-primary" (click)="registrar()" [disabled]="formulario.invalid" *ngIf="!isUpdate"><i class="fa-solid fa-floppy-disk"></i> Registrar</button>
+                <button class="btn btn-success" (click)="actualizar()" [disabled]="formulario.invalid" *ngIf="isUpdate"><i class="fa-solid fa-floppy-disk"></i> Actualizar</button>
             </div>
         </form>
     </div>
@@ -38,7 +44,6 @@
                     <th>Precio</th>
                     <th>Stock</th>
                     <th>Categoria</th>
-                    <th>Fec. Registro</th>
                     <th></th>
                 </tr>
             </thead>
@@ -50,10 +55,9 @@
                     <td>{{prod.precio}}</td>
                     <td>{{prod.stock}}</td>
                     <td>{{prod.categoria.nombre}}</td>
-                    <td>{{prod.createAt}}</td>
                     <td>
-                        <button class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></button>
-                        <button class="btn btn-danger ml-3"><i class="fa-solid fa-trash-can"></i></button>
+                        <button class="btn btn-success" (click)="llenarDatos(prod.id)"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button class="btn btn-danger ml-3" (click)="eliminar(prod.id)"><i class="fa-solid fa-trash-can"></i></button>
                     </td>
                 </tr>
             </tbody>

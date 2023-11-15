@@ -33,7 +33,7 @@ public class Habitacion {
 	private Integer numero;
 
 	@Column(name = "piso", nullable = false)
-	private Integer piso;
+	private String piso;
 
 	@Column(name = "create_at",nullable=false)
 	private LocalDate createAt;

@@ -1,5 +1,6 @@
 package com.dawii.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,4 +65,9 @@ public class ReservacionService {
 	public int actualizarEstadoHab(String estado,long id) {
 		return habitacionDAO.actualizarEstado(estado, id);
 	}
+	
+	public List<Reservacion> FiltrarReservacionFechas(LocalDate fecInicial, LocalDate fecFinal){
+		return reservacionDAO.FiltrarReservacionFechas(fecInicial, fecFinal);
+	}
+	
 }

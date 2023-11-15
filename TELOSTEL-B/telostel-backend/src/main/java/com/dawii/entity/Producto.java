@@ -1,6 +1,6 @@
 package com.dawii.entity;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,6 +28,9 @@ public class Producto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_producto", nullable = false, unique = true, length = 5)
 	private Long id;
+	
+	@Column(name = "create_at", nullable = false)
+	private Date create_at;
 
 	@Column(name = "nombre", length = 50, nullable = false)
 	private String nombre;
@@ -41,11 +44,10 @@ public class Producto {
 	@Column(name = "stock", nullable = false)
 	private Integer stock;
 
-	@Column(name = "create_at", nullable = false)
-	private LocalDate createAt;
-
 	@Column(name = "estado", length = 50, nullable = false)
 	private Integer estado;
+	
+
 
 	@ManyToOne
 	@JoinColumn(name = "id_categoria")
@@ -53,7 +55,6 @@ public class Producto {
 
 	@PrePersist
 	private void prePersits() {
-		this.createAt=LocalDate.now();
 		this.estado=1;
 	}
 	

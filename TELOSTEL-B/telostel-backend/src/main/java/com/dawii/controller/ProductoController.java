@@ -1,5 +1,6 @@
 package com.dawii.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,13 +32,36 @@ public class ProductoController {
 	
 	@Autowired
 	private CategoriaService SCategoria;
+
+	// METODOS CATEGORIA PRODUCTO
 	
-	@GetMapping
+	@GetMapping("/categorias")
+	public ResponseEntity<?> listarCategorias(){
+		List<CategoriaProducto> categorias = SProducto.listarCate();
+		if (!categorias.isEmpty()) {
+			return new ResponseEntity<List<CategoriaProducto>>(categorias, HttpStatus.OK);
+		}
+		return new ResponseEntity<Mensaje>(new Mensaje("No se encontraron categorías de productos"), HttpStatus.NOT_FOUND);
+	}
+	
+	@GetMapping("/categorias/{id}")
+	public ResponseEntity<?> buscarCategoriaXId(@PathVariable Long id){
+		CategoriaProducto categoria = SProducto.buscarPorId(id);
+		if(categoria != null) {
+			return new ResponseEntity<CategoriaProducto>(categoria, HttpStatus.OK);
+		}
+		return new ResponseEntity<Mensaje>(new Mensaje("Categoría de producto no encontrada"), HttpStatus.NOT_FOUND);
+	}
+	
+	
+	//CRUD PRODUCTO
+	
+	@GetMapping("/productos")
 	public ResponseEntity<?> listar(){
 		return new ResponseEntity<List<Producto>>(SProducto.listar(),HttpStatus.OK);
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/buscar/{id}")
 	public ResponseEntity<?> buscar(@PathVariable Long id){
 		Producto bean = SProducto.buscar(id);
 		if(bean!=null) {
@@ -51,17 +76,53 @@ public class ProductoController {
 		return new ResponseEntity<List<Producto>>(lista,HttpStatus.OK);
 	}
 	
-	@PostMapping
-	public ResponseEntity<?> registar(Producto bean) {
-		Producto prod = SProducto.grabar(bean);
-		return new ResponseEntity<Producto>(prod,HttpStatus.CREATED);
-	}
 	
-	@PutMapping
-	public ResponseEntity<?> actualizar(Producto bean) {
-		Producto prod = SProducto.grabar(bean);
-		return new ResponseEntity<Producto>(prod,HttpStatus.CREATED);
+	@PostMapping("/registrar")
+	public ResponseEntity<?> registrarProducto(@RequestBody Producto producto) {
+	    Date fechaActual = new Date();
+	    producto.setCreate_at(fechaActual);
+
+	    // Verificar si ya existe un producto con el mismo nombre
+	    List<Producto> productosConMismoNombre = SProducto.buscarXNombre(producto.getNombre());
+	    if (!productosConMismoNombre.isEmpty()) {
+	        return new ResponseEntity<Mensaje>(new Mensaje("Ya existe este Producto"), HttpStatus.BAD_REQUEST);
+	    }
+
+	    // Si no existe, registrar el nuevo producto
+	    Producto productoRegistrado = SProducto.grabar(producto);
+	    return new ResponseEntity<Producto>(productoRegistrado, HttpStatus.CREATED);
 	}
+
+
+	
+	@PutMapping("/actualizar/{id}")
+	public ResponseEntity<?> actualizarProducto(@PathVariable Long id, @RequestBody Producto producto) {
+	    Producto productoExistente = SProducto.buscar(id);
+
+	    if (productoExistente != null) {
+	        // Verificar si existe otro producto con el mismo nombre
+	        List<Producto> productosConMismoNombre = SProducto.buscarXNombre(producto.getNombre());
+	        productosConMismoNombre.removeIf(p -> p.getId().equals(id)); // Excluir el producto actual
+
+	        if (!productosConMismoNombre.isEmpty()) {
+	            return new ResponseEntity<Mensaje>(new Mensaje("Ya existe un producto con el mismo nombre"), HttpStatus.BAD_REQUEST);
+	        }
+
+	        // Si no existe, proceder con la actualización
+	        productoExistente.setNombre(producto.getNombre());
+	        productoExistente.setCantUnidad(producto.getCantUnidad());
+	        productoExistente.setPrecio(producto.getPrecio());
+	        productoExistente.setStock(producto.getStock());
+	        productoExistente.setCategoria(producto.getCategoria());
+
+	        Producto productoActualizado = SProducto.grabar(productoExistente);
+	        return new ResponseEntity<Producto>(productoActualizado, HttpStatus.OK);
+	    }
+
+	    return new ResponseEntity<Mensaje>(new Mensaje("Producto no encontrado"), HttpStatus.NOT_FOUND);
+	}
+
+
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> eliminar(@PathVariable Long id){
@@ -72,4 +133,5 @@ public class ProductoController {
 		}
 		return new ResponseEntity<Mensaje>(new Mensaje("Producto no encontrado"),HttpStatus.BAD_REQUEST); 
 	}
+	
 }

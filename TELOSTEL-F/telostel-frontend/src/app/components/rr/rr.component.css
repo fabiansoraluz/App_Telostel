@@ -33,3 +33,29 @@ img{
 .main__form-body{
     max-width: 650px;
 }
+
+/* :::::::::::: MODAL-UBIGEO ::::::::::::::*/
+
+/*Header*/
+.modal-header,.modal-footer{
+    background-color: var(--almost-white);
+}
+
+/*Formulario*/
+.modal-content{
+    width: unset;
+}
+.modal-body{
+    padding: 2rem 20px !important;
+}
+.form--ubigeo{
+    display: flex;
+    gap: 1rem;
+}
+.form__select--ubigeo{
+    border: 2px solid var(--almost-white);
+    padding: 1rem;
+    border-radius: 5px;
+    outline: none;
+    width: 150px;
+}

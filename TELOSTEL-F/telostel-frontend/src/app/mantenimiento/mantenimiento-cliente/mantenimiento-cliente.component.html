@@ -1,1 +1,118 @@
-<p>mantenimiento-cliente works!</p>
+<div class="contenedor">
+    <div class="contenedor__item">
+        <form class="row" [formGroup]="formulario" errorTailor>
+            <div class="form-group col-4">
+                <label for="" class="form-label">ID</label>
+                <input type="text" class="form-control" readonly name="id" formControlName="id">
+            </div>
+            <div class="form-group col-4">
+                <label for="" class="form-label">Nombre</label>
+                <input type="text" class="form-control" name="nombre" formControlName="nombre">
+            </div>
+            <div class="form-group col-4">
+                <label for="" class="form-label">Apellido</label>
+                <input type="text" class="form-control" name="apellido" formControlName="apellido">
+            </div>
+            <div class="form-group col-4">
+                <label for="" class="form-label">Celular</label>
+                <input type="text" class="form-control" name="celular" formControlName="celular" [controlErrorsTpl]="messageCelularError">
+            </div>
+            <div class="form-group col-4">
+                <label for="" class="form-label">DNI</label>
+                <input type="text" class="form-control" name="dni" formControlName="dni" [controlErrorsTpl]="messageDniError">
+            </div>
+            <div class="form-group col-4 d-flex align-items-end">
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalUbigeo">Seleccionar Ubigeo</button>
+            </div>
+            <div class="form-btn col-12">
+                <button class="btn btn-primary" (click)="registrar()" [disabled]="formulario.invalid" *ngIf="!isUpdate"><i class="fa-solid fa-floppy-disk"></i> Registrar</button>
+                <button class="btn btn-success" (click)="actualizar()" [disabled]="formulario.invalid" *ngIf="isUpdate"><i class="fa-solid fa-floppy-disk"></i> Actualizar</button>
+            </div>
+        </form>
+    </div>
+    <div class="contenedor__item">
+        <div class="alert alert-danger" *ngIf="error_lista">
+            <h4>{{error_lista}}</h4>
+        </div>
+        <table class="table table-striped mt-3" *ngIf="!error_lista">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Celular</th>
+                    <th>DNI</th>
+                    <th>Fec. Registro</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let c of clientes">
+                    <td>{{c.id}}</td>
+                    <td>{{c.nombre}}</td>
+                    <td>{{c.apellido}}</td>
+                    <td>{{c.celular}}</td>
+                    <td>{{c.dni}}</td>
+                    <td>{{c.createAt}}</td>
+                    <td>
+                        <button class="btn btn-success" (click)="llenarDatos(c.id)"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button class="btn btn-danger ml-3" (click)="eliminar(c.id)"><i class="fa-solid fa-trash-can"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- MODAL DE UBIGEO -->
+<div class="modal fade" id="modalUbigeo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Seleccionar Ubicación</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="form--ubigeo">
+                    <div class="form__item--ubigeo">
+                        <select class="form__select--ubigeo" (change)="listarProvincias()" name="departamento" [(ngModel)]="departamento">
+                            <option value="" disabled selected>Departamento</option>
+                            <option *ngFor="let d of departamentos">{{d}}</option>
+                        </select>
+                    </div>
+                    <div class="form__item--ubigeo">
+                        <select class="form__select--ubigeo" (change)="listarDistritos()" name="provincia" [(ngModel)]="provincia">
+                            <option value="" disabled selected>Provincia</option>
+                            <option *ngFor="let p of provincias">{{p}}</option>
+                        </select>
+                    </div>
+                    <div class="form__item--ubigeo">
+                        <select class="form__select--ubigeo" name="distrito" [(ngModel)]="cliente.ubigeo.id">
+                            <option value="" disabled selected>Distrito</option>
+                            <option *ngFor="let di of distritos" [value]="di.id">{{di.distrito}}</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template let-error let-text="text" #messageCelularError>
+    <div class="form__message" *ngIf="formulario.get('celular').invalid">
+        <p *ngIf="error.required">Campo Obligatorio</p>
+        <p *ngIf="error.pattern">Ingresar de 7 a 9 dígitos</p>
+    </div>
+</ng-template>
+
+<ng-template let-error let-text="text" #messageDniError>
+    <div class="form__message" *ngIf="formulario.get('dni').invalid">
+        <p *ngIf="error.required">Campo Obligatorio</p>
+        <p *ngIf="error.pattern">Ingresar 8 dígitos</p>
+    </div>
+</ng-template>

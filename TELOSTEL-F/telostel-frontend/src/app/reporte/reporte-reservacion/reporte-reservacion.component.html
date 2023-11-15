@@ -1,1 +1,59 @@
-<p>reporte-reservacion works!</p>
+<div class="container-generar-reporte">
+    <h2>Generar Reporte</h2>
+
+    <!-- Formulario para ingresar fechas y generar el reporte -->
+    <form>
+        <label for="fechaInicial">Fecha Inicial</label>
+        <input type="date" id="fechaInicial" name="fechaInicial" required>
+
+        <label for="fechaFinal">Fecha Final</label>
+        <input type="date" id="fechaFinal" name="fechaFinal" required>
+
+        <button type="button" (click)="generarReporte()">Generar Reporte</button>
+    </form>
+</div>
+
+<div class="container-lista-reservas">
+    <h2>Lista de Reservas</h2>
+
+    <!-- Verifica si hay reservas o no -->
+    <ng-container *ngIf="reservas.length > 0; else noReservas">
+        <!-- Tabla de Reservas -->
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Check In</th>
+                    <th>Check Out</th>
+                    <th>Importe</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Iterar sobre la lista de reservas y mostrar cada fila -->
+                <tr *ngFor="let reserva of reservas">
+                    <td>{{ reserva.id }}</td>
+                    <td>{{ reserva.checkIn | date }}</td>
+                    <td>{{ reserva.checkOut | date }}</td>
+                    <td>{{ reserva.importeReserva | currency:'PEN':'symbol':'1.2-2'
+                        }}</td>
+                    <td><button
+                            (click)="verReserva(reserva.id)">Ver</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-container>
+
+    <!-- Mostrar mensaje si no hay reservas -->
+    <ng-template #noReservas>
+        <p>No hay reservaciones en el rango de fechas seleccionado.</p>
+    </ng-template>
+</div>
+
+<!--div class="pdf-viewer-container">
+    <pdf-viewer [src]="pdfSrc"
+              [render-text]="true"
+              [original-size]="false"
+              style="width: 400px; height: 500px"
+  ></pdf-viewer>
+</div-->
