@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Reservacion } from 'src/app/model/reservacion';
 import { ReservacionService } from 'src/app/services/reservacion.service';
@@ -11,18 +11,23 @@ import Swal from 'sweetalert2';
   templateUrl: './reporte-reservacion.component.html',
   styleUrls: ['./reporte-reservacion.component.css']
 })
-export class ReporteReservacionComponent {
+export class ReporteReservacionComponent implements OnInit{
 
-  pdfSrc
+  public pdfSrc
 
 
   reservas: Reservacion [] = [];
   minFechaFinal: string = ''; 
 
   constructor(
-    private sReservacion: ReservacionService,
-    private router: Router
+    private sReservacion: ReservacionService
   ){}
+
+  ngOnInit(): void {
+    this.sReservacion.listar().subscribe(
+      (response)=>this.reservas=response
+    )
+  }
 
   setMinFechaFinal(event: any) {
     this.minFechaFinal = event.target.value;
@@ -49,9 +54,6 @@ export class ReporteReservacionComponent {
     const fechaInicial = (document.getElementById('fechaInicial') as HTMLInputElement).value;
     const fechaFinal = (document.getElementById('fechaFinal') as HTMLInputElement).value;
 
-    console.log('Fecha Inicial:', fechaInicial);
-    console.log('Fecha Final:', fechaFinal);
-
     // Validación de fechas
     if (!this.isFechaFinalValid()) {
       Swal.fire('Fecha Incorrecta', 'Por favor, verifica el orden de las fechas para generar reporte.', 'error');
@@ -61,7 +63,6 @@ export class ReporteReservacionComponent {
     // Llama al servicio para obtener el reporte
     this.sReservacion.reporte1(fechaInicial, fechaFinal).subscribe(
       data => {
-        console.log('Reporte generado:', data);
 
         // Verifica si hay reservas
         if (data && data.length > 0) {
@@ -71,7 +72,6 @@ export class ReporteReservacionComponent {
         }
       },
       error => {
-        console.error('Error al generar el reporte:', error);
       }
     );
   }

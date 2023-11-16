@@ -19,6 +19,8 @@ public class ProductoService {
 	@Autowired
 	private ICategoriaProductoDAO repoCate;
 	
+	// Métodos de categoria
+	
 	public List<CategoriaProducto> listarCate(){
 		return repoCate.findAll();
 	}
@@ -27,7 +29,7 @@ public class ProductoService {
         return repoCate.findByIdCategoria(id);
     }
 	
-	//CRUD
+	// CRUD
 	public Producto grabar(Producto bean) {
 		return repo.save(bean);
 	}
@@ -44,6 +46,9 @@ public class ProductoService {
 	//CONSULTAS
 	public List<Producto> buscarXNombre(String nombre){
 		return repo.findByNombreStartingWith(nombre);
+	}
+	public List<Producto> consulta(String nombre,long idCategoria){
+		return repo.consulta(nombre, idCategoria);
 	}
 
 	//ACTUALIZAR EL STOCK

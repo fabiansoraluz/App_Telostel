@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Reservacion } from '../model/reservacion';
+import { ConsultaReservacion } from '../model/consulta-reservacion';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,10 @@ export class ReservacionService {
 
   public buscar(id:number):Observable<any>{
     return this.http.get(this.host+"/"+id)
+  }
+
+  public datosEstadisticos():Observable<any>{
+    return this.http.get(this.host+"/datosEstadisticos")
   }
   
   public registrar(bean:Reservacion):Observable<any>{
@@ -58,5 +63,8 @@ export class ReservacionService {
     return new Blob([pdfData], { type: 'application/pdf' });
   }
   
+  public consulta(bean:ConsultaReservacion):Observable<any>{
+    return this.http.post(this.host+"/consulta",bean)
+  }
 
 }

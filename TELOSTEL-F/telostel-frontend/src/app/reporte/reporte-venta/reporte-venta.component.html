@@ -1,9 +1,9 @@
 <div class="contenedor__item">
-    <h3>Filtrar | FECHA DE VENTA</h3>
+    <h3>Filtrar | Fecha de Venta</h3>
     <form class="form row mt-3" (ngSubmit)="consultar()">
       <div class="form-group col-4">
         <label for="nombre">Fecha:</label>
-        <input type="date" id="fecha" name="fecha" required [(ngModel)]="fechaConsulta">
+        <input type="date" id="fecha" name="fecha" required [(ngModel)]="fechaConsulta" class="form-control">
       </div>
       <div class="form-group col-4 d-flex align-items-end">
         <button type="submit" class="btn btn-success"><i class="fa-solid fa-magnifying-glass"></i> Consultar</button>
@@ -33,7 +33,7 @@
         </tbody>
     </table>
     <ng-template #noRegistros>
-        <div class="alert alert-info">
+        <div class="alert alert-info mt-3">
             <h4>No hay registros de venta para la fecha seleccionada.</h4>
         </div>
     </ng-template>

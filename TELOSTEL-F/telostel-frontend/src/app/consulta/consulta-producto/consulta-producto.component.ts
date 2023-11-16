@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Categoria } from 'src/app/model/categoria';
+import { ConsultaProducto } from 'src/app/model/consulta-producto';
 import { Producto } from 'src/app/model/producto';
 import { ProductoService } from 'src/app/services/producto.service';
 
@@ -11,11 +12,9 @@ import { ProductoService } from 'src/app/services/producto.service';
 export class ConsultaProductoComponent implements OnInit{
 
   public productos:[Producto]
-  public nombre = ''
   public categorias:[Categoria]
-  public categoriaSeleccionada:number=0
-
-
+  public consulta:ConsultaProducto=new ConsultaProducto()
+  public mensaje:string
 
   constructor(
     private SProducto:ProductoService
@@ -23,7 +22,8 @@ export class ConsultaProductoComponent implements OnInit{
 
   ngOnInit(): void {
     this.SProducto.listar().subscribe(
-      response => this.productos=response
+      (response) => this.productos=response,
+      (err) => this.mensaje=err.error.mensaje
     )
     
     this.SProducto.listarCategorias().subscribe(
@@ -31,11 +31,14 @@ export class ConsultaProductoComponent implements OnInit{
     )
     
   }
-
-  productoPorCategoria(){
-    this.SProducto.productoXCategoria(this.categoriaSeleccionada).subscribe(
-      response =>this.productos = response   
+  consultar(){
+    this.SProducto.consulta(this.consulta).subscribe(
+      (response) => {this.productos=response,this.mensaje=null},
+      (err) => this.mensaje=err.error.mensaje
     )
+  }
+  limpiar(){
+    window.location.reload();
   }
 
 }

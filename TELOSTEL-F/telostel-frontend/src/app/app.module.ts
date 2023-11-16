@@ -30,8 +30,6 @@ import { HabitacionService } from './services/habitacion.service';
 import { interceptorProvider } from './interceptor/token.interceptor';
 import { MantenimientoClienteComponent } from './mantenimiento/mantenimiento-cliente/mantenimiento-cliente.component';
 
-import { ProductoFiltrosPipe } from './pipes/producto-filtros.pipe';
-
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { IndexComponent } from './components/index/index.component';
 
@@ -41,10 +39,7 @@ import localeEsPE from '@angular/common/locales/es-PE';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
 registerLocaleData(localeEsPE);
-
-
 
 @NgModule({
   declarations: [
@@ -67,10 +62,7 @@ registerLocaleData(localeEsPE);
     MantenimientoProductoComponent,
     MantenimientoHabitacionComponent,
     MantenimientoClienteComponent,
-
-    ProductoFiltrosPipe,
-
-
+    IndexComponent,
   ],
   imports: [
     BrowserModule,

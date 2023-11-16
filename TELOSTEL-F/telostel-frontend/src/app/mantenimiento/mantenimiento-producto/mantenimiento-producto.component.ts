@@ -58,7 +58,6 @@ export class MantenimientoProductoComponent implements OnInit {
     this.SProducto.listar().subscribe(
       (response) => {
         this.productos = response;
-        console.log('Listado de Productos:', this.productos); // Agregar este console.log
       },
       (err) => this.error_lista = err.error.mensaje
     );
@@ -68,9 +67,6 @@ export class MantenimientoProductoComponent implements OnInit {
     this.SProducto.listarCategorias().subscribe(
       (categorias: Categoria[]) => {
         this.categorias = categorias;
-      },
-      (error) => {
-        console.error('Error al obtener categorías:', error);
       }
     );
   }
@@ -165,7 +161,6 @@ export class MantenimientoProductoComponent implements OnInit {
     this.producto.cantUnidad = this.formulario.get('cantUnidad').value;
     this.producto.precio = this.formulario.get('precio').value;
     this.producto.stock = this.formulario.get('stock').value;
-    //this.producto.createAt = this.formulario.get('createAt').value;
     this.producto.categoria.id = +this.formulario.get('categoria').value;
 
 

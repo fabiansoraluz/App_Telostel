@@ -32,10 +32,10 @@ export type ChartOptions = {
 export class DashboardComponent implements OnInit{
   
   public chartOptions: Partial<ChartOptions>;
-  public numClientes=0
-  public numReservas=0
-  public numHabitaciones=0
-  public numProductos=0
+  public numClientes:number
+  public numReservas:number
+  public numHabitaciones:number
+  public numProductos:number
 
   constructor(
     private router:Router,
@@ -49,16 +49,20 @@ export class DashboardComponent implements OnInit{
   ngOnInit(): void {
     this.generarGrafico()
     this.SCliente.listar().subscribe(
-      (response) => this.numClientes = response.length
+      (response) => this.numClientes = response.length,
+      (err)=>this.numClientes=0
     )
     this.SReserva.listar().subscribe(
-      (response) => this.numReservas = response.length
+      (response) => this.numReservas = response.length,
+      (err)=>this.numReservas=0
     )
     this.SHabitacion.listar().subscribe(
-      (response) => this.numHabitaciones = response.length
+      (response) => this.numHabitaciones = response.length,
+      (err)=>this.numHabitaciones=0
     )
     this.SProducto.listar().subscribe(
-      (response) => this.numProductos = response.length
+      (response) => this.numProductos = response.length,
+      (err)=>this.numProductos=0
     )
   }
 
@@ -87,13 +91,16 @@ export class DashboardComponent implements OnInit{
     // Obtenemos los ultimos 5 meses
     let meses = this.ultimosMeses().reverse()
 
-    // Obtenemos ventas de los ultimos 5 meses
-    let ventas = [4,8,7,11,13]
-
-    for(let i=0;i<5;i++){
-      let dato = {x:meses[i],y:ventas[i]}
-      datos.push(dato)
-    }
+    // Obtenemos reservas de los ultimos 5 meses
+    this.SReserva.datosEstadisticos().subscribe(
+      (response) => {
+        for(let i=0;i<5;i++){
+          let dato = {x:meses[i],y:response[i].total}
+          datos.push(dato)
+        }
+      }
+    )
+    
     return datos
   }
 

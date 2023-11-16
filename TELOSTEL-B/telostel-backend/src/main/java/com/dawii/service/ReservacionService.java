@@ -2,8 +2,10 @@ package com.dawii.service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import com.dawii.dao.IDetalleReservaDAO;
@@ -35,6 +37,14 @@ public class ReservacionService {
 	
 	@Autowired
 	private IHabitacionDAO habitacionDAO;
+	
+	@Autowired
+    private JdbcTemplate jdbcTemplate;
+	
+	public List<Map<String, Object>> obtenerDatosEstadisticos() {
+	    String sql = "CALL SP_NUMERO_RESERVACIONES()";
+	    return jdbcTemplate.queryForList(sql);
+	}
 	
 	public List<Reservacion> listarReservaciones(){
 		return reservacionDAO.findAll();
@@ -70,4 +80,7 @@ public class ReservacionService {
 		return reservacionDAO.FiltrarReservacionFechas(fecInicial, fecFinal);
 	}
 	
+	public List<Reservacion> consulta(int numero,LocalDate checkIn,LocalDate checkOut) {
+		return reservacionDAO.consulta(numero, checkIn, checkOut);
+	}
 }
