@@ -1,1 +1,51 @@
-<p>consulta-reservacion works!</p>
+<div class="contenedor__item">
+    <h2>Filtrar | Habitación - Fecha</h2>
+    <form class="form row mt-5" (ngSubmit)="consultar()">
+        <div class="form-group col-3">
+            <label for="numero">N° Habitación</label>
+            <input type="number" id="numero" name="numero" class="form-control" [(ngModel)]="consulta.numero">
+        </div>
+        <div class="form-group col-3">
+            <label for="dni">CheckIn:</label>
+            <input type="date" id="dni" name="dni" class="form-control" [(ngModel)]="consulta.checkIn">
+        </div>
+        <div class="form-group col-3">
+            <label for="dni">CheckOut:</label>
+            <input type="date" id="dni" name="dni" class="form-control" [(ngModel)]="consulta.checkOut">
+        </div>
+        <div class="form-group col-3 d-flex align-items-end">
+            <button type="submit" class="btn btn-success"><i class="fa-solid fa-magnifying-glass"></i> Consultar</button>
+            <button type="button" class="btn btn-secondary ml-3" (click)="limpiar()"><i class="fa-solid fa-rotate-right btn-icon"></i> Limpiar</button>
+        </div>
+    </form>
+
+</div>
+<div class="contenedor__item">
+    <table class="table table-striped mt-3" *ngIf="!mensaje">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>N° Habitación</th>
+                <th>CheckIn</th>
+                <th>CheckOut</th>
+                <th>Sede</th>
+                <th>Importe</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let r of reservaciones">
+                <td>{{r.id}}</td>
+                <td>{{r.cliente.nombre}}</td>
+                <td>{{r.habitacion.numero}}</td>
+                <td>{{r.checkIn}}</td>
+                <td>{{r.checkOut}}</td>
+                <td>{{r.sede.nombre}}</td>
+                <td>{{r.importeReserva}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="alert alert-info" *ngIf="mensaje">
+        {{mensaje}}
+    </div>
+</div>

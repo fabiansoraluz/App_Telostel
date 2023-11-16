@@ -20,17 +20,17 @@ export class HabitacionService {
   }
 
   public buscarPorIdTipo(id: number): Observable<TipoHabitacion> {
-    return this.http.get<TipoHabitacion>(`${this.host}/tipoid/${id}`);
+    return this.http.get<TipoHabitacion>(`${this.host}/tipo/${id}`);
   }
 
   // CRUD HABITACION
 
   public listar(): Observable<any> {
-    return this.http.get(`${this.host}/habitaciones`);
+    return this.http.get(`${this.host}`);
   }
 
   public buscar(id: number): Observable<any> {
-    return this.http.get(`${this.host}/buscar/${id}`);
+    return this.http.get(`${this.host}/${id}`);
   }
 
   public registrar(bean: Habitacion): Observable<any> {

@@ -3,8 +3,10 @@ package com.dawii.controller;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dawii.dto.ConsultaReserva;
 import com.dawii.entity.DetalleReservacion;
 import com.dawii.entity.DetalleReservacionPK;
 import com.dawii.entity.Reservacion;
@@ -24,8 +27,6 @@ import com.dawii.entity.Servicio;
 import com.dawii.service.ReservacionService;
 import com.dawii.utils.Mensaje;
 import com.dawii.utils.ReporteGenerado;
-
-import org.springframework.http.HttpHeaders;
 
 @RestController
 @RequestMapping("/api/reservacion")
@@ -53,6 +54,11 @@ public class ReservacionController {
 		return new ResponseEntity<Mensaje>(new Mensaje("Error al encontrar reservación"), HttpStatus.BAD_REQUEST);
 	}
 
+	@GetMapping("/datosEstadisticos")
+    public List<Map<String, Object>> datosEstadisticos() {
+        return SReservacion.obtenerDatosEstadisticos();
+    }
+	
 	@PostMapping
 	public ResponseEntity<?> registrar(@RequestBody Reservacion bean) {
 
@@ -121,6 +127,8 @@ public class ReservacionController {
 		return new ResponseEntity<Mensaje>(new Mensaje("No hay sedes registradas"), HttpStatus.BAD_REQUEST);
 	}
 
+	// CONSULTAS
+	
 	@GetMapping("/reporteFec/{fecInicial}/{fecFinal}")
 	public ResponseEntity<?> filtroReporte(@PathVariable LocalDate fecInicial, @PathVariable LocalDate fecFinal) {
 		List<Reservacion> lista = SReservacion.FiltrarReservacionFechas(fecInicial, fecFinal);
@@ -148,8 +156,14 @@ public class ReservacionController {
 		}
 	}
 
-
-	
+	@PostMapping("/consulta")
+	public ResponseEntity<?> consulta(@RequestBody ConsultaReserva bean){
+		List<Reservacion> lista = SReservacion.consulta(bean.getNumero(), bean.getCheckIn(), bean.getCheckOut());
+		if (lista.size() > 0) {
+			return new ResponseEntity<List<Reservacion>>(lista, HttpStatus.OK);
+		}
+		return new ResponseEntity<Mensaje>(new Mensaje("No hay coincidencias"), HttpStatus.BAD_REQUEST);
+	}
 
 
 }

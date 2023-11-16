@@ -19,7 +19,7 @@ export class ReporteVentaComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
-    //Listamos los clientes
+    //Listamos las ventas
     this.listar()
   }
 

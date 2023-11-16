@@ -30,7 +30,7 @@ export class ConsultaClienteComponent implements OnInit{
   }
   public consultar(){
     this.SCliente.consulta(this.consulta).subscribe(
-      (response) => this.clientes=response,
+      (response) => {this.clientes=response,this.error_lista=null},
       (err)=> this.error_lista=err.error.mensaje
     )
   }

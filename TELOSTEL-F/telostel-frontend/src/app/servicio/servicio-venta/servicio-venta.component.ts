@@ -189,7 +189,10 @@ export class ServicioVentaComponent implements OnInit{
     venta.empleado=this.empleado
     venta.importe=this.importeTotal
     this.SVenta.registrar(venta,this.carrito)
-    this.limpiar()
+    Swal.fire("Venta Registrada","La venta se registro exitosamente","success")
+    setTimeout(() => {
+      this.limpiar()
+    }, 3000); 
   }
   
   limpiar(){

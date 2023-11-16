@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dawii.dto.ConsultaProducto;
 import com.dawii.entity.CategoriaProducto;
 import com.dawii.entity.Producto;
 import com.dawii.service.CategoriaService;
@@ -36,7 +37,7 @@ public class ProductoController {
 	
 	@GetMapping("/categorias")
 	public ResponseEntity<?> listarCategorias(){
-		List<CategoriaProducto> categorias = SProducto.listarCate();
+		List<CategoriaProducto> categorias = SCategoria.listar();
 		if (!categorias.isEmpty()) {
 			return new ResponseEntity<List<CategoriaProducto>>(categorias, HttpStatus.OK);
 		}
@@ -55,7 +56,7 @@ public class ProductoController {
 	
 	//CRUD PRODUCTO
 	
-	@GetMapping("/productos")
+	@GetMapping
 	public ResponseEntity<?> listar(){
 		return new ResponseEntity<List<Producto>>(SProducto.listar(),HttpStatus.OK);
 	}
@@ -69,6 +70,15 @@ public class ProductoController {
 		return new ResponseEntity<Mensaje>(new Mensaje("Producto no encontrado"),HttpStatus.BAD_REQUEST);
 	}
 	
+	@PostMapping("/consulta")
+	public ResponseEntity<?> consultar(@RequestBody ConsultaProducto consulta){
+		List<Producto> lista = SProducto.consulta(consulta.getNombre(),consulta.getIdCategoria());
+		if(lista.size()>0) {
+			return new ResponseEntity<List<Producto>>(lista,HttpStatus.OK);
+		}
+		return new ResponseEntity<Mensaje>(new Mensaje("No hay coincidencias"),HttpStatus.BAD_REQUEST);
+	}
+	
 	@GetMapping("/nombre/{nombre}")
 	public ResponseEntity<?> buscarXNombre(@PathVariable String nombre){
 		List<Producto> lista = SProducto.buscarXNombre(nombre);
@@ -76,7 +86,7 @@ public class ProductoController {
 	}
 	
 	
-	@PostMapping("/registrar")
+	@PostMapping
 	public ResponseEntity<?> registrarProducto(@RequestBody Producto producto) {
 
 	    // Verificar si ya existe un producto con el mismo nombre

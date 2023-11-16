@@ -37,7 +37,7 @@ public class HabitacionController {
     }
 
     // Buscar un tipo de habitación por ID
-    @GetMapping("/tipoid/{id}")
+    @GetMapping("/tipo/{id}")
     public ResponseEntity<?> buscarPorIdTipo(@PathVariable Long id) {
         TipoHabitacion tipoHabitacion = SHabitacion.buscarPorId(id);
         if (tipoHabitacion != null) {
@@ -48,12 +48,12 @@ public class HabitacionController {
 
 	
 	//CRUD HABITACION
-	@GetMapping("/habitaciones")
+	@GetMapping
 	public ResponseEntity<?> listar(){
 		return new ResponseEntity<List<Habitacion>>(SHabitacion.listar(),HttpStatus.OK);
 	}
 	
-	@GetMapping("/buscar/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<?> buscar(@PathVariable Long id){
 		Habitacion bean = SHabitacion.buscar(id);
 		if(bean!=null) {
@@ -88,24 +88,11 @@ public class HabitacionController {
 	}
 	
 	// METODO PARA ACTUALIZAR UNA HABITACION REGISTRADA
-	@PutMapping("/actualizar/{id}")
-	public ResponseEntity<Habitacion> actualizarHabitacion(@PathVariable Long id, @RequestBody Habitacion habitacion) {
-	    Habitacion habitacionActualizada = SHabitacion.buscar(id);
-	    
-	    if (habitacionActualizada == null) {
-	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	    }
-
-	    // Actualiza la habitación con los nuevos datos.
-	    habitacionActualizada.setNumero(habitacion.getNumero());
-	    habitacionActualizada.setPiso(habitacion.getPiso());
-	    habitacionActualizada.setEstado(habitacion.getEstado());
-	    habitacionActualizada.setTipo(habitacion.getTipo());
-
+	@PutMapping
+	public ResponseEntity<?> actualizarHabitacion(@RequestBody Habitacion habitacion) {
 	    // Guarda la habitación actualizada.
-	    habitacionActualizada = SHabitacion.grabar(habitacionActualizada);
-
-	    return new ResponseEntity<>(habitacionActualizada, HttpStatus.OK);
+	    Habitacion bean = SHabitacion.grabar(habitacion);
+	    return new ResponseEntity<Habitacion>(bean, HttpStatus.OK);
 	}
 	
 	
