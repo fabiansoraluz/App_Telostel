@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { Producto } from '../model/producto';
 import { TokenService } from './token.service';
 import { Categoria } from '../model/categoria';
+import { ConsultaCliente } from '../model/consulta-cliente';
+import { ConsultaProducto } from '../model/consulta-producto';
 
 @Injectable({
   providedIn: 'root'
@@ -12,28 +14,22 @@ export class ProductoService {
 
   private host = "http://localhost:8080/api/producto"
 
-
-
   constructor(private http:HttpClient) { }
-  public listar():Observable<any>{
-    return this.http.get(this.host)
-
-  constructor(private http: HttpClient) { }
 
   
   // Métodos relacionados con CategoriaProducto
 
-  public listarCategorias(): Observable<Categoria[]> {
-    return this.http.get<Categoria[]>(`${this.host}/categorias`);
+  public listarCategorias():Observable<any>{
+    return this.http.get(this.host+"/categorias")
   }
 
-  public buscarCategoriaXId(id: number): Observable<Categoria> {
-    return this.http.get<Categoria>(`${this.host}/categorias/${id}`);
+  public productoXCategoria(id:number):Observable<any>{
+    return this.http.get(this.host+"/categorias/"+id)
   }
 
   // CRUD
-  public listar(): Observable<any> {
-    return this.http.get(`${this.host}/productos`);
+  public listar():Observable<any>{
+    return this.http.get(this.host)
   }
 
   public buscar(id: number): Observable<any> {
@@ -52,16 +48,13 @@ export class ProductoService {
     return this.http.delete(`${this.host}/${id}`);
   }
 
+  //Consultas
+
   public buscarXNombre(nombre: string): Observable<any> {
     return this.http.get(`${this.host}/nombre/${nombre}`);
   }
-
-  //listar categorias
-  public listarCategorias():Observable<any>{
-    return this.http.get(this.host+"/categorias")
+  public consulta(consulta:ConsultaProducto):Observable<any>{
+    return this.http.post(`${this.host}/consulta`,consulta)
   }
 
-  public productoXCategoria(id:number):Observable<any>{
-    return this.http.get(this.host+"/categorias/"+id)
-  }
 }
