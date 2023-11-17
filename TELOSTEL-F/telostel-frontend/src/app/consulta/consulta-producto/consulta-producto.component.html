@@ -30,7 +30,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let prod of productos">
+            <tr *ngFor="let prod of productos | slice:desde:hasta">
                 <td>{{prod.id}}</td>
                 <td>{{prod.nombre}}</td>
                 <td>{{prod.cantUnidad}}</td>
@@ -44,6 +44,12 @@
             </tr>
         </tbody>
     </table>
+    <mat-paginator 
+        [length]="productos.length"
+        [pageSize]="pageSize"
+        (page)="cambiarPagina($event)"
+        aria-label="Seleccionar Pagina">
+    </mat-paginator>
     <div class="alert alert-info" *ngIf="mensaje">
         {{mensaje}}
     </div>

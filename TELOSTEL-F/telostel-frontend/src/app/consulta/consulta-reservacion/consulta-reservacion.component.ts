@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { ConsultaReservacion } from 'src/app/model/consulta-reservacion';
 import { Reservacion } from 'src/app/model/reservacion';
 import { ReservacionService } from 'src/app/services/reservacion.service';
@@ -9,6 +10,11 @@ import { ReservacionService } from 'src/app/services/reservacion.service';
   styleUrls: ['./consulta-reservacion.component.css']
 })
 export class ConsultaReservacionComponent implements OnInit{
+
+  // Paginación
+  public pageSize = 5
+  public desde = 0
+  public hasta = 5
 
   public reservaciones:Reservacion[]
   public mensaje:String
@@ -36,5 +42,9 @@ export class ConsultaReservacionComponent implements OnInit{
   }
   public limpiar(){
     window.location.reload();
+  }
+  public cambiarPagina(e:PageEvent){
+    this.desde = e.pageIndex * e.pageSize;
+    this.hasta = this.desde + this.pageSize;
   }
 }

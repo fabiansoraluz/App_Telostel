@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { Cliente } from 'src/app/model/cliente';
 import { ConsultaCliente } from 'src/app/model/consulta-cliente';
 import { ClienteService } from 'src/app/services/cliente.service';
@@ -9,6 +10,11 @@ import { ClienteService } from 'src/app/services/cliente.service';
   styleUrls: ['./consulta-cliente.component.css']
 })
 export class ConsultaClienteComponent implements OnInit{
+
+  // Paginación
+  public pageSize = 5
+  public desde = 0
+  public hasta = 5
 
   clientes:Cliente[]=[]
   consulta:ConsultaCliente=new ConsultaCliente()
@@ -36,5 +42,9 @@ export class ConsultaClienteComponent implements OnInit{
   }
   public limpiar(){
     window.location.reload();
+  }
+  public cambiarPagina(e:PageEvent){
+    this.desde = e.pageIndex * e.pageSize;
+    this.hasta = this.desde + this.pageSize;
   }
 }

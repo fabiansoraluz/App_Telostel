@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { Categoria } from 'src/app/model/categoria';
 import { ConsultaProducto } from 'src/app/model/consulta-producto';
 import { Producto } from 'src/app/model/producto';
@@ -10,6 +11,11 @@ import { ProductoService } from 'src/app/services/producto.service';
   styleUrls: ['./consulta-producto.component.css']
 })
 export class ConsultaProductoComponent implements OnInit{
+
+  // Paginación
+  public pageSize = 10
+  public desde = 0
+  public hasta = 10
 
   public productos:[Producto]
   public categorias:[Categoria]
@@ -39,6 +45,10 @@ export class ConsultaProductoComponent implements OnInit{
   }
   limpiar(){
     window.location.reload();
+  }
+  public cambiarPagina(e:PageEvent){
+    this.desde = e.pageIndex * e.pageSize;
+    this.hasta = this.desde + this.pageSize;
   }
 
 }

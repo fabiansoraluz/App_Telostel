@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PageEvent } from '@angular/material/paginator';
 import { Cliente } from 'src/app/model/cliente';
 import { Distrito } from 'src/app/model/distrito';
 import { ClienteService } from 'src/app/services/cliente.service';
@@ -13,6 +14,13 @@ import Swal from 'sweetalert2';
 })
 export class MantenimientoClienteComponent implements OnInit{
   
+
+  // Paginación
+  public pageSize = 10
+  public desde = 0
+  public hasta = 10
+
+  // Formulario
   formulario:FormGroup
   clientes:Cliente[]=[]
   cliente:Cliente = new Cliente()
@@ -178,6 +186,10 @@ export class MantenimientoClienteComponent implements OnInit{
     this.cliente.apellido = this.formulario.get("apellido").value
     this.cliente.celular = this.formulario.get("celular").value
     this.cliente.dni = this.formulario.get("dni").value
+  }
+  public cambiarPagina(e:PageEvent){
+    this.desde = e.pageIndex * e.pageSize;
+    this.hasta = this.desde + this.pageSize;
   }
 
 }
