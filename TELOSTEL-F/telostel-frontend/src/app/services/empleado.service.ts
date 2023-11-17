@@ -14,5 +14,7 @@ export class EmpleadoService {
   public buscarXUsername(username:String):Observable<any>{
     return this.http.get(this.host+"/username/"+username)
   }
-
+  public listarCargos():Observable<any>{
+    return this.http.get(this.host+"/cargo")
+  }
 }

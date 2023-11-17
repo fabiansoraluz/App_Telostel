@@ -23,6 +23,9 @@ public class UsuarioService {
 	public Usuario buscarXUsername(String username) {
 		return repo.findByUsername(username);
 	}
+	public Usuario buscarXID(long id) {
+		return repo.findById(id).orElse(null);
+	}
 	public Usuario buscarXCorreo(String correo) {
 		return repo.findByCorreo(correo);
 	}

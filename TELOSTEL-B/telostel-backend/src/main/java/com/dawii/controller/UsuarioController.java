@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -111,6 +112,14 @@ public class UsuarioController {
 	public ResponseEntity<?> listar(){
 		return new ResponseEntity<List<Usuario>>(SUsuario.listar(),HttpStatus.OK);
 	}
+	@GetMapping("/{username}")
+	public ResponseEntity<?> buscar(@PathVariable String username){
+		Usuario user = SUsuario.buscarXUsername(username);
+		if(user != null) {
+			return new ResponseEntity<Usuario>(user,HttpStatus.OK);
+		}
+		return new ResponseEntity<Mensaje>(new Mensaje("Usuario no encontrado"),HttpStatus.OK);
+	}
 	
 	@PostMapping
 	public ResponseEntity<?> registar(@Valid @RequestBody Usuario user,BindingResult result){
@@ -151,6 +160,31 @@ public class UsuarioController {
 		Usuario usuario = SUsuario.grabar(user);
 		return new ResponseEntity<Usuario>(usuario,HttpStatus.CREATED);
 	}
+	@PutMapping
+	public ResponseEntity<?> actualizar(@Valid @RequestBody Usuario user,BindingResult result){
+		Usuario userBD =SUsuario.buscarXID(user.getId());
+		if(result.hasErrors()) {
+			return new ResponseEntity<Mensaje>(new Mensaje("Error de validación"),HttpStatus.BAD_REQUEST);
+		}
+		if(SEmpleado.existeXDni(user.getEmpleado().getDni()) && !userBD.getEmpleado().getDni().equals(user.getEmpleado().getDni())) {
+			return new ResponseEntity<Mensaje>(new Mensaje("El DNI ya está registrado"),HttpStatus.BAD_REQUEST);
+		}
+		if(SEmpleado.existeXCelular(user.getEmpleado().getCelular()) && !userBD.getEmpleado().getCelular().equals(user.getEmpleado().getCelular())) {
+			return new ResponseEntity<Mensaje>(new Mensaje("El celular ya está registrado"),HttpStatus.BAD_REQUEST);
+		}
+		if(SUsuario.existeXUsername(user.getUsername()) && !userBD.getUsername().equals(user.getUsername())) {
+			return new ResponseEntity<Mensaje>(new Mensaje("El username ya está registrado"),HttpStatus.BAD_REQUEST);
+		}
+		if(SUsuario.existeXCorreo(user.getCorreo()) && !userBD.getCorreo().equals(user.getCorreo())) {
+			return new ResponseEntity<Mensaje>(new Mensaje("El correo ya está registrado"),HttpStatus.BAD_REQUEST);
+		}
+		// Actualizar el empleado
+		Empleado emp = user.getEmpleado();
+		SEmpleado.grabar(emp);
+		// Actualizar el usuario
+		Usuario usuario = SUsuario.grabar(user);
+		return new ResponseEntity<Usuario>(usuario,HttpStatus.CREATED);
+	}
 	
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@Valid @RequestBody LoginUsuario user,BindingResult result){
@@ -168,5 +202,4 @@ public class UsuarioController {
 			return new ResponseEntity<Mensaje>(new Mensaje("Usuario y/o contraseña incorrectos"),HttpStatus.UNAUTHORIZED);
 		}
 	} 
-	
 }

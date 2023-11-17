@@ -96,7 +96,6 @@ export class RegistrarComponent implements OnInit{
     //Construimos Usuario
     this.buildUser();
     //Registramos Usuario
-    console.log(this.usuario)
     this.SUsuario.registrar(this.usuario).subscribe(
       response =>{
         this.router.navigate(["/login"])

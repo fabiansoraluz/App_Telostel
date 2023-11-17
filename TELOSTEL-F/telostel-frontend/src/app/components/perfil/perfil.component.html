@@ -1,1 +1,121 @@
-<p>perfil works!</p>
+<div class="contenedor__item">
+    <form class="form-empleado" [formGroup]="formulario" errorTailor>
+        <div class="row">
+            <h3 class="w-10 ml-3">Datos del Empleado</h3>
+            <button class="btn btn-success ml-5" (click)="actualizar()"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
+        </div>
+        <div class="row mt-5">
+            <div class="form-group col-4">
+                <label for="">Nombre</label>
+                <input type="text" class="form-control" name="nombre" formControlName="nombre" [controlErrorsTpl]="messageNombreError">
+            </div>
+            <div class="form-group col-4">
+                <label for="">Apellido</label>
+                <input type="text" class="form-control" name="apellido" formControlName="apellido" [controlErrorsTpl]="messageApellidoError">
+            </div>
+            <div class="form-group col-4">
+                <label for="">DNI</label>
+                <input type="text" class="form-control" name="dni" formControlName="dni" [controlErrorsTpl]="messageDniError">
+            </div>
+            <div class="form-group col-4">
+                <label for="">Celular</label>
+                <input type="text" class="form-control" name="celular" formControlName="celular" [controlErrorsTpl]="messageCelularError">
+            </div>
+            <div class="form-group col-4">
+                <label for="">Ubigeo</label>
+                <div class="form__item position-relative">    
+                    <input type="text" class="form-control" name="ubigeo" formControlName="ubigeo" readonly>
+                    <button type="button" class="btn btn-ubigeo" data-toggle="modal" data-target="#modalUbigeo">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="form-group col-4">
+                <label for="">Cargo</label>
+                <select class="form-control" name="cargo" formControlName="cargo">
+                    <option value="" selected disabled>Seleccionar Cargo</option>
+                    <option [value]="c.id" *ngFor="let c of cargos">{{c.nombre}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <h3 class="ml-3">Datos del Usuario</h3>
+        </div>
+        <div class="row mt-5">
+            <div class="form-group col-4">
+                <label for="">Correo</label>
+                <input type="text" class="form-control" name="correo" formControlName="correo">
+            </div>
+        </div>
+    </form>
+</div>
+
+<ng-template let-error let-text="text" #messageNombreError>
+    <div class="form__message" *ngIf="!formulario.get('nombre').valid">
+        <p *ngIf="error.required">El campo nombre es obligatorio</p>
+        <p *ngIf="error.pattern">Ingresar entre 4 a 30 letras</p>
+    </div>
+</ng-template>
+<ng-template let-error let-text="text" #messageApellidoError>
+    <div class="form__message" *ngIf="!formulario.get('apellido').valid">
+        <p *ngIf="error.required">El campo apellido es obligatorio</p>
+        <p *ngIf="error.pattern">Ingresar entre 4 a 30 caracteres</p>
+    </div>
+</ng-template>
+<ng-template let-error let-text="text" #messageDniError>
+    <div class="form__message" *ngIf="!formulario.get('dni').valid">
+        <p *ngIf="error.required">El campo dni es obligatorio</p>
+        <p *ngIf="error.pattern">Ingresar 8 dígitos</p>
+    </div>
+</ng-template>
+<ng-template let-error let-text="text" #messageCelularError>
+    <div class="form__message" *ngIf="!formulario.get('celular').valid">
+        <p *ngIf="error.required">El campo celular es obligatorio</p>
+        <p *ngIf="error.pattern">Ingresar entre 7 a 9 dígitos</p>
+    </div>
+</ng-template>
+<ng-template let-error let-text="text" #messageUsernameError>
+    <div class="form__message" *ngIf="!formulario.get('username').valid">
+        <p *ngIf="error.required">El campo username es obligatorio</p>
+        <p *ngIf="error.pattern">Ingresar username entre 6 a 20 caracteres</p>
+    </div>
+</ng-template>
+
+<!-- MODAL DE UBIGEO -->
+<div class="modal fade" id="modalUbigeo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Seleccionar Ubicación</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="form--ubigeo">
+                    <div class="form__item--ubigeo">
+                        <select class="form__select--ubigeo" (change)="listarProvincias()" name="departamento" [(ngModel)]="departamento">
+                            <option value="" disabled selected>Departamento</option>
+                            <option *ngFor="let d of departamentos">{{d}}</option>
+                        </select>
+                    </div>
+                    <div class="form__item--ubigeo">
+                        <select class="form__select--ubigeo" (change)="listarDistritos()" name="provincia" [(ngModel)]="provincia">
+                            <option value="" disabled selected>Provincia</option>
+                            <option *ngFor="let p of provincias">{{p}}</option>
+                        </select>
+                    </div>
+                    <div class="form__item--ubigeo">
+                        <select class="form__select--ubigeo" name="distrito" (change)="seleccionarDistrito()" [(ngModel)]="usuario.empleado.ubigeo.id">
+                            <option value="" disabled selected>Distrito</option>
+                            <option *ngFor="let di of distritos" [value]="di.id">{{di.distrito}}</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

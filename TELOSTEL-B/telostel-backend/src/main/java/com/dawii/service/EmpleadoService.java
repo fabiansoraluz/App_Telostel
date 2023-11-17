@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.dawii.dao.ICargoDAO;
 import com.dawii.dao.IEmpleadoDAO;
+import com.dawii.entity.CargoEmpleado;
 import com.dawii.entity.Empleado;
 
 @Service
@@ -14,6 +16,9 @@ public class EmpleadoService {
 	
 	@Autowired
 	private IEmpleadoDAO repo;
+	
+	@Autowired
+	private ICargoDAO cargoDAO;
 	
 	//VALIDACIONES
 	public boolean existeXDni(String dni) {
@@ -40,11 +45,14 @@ public class EmpleadoService {
 		return repo.findXUsername(username);
 	}
 	public boolean existeOtroXDni(Long id, String dni) {
-    return repo.existsByDniAndIdNot(dni, id);
-  }
-  public boolean existeOtroXCelular(Long id, String celular) {
-    return repo.existsByCelularAndIdNot(celular, id);
-  }
+	    return repo.existsByDniAndIdNot(dni, id);
+	 }
+	public boolean existeOtroXCelular(Long id, String celular) {
+	    return repo.existsByCelularAndIdNot(celular, id);
+	}
+	public List<CargoEmpleado> listarCargos(){
+		return cargoDAO.findAll();
+	}
 	
 
 }

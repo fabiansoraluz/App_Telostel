@@ -19,8 +19,14 @@ export class UsuarioService {
   public login(usuario:LoginUsuario):Observable<any>{
     return this.http.post<JwtDto>(this.host+"/login",usuario,{headers: this.headers});
   }
+  public buscar(username:String):Observable<any>{
+    return this.http.get<Usuario>(this.host+"/"+username);
+  }
   public registrar(usuario:Usuario):Observable<any>{
     return this.http.post<Usuario>(this.host,usuario,{headers:this.headers});
+  }
+  public actualizar(usuario:Usuario):Observable<any>{
+    return this.http.put<Usuario>(this.host,usuario,{headers:this.headers});
   }
   public mail(correo:string):Observable<any>{
     return this.http.post<string>(this.host+"/mail/"+correo,null,{headers:this.headers})
