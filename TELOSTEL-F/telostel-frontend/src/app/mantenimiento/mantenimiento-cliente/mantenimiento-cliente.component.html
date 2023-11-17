@@ -47,7 +47,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let c of clientes">
+                <tr *ngFor="let c of clientes | slice:desde:hasta">
                     <td>{{c.id}}</td>
                     <td>{{c.nombre}}</td>
                     <td>{{c.apellido}}</td>
@@ -61,6 +61,12 @@
                 </tr>
             </tbody>
         </table>
+        <mat-paginator 
+            [length]="clientes.length"
+            [pageSize]="pageSize"
+            (page)="cambiarPagina($event)"
+            aria-label="Seleccionar Pagina">
+        </mat-paginator>
     </div>
 </div>
 

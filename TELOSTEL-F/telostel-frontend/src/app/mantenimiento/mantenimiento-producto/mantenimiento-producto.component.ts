@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PageEvent } from '@angular/material/paginator';
 import { Categoria } from 'src/app/model/categoria';
 import { Producto } from 'src/app/model/producto';
 import { ProductoService } from 'src/app/services/producto.service';
@@ -12,6 +13,12 @@ import Swal from 'sweetalert2';
 })
 export class MantenimientoProductoComponent implements OnInit {
 
+  // Paginación
+  public pageSize = 10
+  public desde = 0
+  public hasta = 10
+
+  // Formulario
   formulario: FormGroup
   productos: Producto[] = []
   producto: Producto = new Producto()
@@ -166,5 +173,8 @@ export class MantenimientoProductoComponent implements OnInit {
 
 
   }
-
+  public cambiarPagina(e:PageEvent){
+    this.desde = e.pageIndex * e.pageSize;
+    this.hasta = this.desde + this.pageSize;
+  }
 }

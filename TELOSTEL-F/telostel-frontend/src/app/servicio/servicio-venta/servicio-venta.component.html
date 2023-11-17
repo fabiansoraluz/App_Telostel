@@ -131,7 +131,7 @@
               </tr>
           </thead>
           <tbody>
-              <tr *ngFor="let prod of productos">
+              <tr *ngFor="let prod of productos | slice:desde:hasta">
                   <td>{{prod.id}}</td>
                   <td>{{prod.nombre}}</td>
                   <td>{{prod.categoria.nombre}}</td>
@@ -139,6 +139,12 @@
               </tr>
           </tbody>
         </table>
+        <mat-paginator 
+            [length]="productos.length"
+            [pageSize]="pageSize"
+            (page)="cambiarPagina($event)"
+            aria-label="Seleccionar Pagina">
+        </mat-paginator>
         <div class="form__input-container mt-5">
           <div class="form__group">
             <label for="exampleInputEmail1"><b>Producto</b></label><br>			
@@ -158,6 +164,6 @@
         <button type="submit" class="btn btn-primary" data-dismiss="modal" (click)="agregarProducto()"><i class="fas fa-save"></i> Agregar</button>
         <button type="button" class="btn btn-danger btn-cancelar-producto" data-dismiss="modal"><i class="fas fa-undo-alt"></i> Cancelar</button>
       </div>
-</div>
+    </div>
   </div>
 </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PageEvent } from '@angular/material/paginator';
 import { Carrito } from 'src/app/model/carrito';
 import { Cliente } from 'src/app/model/cliente';
 import { Empleado } from 'src/app/model/empleado';
@@ -19,6 +20,11 @@ import Swal from 'sweetalert2';
 })
 export class ServicioVentaComponent implements OnInit{
   
+  // Paginación
+  public pageSize = 5
+  public desde = 0
+  public hasta = 5
+
   //Formulario
   public formulario:FormGroup
   public fecha:String
@@ -200,5 +206,9 @@ export class ServicioVentaComponent implements OnInit{
     this.formulario.reset()
     this.calcularTotal()
     window.location.reload();
+  }
+  public cambiarPagina(e:PageEvent){
+    this.desde = e.pageIndex * e.pageSize;
+    this.hasta = this.desde + this.pageSize;
   }
 }

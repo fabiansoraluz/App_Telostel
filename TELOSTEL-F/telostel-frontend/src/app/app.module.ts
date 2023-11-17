@@ -38,6 +38,8 @@ import { registerLocaleData } from '@angular/common';
 import localeEsPE from '@angular/common/locales/es-PE';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 
 registerLocaleData(localeEsPE);
 
@@ -74,7 +76,8 @@ registerLocaleData(localeEsPE);
     errorTailorImports,
     NgApexchartsModule,
     PdfViewerModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatPaginatorModule
   ],
   providers: [
     ProductoService,
