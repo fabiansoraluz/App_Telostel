@@ -56,7 +56,7 @@ public class ProductoController {
 	
 	//CRUD PRODUCTO
 	
-	@GetMapping("/page/{page}")
+	@GetMapping
 	public ResponseEntity<?> listar(){
 		return new ResponseEntity<List<Producto>>(SProducto.listar(),HttpStatus.OK);
 	}
