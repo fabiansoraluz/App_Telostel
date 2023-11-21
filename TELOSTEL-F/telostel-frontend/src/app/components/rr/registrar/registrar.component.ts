@@ -95,6 +95,11 @@ export class RegistrarComponent implements OnInit{
   registrarUsuario():void{
     //Construimos Usuario
     this.buildUser();
+    //Validamos Ubigeo
+    if(this.usuario.empleado.ubigeo.id === ''){
+      Swal.fire("Error del Sistema","Obligatorio seleccionar ubigeo","error")
+      return;
+    }
     //Registramos Usuario
     this.SUsuario.registrar(this.usuario).subscribe(
       response =>{
