@@ -86,7 +86,7 @@ public class ProductoController {
 	}
 	
 	
-	@PostMapping
+	@PostMapping("/registrar")
 	public ResponseEntity<?> registrarProducto(@RequestBody Producto producto) {
 
 	    // Verificar si ya existe un producto con el mismo nombre
