@@ -21,6 +21,7 @@ import { MantenimientoProductoComponent } from './mantenimiento/mantenimiento-pr
 import { MantenimientoHabitacionComponent } from './mantenimiento/mantenimiento-habitacion/mantenimiento-habitacion.component';
 import { MantenimientoClienteComponent } from './mantenimiento/mantenimiento-cliente/mantenimiento-cliente.component';
 import { IndexComponent } from './components/index/index.component';
+import { ReservacionComponent } from './reservacion/reservacion.component';
 
 
 const routes: Routes = [
@@ -28,6 +29,7 @@ const routes: Routes = [
   {path:'index',component:IndexComponent},
   {path:'login', component:LoginComponent},
   {path:'aside', component:AsideComponent},
+  {path:'reservacion',component:ReservacionComponent},
   {path:'opciones',component:RRComponent,children:[
     {path:'registrar',component:RegistrarComponent},
     {path:'recuperar',component:RecuperarComponent}

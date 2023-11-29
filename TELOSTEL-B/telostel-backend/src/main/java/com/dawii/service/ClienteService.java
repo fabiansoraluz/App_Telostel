@@ -32,6 +32,9 @@ public class ClienteService {
 	public Cliente buscar(long id) {
 		return repo.findById(id).orElse(null);
 	}
+	public Cliente buscarXDni(String dni) {
+		return repo.findByDni(dni);
+	}
 	public boolean existeCelular(String celular) {
 		return repo.existsByCelular(celular);
 	}

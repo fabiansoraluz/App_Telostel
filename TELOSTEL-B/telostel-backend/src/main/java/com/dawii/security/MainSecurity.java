@@ -69,6 +69,9 @@ public class MainSecurity {
 		http.authorizeHttpRequests(auth -> auth.
 				requestMatchers("/api/usuario/**").permitAll().
 				requestMatchers("/api/ubigeo/**").permitAll().
+				requestMatchers("/api/habitacion/**").permitAll().
+				requestMatchers("/api/reservacion/**").permitAll().
+				requestMatchers("/api/cliente/**").permitAll().
 				anyRequest().authenticated());
 		http.exceptionHandling(eh -> eh.authenticationEntryPoint(jwtEntryPoint));
 		http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

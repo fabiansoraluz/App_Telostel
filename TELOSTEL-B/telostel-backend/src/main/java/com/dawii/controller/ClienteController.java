@@ -49,6 +49,14 @@ public class ClienteController {
 		}
 		return new ResponseEntity<Mensaje>(new Mensaje("No se encontró al cliente"),HttpStatus.BAD_REQUEST);
 	}
+	@GetMapping("/dni/{dni}")
+	public ResponseEntity<?> buscarXDni(@PathVariable String dni){
+		Cliente bean = SCliente.buscarXDni(dni);
+		if(bean!=null) {
+			return new ResponseEntity<Cliente>(bean,HttpStatus.OK);
+		}
+		return new ResponseEntity<Mensaje>(new Mensaje("No se encontró al cliente"),HttpStatus.BAD_REQUEST);
+	}
 	
 	@PostMapping
 	public ResponseEntity<?> registrar(@RequestBody Cliente bean){
