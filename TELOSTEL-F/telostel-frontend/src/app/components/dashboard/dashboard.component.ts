@@ -154,4 +154,13 @@ export class DashboardComponent implements OnInit{
       Swal.fire("Error de Permisos","Usted no tiene permisos necesarios","error")
     }
   }
+  consultarEnlace(enlace:String){
+    let rolesPermitidos=["Administrador","Consultor","Recepcion"]
+    let rol = this.SToken.getRol()
+    if(rolesPermitidos.includes(rol)){
+      this.router.navigate([enlace])
+    }else{
+      Swal.fire("Error de Permisos","Usted no tiene permisos necesarios","error")
+    }
+  }
 }

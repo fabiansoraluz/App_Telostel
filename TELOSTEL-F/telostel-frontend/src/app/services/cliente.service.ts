@@ -19,6 +19,9 @@ export class ClienteService {
   public buscar(id:number):Observable<any>{
     return this.http.get(this.host+"/"+id)
   }
+  public buscarXDNI(dni:String):Observable<any>{
+    return this.http.get(this.host+"/dni/"+dni)
+  }
   public buscarXNombre(nombre:String):Observable<any>{
     return this.http.get(this.host+"/nombre/"+nombre)
   }

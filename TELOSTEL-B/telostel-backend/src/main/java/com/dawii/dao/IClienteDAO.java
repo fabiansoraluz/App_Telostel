@@ -15,6 +15,7 @@ public interface IClienteDAO extends JpaRepository<Cliente, Long>{
 	@Query("SELECT c FROM Cliente c WHERE c.nombre LIKE CONCAT(:nombre, '%') AND (:dni = '' OR c.dni = :dni)")
 	public List<Cliente> consulta(@Param("nombre") String nombre, @Param("dni") String dni);
 	public List<Cliente> findByNombreStartingWith(String nombre);
+	public Cliente findByDni(String dni);
 	public boolean existsByCelular(String celular);
 	public boolean existsByDni(String dni);
 }

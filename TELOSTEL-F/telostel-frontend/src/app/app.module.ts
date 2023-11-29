@@ -39,6 +39,7 @@ import localeEsPE from '@angular/common/locales/es-PE';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { ReservacionComponent } from './reservacion/reservacion.component';
 
 
 registerLocaleData(localeEsPE);
@@ -65,6 +66,7 @@ registerLocaleData(localeEsPE);
     MantenimientoHabitacionComponent,
     MantenimientoClienteComponent,
     IndexComponent,
+    ReservacionComponent,
   ],
   imports: [
     BrowserModule,
