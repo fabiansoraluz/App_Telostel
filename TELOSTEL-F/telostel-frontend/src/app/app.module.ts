@@ -40,6 +40,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { ReservacionComponent } from './reservacion/reservacion.component';
+import { DetalleReservacionComponent } from './detalle/detalle-reservacion/detalle-reservacion.component';
 
 
 registerLocaleData(localeEsPE);
@@ -67,6 +68,7 @@ registerLocaleData(localeEsPE);
     MantenimientoClienteComponent,
     IndexComponent,
     ReservacionComponent,
+    DetalleReservacionComponent,
   ],
   imports: [
     BrowserModule,

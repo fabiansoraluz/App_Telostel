@@ -11,10 +11,10 @@ export class Reservacion{
     importeReserva:number
     createAt:Date
     estado:number
-    cliente:Cliente
-    empleado:Empleado
-    habitacion:Habitacion
+    cliente:Cliente = new Cliente();
+    empleado:Empleado = new Empleado();
+    habitacion:Habitacion = new Habitacion();
     sede:Sede = new Sede()
-    servicios:Servicio[]
+    servicios:Servicio[] = []
     
 }

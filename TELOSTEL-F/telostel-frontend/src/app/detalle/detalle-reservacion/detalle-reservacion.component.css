@@ -1,0 +1,146 @@
+.contenedor__data{
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    margin-top: 2rem;
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: 0px 0px 6px 0px var(--gray);
+    overflow: hidden;
+}
+.contenedor__data .subtitle{
+    margin: 0px;
+    font-size: 25px;
+    font-weight: 500;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0px 2.5rem;
+    color: var(--white);
+    background-color: var(--secondary);
+}
+
+.contenedor__reserva{
+    padding: 0px;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+
+.datos__container{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 3rem;
+    padding: 1.5rem 0px;
+}
+
+.icon{
+    margin-right: 1rem;
+}
+.datos__title{
+    font-size: 20px;
+    font-weight: 500;
+}
+.datos__info{
+    font-size: 18px;
+}
+
+/* RESERVACION - ASIDE */
+
+.aside__reserva{
+    background-color: var(--blue-color);
+    padding: 2rem;
+    color: var(--white);
+}
+.aside__reserva label{
+    font-size: 18px;
+}
+.aside__reserva .form-group{
+    margin-bottom: 2rem;
+}
+
+.aside__sede{
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 20px;
+    border-bottom: 1px solid white;
+    padding-bottom: 1rem;
+}
+.aside__img{
+    width: 100%;
+}
+.aside__costo{
+    text-align: end;
+    font-size: 30px;
+}
+
+/* RESERVACION - MAIN */
+
+.main__reserva{
+    padding: 2rem;
+    position: relative;
+}
+.main__title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.btn-listar{
+    font-size: 22px;
+    color: var(--secondary);
+}
+.data__container{
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 1.5rem;
+}
+.data__container label{
+    font-size: 20px;
+    font-weight: 500;
+}
+.data__container input{
+    background-color: var(--white);
+}
+
+/* SERVICIOS */
+.servicios__card{
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 2rem;
+}
+.servicio__item{
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 0px 6px .5px var(--gray);
+}
+.servicio__title{
+    font-weight: 500;
+    font-size: 20px;
+}
+.servicio__info{
+    padding: 1rem;
+}
+.servicio__costo{
+    background-color: var(--info);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 1rem;
+}
+.servicio__costo p{
+    margin: 0px;
+    color: var(--white);
+    font-size: 25px;
+}
+
+.direccion{
+    position: absolute;
+    right: 2rem;
+    bottom: 2rem;
+    font-size: 22px;
+    font-weight: 500;
+}

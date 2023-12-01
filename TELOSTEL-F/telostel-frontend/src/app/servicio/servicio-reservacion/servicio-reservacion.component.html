@@ -1,12 +1,22 @@
 <div class="rol d-flex">
     <button class="btn btn-primary col-2" routerLink="/system/mantenimiento/habitacion"><i class="fa-solid fa-floppy-disk"></i> Registrar Habitación</button>
-    <select class="form-control col-2 ml-3" [(ngModel)]="pisoSeleccionado" (change)="cambiarPiso()">
-        <option value=0 disabled selected>Seleccionar Piso</option>
-        <option *ngFor="let piso of pisos" [value]="piso">{{'Nivel ' + piso}}</option>
-    </select>
 </div>
 <div class="contenedor__item">
-    <h3 [ngClass]="{'text-info':habitaciones!=null}">{{habitaciones!=null && habitaciones.length>0 ? 'Habitaciones Disponibles':'No hay habitaciones disponibles' }}</h3>
+    <h3 class="text-info">Buscar Habitaciones</h3>
+    <form class="row mt-3">
+        <select class="form-control col-2" name="sede" [(ngModel)]="sedeSeleccionada">
+            <option value=0 disabled selected>Seleccionar Sede</option>
+            <option *ngFor="let sede of sedes" [value]="sede.id">{{sede.nombre}}</option>
+        </select>
+        <select class="form-control col-2 ml-3" name="tipo" [(ngModel)]="tipoSeleccionado">
+            <option value='' selected>Todos los tipos</option>
+            <option *ngFor="let tipo of tipos" [value]="tipo.nombre">{{tipo.nombre}}</option>
+        </select>
+        <button type="submit" (click)="filtrar()" class="btn btn-success ml-2"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </form>
+    <div class="alert alert-info mt-4" *ngIf="mensaje!=''">
+        {{mensaje}}
+    </div>
     <div class="hab__contenedor mt-5" *ngIf="habitaciones!=null && habitaciones.length>0">
         <div *ngFor="let hab of habitaciones" class="card__habitacion" [ngClass]="'card__habitacion--'+hab.estado" (click)="llenar(hab.id)">
             <div class="card__header">
@@ -43,13 +53,6 @@
                             <input type="text" class="form-control" formControlName="cliente" readonly>
                             <button type="button" class="btn-cliente" data-toggle="modal" data-target="#clienteModal"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
-                    </div>
-                    <div class="form-group col-4">
-                        <label for="">Sede</label>
-                        <select name="" id="" class="form-control" formControlName="sede" [controlErrorsTpl]="messageSedeError">
-                            <option value = 0 disabled>Seleccionar Ubicación</option>
-                            <option *ngFor="let sede of sedes" [value]="sede.id">{{sede.nombre}}</option>
-                        </select>
                     </div>
                     <div class="form-group col-4">
                         <label for="">Fecha de Ingreso</label>

@@ -44,6 +44,10 @@ public class Habitacion {
 	@ManyToOne
 	@JoinColumn(name = "id_tipo_habitacion")
 	private TipoHabitacion tipo;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_hotel")
+	private Hotel hotel;
 
 	@PrePersist
 	private void prePersist() {
