@@ -45,8 +45,8 @@ public class HabitacionService {
 	public int buscarUltimoPiso() {
 		return repo.buscarUltimoPiso();
 	}
-	public List<Habitacion> buscarXPiso(String piso){
-		return repo.findByPiso(piso);
+	public List<Habitacion> buscarXPisoAndSede(String piso,long idSede){
+		return repo.buscarXPisoAndSede(piso,idSede);
 	}
 	public List<Habitacion> buscarXTipo(int id){
 		return repo.buscarXTipo(id);
@@ -71,4 +71,10 @@ public class HabitacionService {
 	    return nuevaHabitacion;
 
 	}
+	
+	//Listar por sede y tipo de habitación
+	public List<Habitacion> buscarXSedeAndTipo(long sede,String tipo){
+		return repo.buscarXSedeAndTipo(sede, tipo);
+	}
+	
 }

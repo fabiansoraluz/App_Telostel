@@ -31,6 +31,7 @@
                 <th>CheckOut</th>
                 <th>Sede</th>
                 <th>Importe</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -42,6 +43,7 @@
                 <td>{{r.checkOut}}</td>
                 <td>{{r.sede.nombre}}</td>
                 <td>{{r.importeReserva}}</td>
+                <td><button type="button" class="btn btn-info" [routerLink]="'/system/detalle/reservacion/'+r.id"><i class="fa-solid fa-magnifying-glass"></i></button></td>
             </tr>
         </tbody>
     </table>

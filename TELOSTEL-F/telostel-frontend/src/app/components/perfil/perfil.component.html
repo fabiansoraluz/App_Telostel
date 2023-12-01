@@ -34,7 +34,7 @@
                 <label for="">Cargo</label>
                 <select class="form-control" name="cargo" formControlName="cargo">
                     <option value="" selected disabled>Seleccionar Cargo</option>
-                    <option [value]="c.id" *ngFor="let c of cargos">{{c.nombre}}</option>
+                    <option [value]="c.id" *ngFor="let c of cargos" disabled>{{c.nombre}}</option>
                 </select>
             </div>
         </div>

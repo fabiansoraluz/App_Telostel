@@ -19,7 +19,8 @@ public interface IHabitacionDAO extends JpaRepository<Habitacion, Long>{
 	public int buscarUltimoPiso();
 	
 	// Buscar por piso
-	public List<Habitacion> findByPiso(String piso);
+	@Query("SELECT H FROM Habitacion H WHERE H.piso=?1 AND H.hotel.sede.id=?2 ")
+	public List<Habitacion> buscarXPisoAndSede(String piso,long idSede);
 	
 	//Buscar por tipo
 	@Query("SELECT H FROM Habitacion H "
@@ -33,5 +34,8 @@ public interface IHabitacionDAO extends JpaRepository<Habitacion, Long>{
 	public int actualizarEstado(String estado, long id);
 
 	public Habitacion findFirstByPisoOrderByNumeroDesc(String piso);
-
+	
+	@Query("SELECT H FROM Habitacion H WHERE (H.hotel.sede.id=?1) AND (H.tipo.nombre = ?2 OR '' = ?2) AND (H.estado = 'disponible')")
+	public List<Habitacion> buscarXSedeAndTipo(long sede,String tipo);
+	
 }

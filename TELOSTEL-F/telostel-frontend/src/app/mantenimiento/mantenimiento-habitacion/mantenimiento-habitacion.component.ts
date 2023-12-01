@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { Habitacion } from 'src/app/model/habitacion';
+import { Sede } from 'src/app/model/sede';
 import { TipoHabitacion } from 'src/app/model/tipo-habitacion';
 import { HabitacionService } from 'src/app/services/habitacion.service';
+import { ReservacionService } from 'src/app/services/reservacion.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,20 +14,22 @@ import Swal from 'sweetalert2';
 })
 export class MantenimientoHabitacionComponent implements OnInit {
 
+  public sedes:Sede[]=[]
+  public sede:number
   public habitaciones: Habitacion[] = [];
   public tiposHabitacion: TipoHabitacion[] = [];
+
   public formulario:FormGroup
   public isUpdate = false
   private habitacion:Habitacion
 
   constructor(
     private SHabitacion: HabitacionService,
+    private SReserva:ReservacionService,
     private formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
-    // Listar Habitaciones
-    this.listarHabitaciones();
 
     // Listar Tipos de Habitación
     this.listarTipos();
@@ -49,6 +53,9 @@ export class MantenimientoHabitacionComponent implements OnInit {
       ]
     })
 
+    // Listar Sedes
+    this.listarSedes();
+
     //Si es registrar settear estado en disponible y desabilitamos para no permitir modificaciones
     if(!this.isUpdate){
       this.formulario.patchValue({
@@ -59,9 +66,24 @@ export class MantenimientoHabitacionComponent implements OnInit {
     
   }
 
-  private listarHabitaciones(){
+  private listarSedes(){
+    this.SReserva.sedes().subscribe(
+      (response)=>{
+        this.sedes=response,
+
+        this.formulario.patchValue({
+          sede:this.sedes[0].id
+        })
+        this.sede=this.sedes[0].id
+        this.listarHabitaciones()
+      }
+    )
+  }
+
+  public listarHabitaciones(){
     this.SHabitacion.listar().subscribe((response) => {
-      this.habitaciones = response;
+      var response = response.filter(h => h.hotel.sede.id == this.sede);
+      this.habitaciones = response.sort((a, b) => a.numero - b.numero);
     });
   }
 
@@ -82,6 +104,8 @@ export class MantenimientoHabitacionComponent implements OnInit {
   
     this.habitacion.piso=piso
     this.habitacion.tipo=tipo
+    this.habitacion.hotel.id=this.sede
+    this.habitacion.hotel.sede.id=this.sede
 
     this.SHabitacion.registrar(this.habitacion).subscribe(
       (response) => {

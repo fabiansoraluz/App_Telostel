@@ -22,6 +22,7 @@ import { MantenimientoHabitacionComponent } from './mantenimiento/mantenimiento-
 import { MantenimientoClienteComponent } from './mantenimiento/mantenimiento-cliente/mantenimiento-cliente.component';
 import { IndexComponent } from './components/index/index.component';
 import { ReservacionComponent } from './reservacion/reservacion.component';
+import { DetalleReservacionComponent } from './detalle/detalle-reservacion/detalle-reservacion.component';
 
 
 const routes: Routes = [
@@ -40,6 +41,7 @@ const routes: Routes = [
     {path:'consulta/cliente',component:ConsultaClienteComponent,data:{title:'Consulta de Clientes'}},
     {path:'consulta/producto',component:ConsultaProductoComponent,data:{title:'Consulta de Productos'}},
     {path:'consulta/reservacion',component:ConsultaReservacionComponent,data:{title:'Consulta de Reservaciones'}},
+    {path:'detalle/reservacion/:idReserva',component:DetalleReservacionComponent,data:{title:'Detalle de Reservación'}},
     {path:'mantenimiento/habitacion',component:MantenimientoHabitacionComponent,data:{title:'Mantenimiento de Habitaciones'}},
     {path:'mantenimiento/producto',component:MantenimientoProductoComponent,data:{title:'Mantenimiento de Productos'}},
     {path:'mantenimiento/cliente',component:MantenimientoClienteComponent,data:{title:'Mantenimiento de Clientes'}},

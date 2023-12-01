@@ -14,6 +14,8 @@ import * as moment from 'moment';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { Empleado } from 'src/app/model/empleado';
 import { TokenService } from 'src/app/services/token.service';
+import { TipoHabitacion } from 'src/app/model/tipo-habitacion';
+import { HabitacionDTO } from 'src/app/model/habitacion-dto';
 
 @Component({
   selector: 'app-servicio-reservacion',
@@ -24,12 +26,14 @@ export class ServicioReservacionComponent implements OnInit{
   
   //Pisos y Habitaciones
   public habitaciones:[Habitacion]
-  public pisos:number[]
-  public pisoSeleccionado:number=0
+  public sedes:[Sede]
+  public sedeSeleccionada:number=0
+  public tipos:TipoHabitacion[]=[]
+  public tipoSeleccionado:string=""
+  public mensaje:string=''
 
   //Reservacion
   public reservacion= new Reservacion()
-  public sedes:[Sede]
   public servicios:[Servicio]
   public formulario:FormGroup
   public habitacion:Habitacion
@@ -67,26 +71,20 @@ export class ServicioReservacionComponent implements OnInit{
       response => this.empleado=response
     )
 
-    //Buscar habitaciones del primer piso
-    this.SHabitacion.buscarXPiso(1).subscribe(
-      response =>{
-        this.habitaciones = response.filter(h => h.estado === 'disponible')
-      }
-    )
-    //Buscar último piso
-    this.SHabitacion.ultimoPiso().subscribe(
-      response =>{
-        if(response!=0){
-          this.pisos = Array.from({length: response},(_,i) => i + 1);
-        }
-      }
-    )
     //Listar Sedes
     this.SReservacion.sedes().subscribe(
       response =>{
         this.sedes = response
       }
     )
+
+    //Listar Tipos
+    this.SHabitacion.listarTipos().subscribe(
+      response=>{
+        this.tipos = response
+      }
+    )
+
     //Listar Servicios
     this.listarServicios();
     
@@ -112,10 +110,6 @@ export class ServicioReservacionComponent implements OnInit{
       [
         Validators.required,
         this.checkOutValidator.bind(this)
-      ]],
-      sede:[0,
-      [
-        Validators.required
       ]]
     })
   }
@@ -196,14 +190,24 @@ export class ServicioReservacionComponent implements OnInit{
     this.listarServicios();
   }
 
-  //Cambiar Piso
-  cambiarPiso(){
-    this.SHabitacion.buscarXPiso(this.pisoSeleccionado).subscribe(
-      response =>{
-        this.habitaciones = response.filter(h => h.estado === 'disponible')
-      }
+  //Buscar
+  filtrar(){
+    var bean = new HabitacionDTO();
+    bean.sede = this.sedeSeleccionada
+    bean.tipo = this.tipoSeleccionado
+    if(bean.sede == 0){
+      Swal.fire("Error del Sistema","Debes seleccionar una sede","error")
+      return
+    } 
+    this.SHabitacion.buscarXSedeAndTipo(bean).subscribe(
+      (response)=> {
+        this.mensaje='',
+        this.habitaciones=response
+      },
+      (err)=>{this.habitaciones=null,this.mensaje=err.error.mensaje}
     )
   }
+  
   //Llenar el formulario con la habitacion
   llenar(id:number){
     this.SHabitacion.buscar(id).subscribe(
@@ -281,7 +285,7 @@ export class ServicioReservacionComponent implements OnInit{
     this.reservacion.habitacion = this.habitacion
     this.reservacion.importeReserva = this.impReserva
     this.reservacion.servicios = this.servicios_list
-    this.reservacion.sede.id = this.formulario.get("sede").value
+    this.reservacion.sede.id = this.sedeSeleccionada
 
     //Registramos reservacion
     this.SReservacion.registrar(this.reservacion).subscribe(

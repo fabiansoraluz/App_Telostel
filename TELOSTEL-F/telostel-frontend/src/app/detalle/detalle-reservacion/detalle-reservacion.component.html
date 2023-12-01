@@ -1,0 +1,99 @@
+<div class="datos__container">
+    <div class="contenedor__data">
+        <h3 class="subtitle">Cliente</h3>
+        <div class="datos__container">
+            <div class="datos__card">
+                <p class="datos__title"><i class="fa-solid fa-id-card-clip icon"></i> Nombre</p>
+                <p class="datos__info">{{reserva.cliente.apellido+', '+reserva.cliente.nombre}}</p>
+            </div>
+            <div class="datos__card">
+                <p class="datos__title"><i class="fa-solid fa-address-card icon"></i>DNI</p>
+                <p class="datos__info">{{reserva.cliente.dni}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="contenedor__data">
+        <h3 class="subtitle">Empleado</h3>
+        <div class="datos__container">
+            <div class="datos__card">
+                <p class="datos__title"><i class="fa-solid fa-id-card-clip icon"></i> Nombre</p>
+                <p class="datos__info">{{reserva.empleado.apellido+', '+reserva.empleado.nombre}}</p>
+            </div>
+            <div class="datos__card">
+                <p class="datos__title"><i class="fa-solid fa-address-card icon"></i>DNI</p>
+                <p class="datos__info">{{reserva.empleado.dni}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="contenedor__item contenedor__reserva">
+    <div class="aside__reserva">
+        <figure class="aside__figure">
+            <img [src]="'../../../assets/img/'+reserva.sede.nombre+'.jpg'" alt="" class="aside__img">
+            <p class="aside__sede">{{reserva.sede.nombre}}</p>
+        </figure>
+        <div class="form-group">
+            <label>Check In</label>
+            <input type="text" class="form-control" [value]="reserva.checkIn" readonly>
+        </div>
+        <div class="form-group">
+            <label>Check Out</label>
+            <input type="text" class="form-control" [value]="reserva.checkOut" readonly>
+        </div>
+        <div class="form-group">
+            <label>Importe Reserva</label>
+            <input type="text" class="form-control" [value]="'S/ ' + (reserva.importeReserva| number:'1.2-2')" readonly>
+        </div>
+        <div class="form-group">
+            <label>Importe Servicios</label>
+            <input type="text" class="form-control" [value]="'S/ ' +(costo_servicios| number:'1.2-2')" readonly>
+        </div>
+        <div class="form-group">
+            <label>Total</label>
+            <p class="aside__costo">S/ {{(reserva.importeReserva + costo_servicios) | number:'1.2-2'}}</p>
+        </div>
+    </div>
+    <main class="main__reserva">
+        <section class="habitacion__container">
+            <div class="main__title">
+                <h2 class="subtitle">Información de Habitación</h2>
+                <button type="button" class="btn btn-listar" routerLink="/system/consulta/reservacion"><i class="fa-solid fa-square-caret-left"></i> Volver a Listar</button>
+            </div>
+            <div class="data__container">
+                <div class="form-group">
+                    <label>Número</label>
+                    <input type="text" class="form-control" [value]="reserva.habitacion.numero" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Piso</label>
+                    <input type="text" class="form-control" [value]="reserva.habitacion.piso" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Tipo</label>
+                    <input type="text" class="form-control" [value]="reserva.habitacion.tipo.nombre" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Costo</label>
+                    <input type="text" class="form-control" [value]="'S/ ' + (reserva.habitacion.tipo.costo|number:'1.2-2')" readonly>
+                </div>
+            </div>
+        </section>
+        <section class="servicios__container">
+            <h3 class="subtitle mt-5">Servicios</h3>
+            <div class="servicios__card">
+                <div class="servicio__item" *ngFor="let servicio of reserva.servicios">
+                    <div class="servicio__info">
+                        <p class="servicio__title">{{servicio.nombre}}</p>
+                        <p class="servicio__desc">{{servicio.descripcion}}</p>
+                    </div>
+                    <div class="servicio__costo">
+                        <p>{{'S/ ' + (servicio.costo|number:'1.2-2')}}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <p class="direccion">{{reserva.sede.direccion}}</p>
+    </main>
+    
+</div>

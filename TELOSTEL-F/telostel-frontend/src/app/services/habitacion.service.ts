@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Habitacion } from '../model/habitacion';
 import { TipoHabitacion } from '../model/tipo-habitacion';
+import { HabitacionDTO } from '../model/habitacion-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -56,5 +57,9 @@ export class HabitacionService {
 
   public buscarXTipo(id_tipo: number): Observable<any> {
     return this.http.get(`${this.host}/tipo/${id_tipo}`);
+  }
+
+  public buscarXSedeAndTipo(bean:HabitacionDTO):Observable<any>{
+    return this.http.post(`${this.host}/buscar`,bean)
   }
 }
